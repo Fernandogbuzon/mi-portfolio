@@ -54,9 +54,11 @@
           <p class="hero__eyebrow reveal">Desarrollador Full-Stack · Sevilla, España</p>
           <h1 class="hero__title reveal">Hola, soy <span class="accent">Fernando García Buzón</span></h1>
           <p class="hero__subtitle reveal">
-            Construyo aplicaciones web y multiplataforma de principio a fin:
-            de la base de datos a la interfaz. Titulado en DAM y con muchas
-            ganas de aportar en mi primer equipo.
+            Construyo aplicaciones web full-stack de principio a fin, de la base
+            de datos a la interfaz. Trabajo con Next.js, React, TypeScript y
+            Supabase, y he desarrollado plataformas completas con pagos online y
+            datos en tiempo real. Titulado en DAM y con ganas de aportar en mi
+            primer equipo.
           </p>
 
           <div class="hero__cta reveal">
@@ -124,7 +126,6 @@
     </section>
 
     <!-- ===== Skills ===== -->
-    <!-- TODO Fernando: confírmame/ajusta estas tecnologías y tu nivel real -->
     <section class="section skills" id="skills">
       <div class="container">
         <header class="section__head reveal">
@@ -136,25 +137,25 @@
           <article class="skill-card reveal">
             <h3>Lenguajes</h3>
             <ul class="tags">
-              <li>Java</li><li>Python</li><li>JavaScript</li><li>SQL</li>
+              <li>TypeScript</li><li>JavaScript</li><li>Python</li><li>SQL</li>
             </ul>
           </article>
           <article class="skill-card reveal">
             <h3>Frontend</h3>
             <ul class="tags">
-              <li>HTML5</li><li>CSS3</li><li>JavaScript</li>
+              <li>React</li><li>Next.js</li><li>Tailwind CSS</li><li>HTML5</li><li>CSS3</li>
             </ul>
           </article>
           <article class="skill-card reveal">
             <h3>Backend &amp; BBDD</h3>
             <ul class="tags">
-              <li>MySQL</li><li>API REST</li><li>Spring <span class="tag-note">(por confirmar)</span></li>
+              <li>Node.js</li><li>PostgreSQL</li><li>Supabase</li><li>Stripe</li><li>Zod</li><li>REST APIs</li>
             </ul>
           </article>
           <article class="skill-card reveal">
-            <h3>Herramientas</h3>
+            <h3>Automatización &amp; Tools</h3>
             <ul class="tags">
-              <li>Git</li><li>GitHub</li><li>VS Code</li>
+              <li>Git</li><li>GitHub</li><li>Playwright</li><li>GitHub Actions</li>
             </ul>
           </article>
         </div>
@@ -169,31 +170,47 @@
           <h2 class="section__title">Cosas que he construido</h2>
         </header>
 
-        <div class="projects__grid">
-          <!-- Proyecto 1: ADESA (privado) -->
-          <article class="project-card reveal">
-            <div class="project-card__thumb thumb--1">
-              <span>ADESA Digital</span>
+        <!-- Proyecto destacado: ADESA Digital -->
+        <article class="project-featured reveal">
+          <div class="project-featured__media thumb--1" aria-hidden="true">
+            <span>ADESA Digital</span>
+          </div>
+          <div class="project-featured__content">
+            <span class="badge--featured">Proyecto destacado</span>
+            <h3>ADESA Digital — Plataforma web para club de baloncesto</h3>
+            <p class="project-featured__lead">
+              Plataforma web full-stack que digitaliza por completo la gestión de un
+              club de baloncesto: web pública (resultados de la federación en tiempo
+              real, noticias, galería, inscripciones con pago y torneos 3x3 en vivo)
+              y panel de administración con permisos por rol. Diseñada como
+              <strong>white-label</strong>: el mismo despliegue sirve a cualquier club
+              cambiando solo su configuración, sin tocar una línea de código.
+            </p>
+            <ul class="feature-list">
+              <li>🏀 16 módulos de dominio integrados (inscripciones, horarios, equipos, torneos, finanzas…)</li>
+              <li>💳 Pagos reales con Stripe (checkout + webhooks), Bizum y transferencia</li>
+              <li>🔄 Datos de la federación en tiempo real mediante scraper propio</li>
+              <li>🏆 Torneos 3x3 con marcador en vivo y mesa de árbitro</li>
+              <li>🔐 Autorización por rol en el servidor + seguridad a nivel de fila (RLS)</li>
+              <li>⚙️ Multi-club / white-label configurable en vivo, sin redeploy</li>
+            </ul>
+            <ul class="metrics" aria-label="Métricas del proyecto">
+              <li><strong>48</strong><span>tablas</span></li>
+              <li><strong>26</strong><span>migraciones SQL</span></li>
+              <li><strong>16</strong><span>módulos</span></li>
+              <li><strong>0</strong><span>vulnerabilidades</span></li>
+            </ul>
+            <ul class="tags tags--sm">
+              <li>Next.js 16</li><li>React 19</li><li>TypeScript</li><li>Tailwind CSS v4</li><li>Supabase</li><li>PostgreSQL</li><li>Stripe</li><li>Zod</li><li>Nodemailer</li><li>Node.js</li>
+            </ul>
+            <div class="project-card__links">
+              <span class="project-link project-link--private" title="Repositorio privado">🔒 Repo privado — capturas disponibles bajo petición</span>
             </div>
-            <div class="project-card__body">
-              <div class="project-card__top">
-                <h3>ADESA Digital</h3>
-                <span class="badge--featured">Destacado</span>
-              </div>
-              <p>
-                Plataforma web integral desarrollada para ADESA.
-                <em>(Descripción y stack por confirmar contigo.)</em>
-              </p>
-              <ul class="tags tags--sm">
-                <li>Por confirmar</li>
-              </ul>
-              <div class="project-card__links">
-                <span class="project-link project-link--private" title="Repositorio privado">🔒 Repo privado</span>
-              </div>
-            </div>
-          </article>
+          </div>
+        </article>
 
-          <!-- Proyecto 2: FAB Cádiz Scraper (público) -->
+        <!-- Resto de proyectos -->
+        <div class="projects__grid">
           <article class="project-card reveal">
             <div class="project-card__thumb thumb--2">
               <span>FAB Cádiz Scraper</span>
@@ -203,11 +220,14 @@
                 <h3>FAB Cádiz Scraper</h3>
               </div>
               <p>
-                Scraper en Python que extrae y procesa datos de forma automática.
-                <em>(Cuéntame qué fuente scrapea y qué hace con los datos.)</em>
+                Scraper que extrae automáticamente competiciones, partidos y
+                clasificaciones de la federación andaluza de baloncesto y los vuelca
+                en PostgreSQL. Usa scrapeo <strong>incremental</strong> (detecta
+                cambios con hashes y solo actualiza lo nuevo) y alimenta en tiempo
+                real a ADESA Digital, eliminando la carga manual de resultados.
               </p>
               <ul class="tags tags--sm">
-                <li>Python</li><li>Web Scraping</li>
+                <li>Python</li><li>Playwright</li><li>Supabase</li><li>PostgreSQL</li><li>GitHub Actions</li>
               </ul>
               <div class="project-card__links">
                 <a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper" target="_blank" rel="noopener" class="project-link">Código →</a>
@@ -237,18 +257,28 @@
           <li class="timeline__item reveal">
             <span class="timeline__dot"></span>
             <div class="timeline__content">
-              <span class="timeline__date">20XX — 20XX</span>
+              <span class="timeline__date">2025</span>
+              <h3>Prácticas en empresa (FCT)</h3>
+              <p class="timeline__org">Solitua · Modalidad online</p>
+              <p>
+                Prácticas de empresa del ciclo de DAM, desarrolladas en remoto.
+                <em>(Cuéntame qué tecnologías y tareas tocaste y lo detallo.)</em>
+              </p>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__dot"></span>
+            <div class="timeline__content">
+              <span class="timeline__date">2023 — 2025</span>
               <h3>Grado Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
               <p class="timeline__org">Victoria FP · Sevilla</p>
               <p>
                 Formación en desarrollo de software multiplataforma: programación
-                orientada a objetos, bases de datos, acceso a datos, interfaces y
-                desarrollo de aplicaciones móviles.
-                <em>(Confírmame las fechas.)</em>
+                orientada a objetos, bases de datos, acceso a datos, desarrollo de
+                interfaces y aplicaciones móviles.
               </p>
             </div>
           </li>
-          <!-- TODO Fernando: ¿prácticas (FCT)? ¿algún trabajo o colaboración? Añádelo aquí. -->
         </ol>
       </div>
     </section>

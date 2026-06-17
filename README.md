@@ -43,9 +43,13 @@ Luego entra en `http://localhost:8000`.
 
 ## 📝 Pendiente de completar
 
-- [ ] Fechas del Grado Superior en DAM
-- [ ] Descripción y stack real del proyecto **ADESA Digital**
-- [ ] Qué hace el **FAB Cádiz Scraper** (fuente de datos)
-- [ ] Confirmar la lista de **skills** y el nivel
-- [ ] Añadir foto de perfil (opcional)
+- [x] Fechas del Grado Superior en DAM (2023–2025)
+- [x] Descripción y stack real del proyecto **ADESA Digital**
+- [x] Qué hace el **FAB Cádiz Scraper** (federación andaluza de baloncesto)
+- [x] Lista de **skills**
+- [ ] Nivel de cada skill (avanzado / intermedio / en aprendizaje)
+- [ ] Tareas y tecnologías de las **prácticas (FCT)** en Solitua
+- [ ] Enlace exacto de **LinkedIn** (las tildes de la URL pueden fallar)
+- [ ] **Capturas de ADESA Digital** para las tarjetas (repo privado)
+- [ ] Foto de perfil (opcional)
 - [ ] Más proyectos
