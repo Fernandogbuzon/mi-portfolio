@@ -229,6 +229,7 @@ html[data-theme="dark"] .badge--available { color: #4ade80; }
 }
 .thumb--1 { background: linear-gradient(135deg, #4f6df5, #9b5cf6); }
 .thumb--2 { background: linear-gradient(135deg, #0ea5e9, #22c55e); }
+.thumb--3 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
 .project-card__body { padding: 1.4rem; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
 .project-card__body--center { align-items: center; justify-content: center; text-align: center; }
 .project-card__top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
@@ -238,7 +239,7 @@ html[data-theme="dark"] .badge--available { color: #4ade80; }
 .project-card__links { margin-top: auto; padding-top: 0.5rem; display: flex; gap: 1rem; }
 .project-link { font-weight: 600; font-size: 0.9rem; color: var(--accent); transition: gap 0.2s ease; }
 .project-link:hover { text-decoration: underline; }
-.project-link--private { color: var(--text-soft); cursor: default; }
+.project-link--private, .project-link--soon { color: var(--text-soft); cursor: default; }
 
 .project-card--add { border-style: dashed; box-shadow: none; }
 .project-card--add:hover { transform: none; border-color: var(--accent); }
