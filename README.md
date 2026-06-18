@@ -1,6 +1,6 @@
 # Portfolio · Fernando García Buzón
 
-Portfolio personal de **Fernando García Buzón**, desarrollador Full-Stack en Sevilla.
+Portfolio personal de **Fernando García Buzón**, desarrollador Full-Stack en Sanlúcar de Barrameda (Cádiz).
 Sitio estático en **HTML, CSS y JavaScript puro** — sin dependencias ni build.
 
 ## ✨ Características
@@ -37,9 +37,9 @@ Luego entra en `http://localhost:8000`.
 
 ## 🌐 Publicar gratis (GitHub Pages)
 
-1. Sube el repo a GitHub.
-2. **Settings → Pages → Source:** rama `main`, carpeta `/ (root)`.
-3. En unos minutos estará en `https://Fernandogbuzon.github.io/mi-portfolio/`.
+1. El repositorio debe ser **público**.
+2. **Settings → Pages → Source:** *Deploy from a branch* → rama `claude/eager-hawking-cfpypc`, carpeta `/ (root)` → **Save**.
+3. En 1-2 minutos estará en `https://fernandogbuzon.github.io/mi-portfolio/`.
 
 ## 📝 Pendiente de completar
 
@@ -48,8 +48,9 @@ Luego entra en `http://localhost:8000`.
 - [x] Qué hace el **FAB Cádiz Scraper** (federación andaluza de baloncesto)
 - [x] Lista de **skills**
 - [ ] Nivel de cada skill (avanzado / intermedio / en aprendizaje)
-- [ ] Tareas y tecnologías de las **prácticas (FCT)** en Solitua
-- [ ] Enlace exacto de **LinkedIn** (las tildes de la URL pueden fallar)
+- [x] Prácticas (FCT) en **Solutia** — Wespaces, rol frontend
+- [ ] Stack de **Wespaces** (con qué se hizo el frontend)
+- [x] Enlace de **LinkedIn**
 - [ ] **Capturas de ADESA Digital** para las tarjetas (repo privado)
 - [ ] Foto de perfil (opcional)
 - [ ] Más proyectos
