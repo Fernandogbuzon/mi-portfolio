@@ -48,8 +48,8 @@ Luego entra en `http://localhost:8000`.
 - [x] Qué hace el **FAB Cádiz Scraper** (federación andaluza de baloncesto)
 - [x] Lista de **skills**
 - [ ] Nivel de cada skill (avanzado / intermedio / en aprendizaje)
-- [x] Prácticas (FCT) en **Solutia** — Wespaces, rol frontend
-- [ ] Stack de **Wespaces** (con qué se hizo el frontend)
+- [x] Prácticas (FCT) en **Solutia** — WeSpaces (Flutter)
+- [x] Experiencia laboral, formación, idiomas y contacto (CV)
 - [x] Enlace de **LinkedIn**
 - [ ] **Capturas de ADESA Digital** para las tarjetas (repo privado)
 - [ ] Foto de perfil (opcional)

@@ -283,6 +283,10 @@ html[data-theme="dark"] .badge--available { color: #4ade80; }
 .metrics strong { font-family: var(--font-display); font-size: 1.7rem; color: var(--accent); line-height: 1; }
 .metrics span { font-size: 0.8rem; color: var(--text-soft); }
 
+/* ---------- Trayectoria (experiencia + formación) ---------- */
+.trajectory__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; }
+.trajectory__heading { font-size: 1.25rem; margin-bottom: 1.5rem; }
+
 /* ---------- Timeline ---------- */
 .timeline { position: relative; padding-left: 1.5rem; }
 .timeline::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
@@ -290,7 +294,7 @@ html[data-theme="dark"] .badge--available { color: #4ade80; }
 .timeline__item:last-child { padding-bottom: 0; }
 .timeline__dot { position: absolute; left: -1.5rem; top: 6px; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 4px var(--accent-soft); }
 .timeline__date { font-size: 0.82rem; font-weight: 600; color: var(--accent); }
-.timeline__content h3 { font-size: 1.15rem; margin: 0.3rem 0; }
+.timeline__content h3, .timeline__content h4 { font-size: 1.05rem; margin: 0.3rem 0; }
 .timeline__org { font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
 .timeline__content p { color: var(--text-soft); font-size: 0.95rem; }
 .timeline__content em { opacity: 0.8; font-size: 0.85rem; }
@@ -342,4 +346,6 @@ html[data-theme="dark"] .badge--available { color: #4ade80; }
   .project-featured__media { min-height: 160px; font-size: 1.4rem; }
   .project-featured__content { padding: 1.5rem; }
   .metrics { gap: 1.25rem; }
+
+  .trajectory__grid { grid-template-columns: 1fr; gap: 2.5rem; }
 }
