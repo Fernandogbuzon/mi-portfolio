@@ -242,7 +242,7 @@
   padding:clamp(2.5rem,6vw,5rem);
   position:relative;overflow:hidden;
 }
-.criterio .folio{color:color-mix(in oklab, var(--papel) 55%, transparent)}
+.criterio .folio{color:color-mix(in oklab, var(--papel) 70%, transparent)}
 .manifiesto{
   font-size:clamp(1.6rem,1.1rem + 2.6vw,3.2rem);
   line-height:1.14;color:var(--papel);
@@ -400,7 +400,10 @@ pre{
   line-height:1.6;margin-bottom:1.5rem;
   -webkit-overflow-scrolling:touch;
 }
-pre .c{color:color-mix(in oklab, var(--papel) 45%, transparent)}
+/* 62% y no 45%: compuesto sobre --tinta, el 45% daba 3,64:1 con
+   texto de 13px y AA pide 4,5. Un comentario que no se lee no es un
+   comentario. */
+pre .c{color:color-mix(in oklab, var(--papel) 62%, transparent)}
 pre .k{color:var(--verde-invertido)}
 code{font-family:var(--mono);font-size:.88em;color:var(--tinta)}
 
@@ -460,3 +463,25 @@ p > code{
 .pieza--dato{justify-content:center}
 .pieza--dato .pieza-folio{margin-bottom:1.75rem}
 .pieza--dato p{margin-bottom:0}
+
+/* ---------- 11 · Cierre del caso ---------- */
+/* Quien llega a un caso desde una búsqueda no ha pasado por la portada:
+   si aquí no hay forma de actuar, se va. */
+.caso-contacto{
+  width:min(100% - var(--gutter)*2, var(--ancho));
+  margin:clamp(3rem,7vw,5rem) auto 0;
+  padding:clamp(1.75rem,4vw,2.75rem);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:clamp(1.25rem,3vw,2.5rem);
+  align-items:center;
+}
+.caso-contacto h2{font-size:clamp(1.4rem,1.1rem + 1.4vw,2rem);margin-block:.6rem .7rem}
+.caso-contacto p{font-size:.97rem;margin:0}
+.caso-contacto .botonera{flex-direction:column;align-items:stretch}
+.caso-contacto .btn{justify-content:center;white-space:nowrap}
+
+@media (max-width:52rem){
+  .caso-contacto{grid-template-columns:1fr}
+  .caso-contacto .botonera{flex-direction:row;flex-wrap:wrap}
+}
