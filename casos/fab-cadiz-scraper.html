@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>FAB Cádiz Scraper — Caso · Fernando García Buzón</title>
+<meta name="description" content="Cómo saco resultados de una federación sin API, sin servidor y casi sin escribir en la base de datos. Y el fallo silencioso que me enseñó a hacer ruido.">
+
+<link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/casos/fab-cadiz-scraper.html">
+<link rel="icon" href="../marca/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="FAB Cádiz Scraper — Caso">
+<meta property="og:description" content="Resultados de la federación en Postgres, sin servidor y sin escribir cuando no hace falta. Con el fallo silencioso incluido.">
+<meta property="og:image" content="https://fernandogbuzon.github.io/mi-portfolio/marca/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/sistema.css?v=1">
+<link rel="stylesheet" href="../css/paginas.css?v=1">
+
+<script>
+  try {
+    var t = localStorage.getItem("tema");
+    if (t === "claro" || t === "noche") document.documentElement.setAttribute("data-tema", t);
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<a class="salto" href="#contenido">Saltar al contenido</a>
+<div id="campo" aria-hidden="true"></div>
+
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-anillo" aria-hidden="true"></div>
+
+<header class="cabecera">
+  <div class="env vidrio">
+    <a class="marca" href="../index.html">fgbuzon<span class="punto">.</span></a>
+    <nav aria-label="Principal">
+      <ul class="menu" id="menu">
+        <li><a href="../index.html#trabajo">Trabajo</a></li>
+        <li><a href="adesa-digital.html">ADESA Digital</a></li>
+        <li><a href="../index.html#hablamos">Hablamos</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;align-items:center;gap:.4rem">
+      <button class="interruptor" id="interruptor" type="button" aria-label="Cambiar de tema">
+        <svg class="sol" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="luna" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburguesa" id="hamburguesa" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <div class="caso-cabecera">
+    <div class="env">
+      <a class="volver" href="../index.html">← Todo el trabajo</a>
+      <h1>Resultados sin servidor y sin nadie escribiéndolos</h1>
+      <p class="entradilla">
+        La federación andaluza no tiene API. Publica los resultados en una
+        página de 2008 detrás de Cloudflare. Este scraper los saca, calcula las
+        clasificaciones y los deja en Postgres — y la mayoría de las veces
+        decide que no hace falta escribir nada.
+      </p>
+
+      <dl class="caso-ficha">
+        <div><dt>Para</dt><dd>adesa80.com</dd></div>
+        <div><dt>Mi papel</dt><dd>Todo. Es mío de punta a punta.</dd></div>
+        <div><dt>Código</dt><dd><a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper" target="_blank" rel="noopener">Abierto en GitHub</a></dd></div>
+        <div><dt>Stack</dt><dd>Python · Playwright · PostgreSQL · GitHub Actions</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <article class="caso-cuerpo">
+
+    <h2><span class="rotulo">Problema</span><br>Cuatro restricciones que se pelean entre sí</h2>
+
+    <p class="primera">
+      El club necesitaba calendario, resultados y clasificación al día. La
+      única fuente es la web de la Federación Andaluza de Baloncesto, y no
+      expone nada parecido a una API.
+    </p>
+
+    <ul>
+      <li>Es un <strong>ASP.NET WebForms</strong>: los datos solo salen disparando <code>__doPostBack</code> a través de tres desplegables encadenados —categoría, fase, grupo—, y todo eso detrás de Cloudflare.</li>
+      <li>Los resultados tienen que aparecer <strong>minutos después</strong> de acabar un partido un sábado por la tarde.</li>
+      <li>Sin servidor: corre con los minutos gratuitos de GitHub Actions.</li>
+      <li>Escribe en un Postgres <strong>compartido</strong> con la web del club, cuyo contrato de lectura no se puede romper.</li>
+    </ul>
+
+    <p>
+      La solución ingenua —scrapearlo todo cada diez minutos— falla en las
+      cuatro a la vez: agota los minutos de CI, machaca la base de datos con
+      escrituras idénticas y aun así llega tarde.
+    </p>
+
+    <h2><span class="rotulo">Solución</span><br>Dos scrapers con precios distintos</h2>
+
+    <p>
+      En vez de uno que lo haga todo, hay dos con perfiles de coste opuestos:
+    </p>
+
+    <h3>El barrido nocturno</h3>
+    <p>
+      <code>scraper_competicion.py</code> (1.390 líneas) recorre una vez al día cada
+      competición, categoría, fase y grupo. Calcula las clasificaciones en
+      Python —con desempate particular incluido— y borra los <em>partidos
+      fantasma</em> de playoff que la federación deja publicados y nunca se
+      juegan.
+    </p>
+
+    <h3>El sondeo quirúrgico</h3>
+    <p>
+      <code>scraper_resultados.py</code> (1.153 líneas) no recorre nada. Le pregunta a
+      Postgres <strong>qué partidos deberían haber terminado ya y no tienen
+      resultado</strong>, los agrupa, y vuelve a mirar solo esos grupos. Los sábados
+      por la tarde son unos pocos; el resto de la semana, ninguno.
+    </p>
+
+    <h3>Y sobre todo: no escribir</h3>
+
+    <p>
+      De cada grupo se calcula un <strong>SHA-256 del listado de partidos
+      canonicalizado</strong> y se compara con el hash guardado, a través de una
+      función atómica en Postgres. Si coincide, la ejecución termina sin tocar
+      una fila.
+    </p>
+
+<pre><code><span class="c"># La mayoría de las ejecuciones acaban aquí.</span>
+<span class="k">if</span> hash_nuevo == hash_guardado:
+    logger.info(<span class="k">"grupo %s sin cambios"</span>, grupo)
+    <span class="k">return</span></code></pre>
+
+    <p>
+      Encima va un <em>pre-check</em> sin <code>checkout</code> que mira si hoy hay partidos
+      antes de arrancar el trabajo entero. Los días sin baloncesto no cuestan
+      casi nada: <strong>alrededor de un 80&nbsp;% menos de coste de CI</strong>.
+    </p>
+
+    <h2><span class="rotulo">Impacto</span><br>Nadie transcribe nada</h2>
+
+    <ul class="ancho metricas" style="max-width:none">
+      <li><span class="cifra" data-cifra="25" data-sufijo=" min">25 min</span><span class="que">Del pitido a la web</span></li>
+      <li><span class="cifra" data-cifra="3003">3003</span><span class="que">Líneas de Python</span></li>
+      <li><span class="cifra" data-cifra="80" data-sufijo=" %">80 %</span><span class="que">Menos coste de CI</span></li>
+      <li><span class="cifra" data-cifra="0">0</span><span class="que">Servidores</span></li>
+    </ul>
+
+    <p>
+      Además del scraper salieron 6 migraciones SQL y una pasada de seguridad
+      que dejó los avisos de Supabase <strong>de 13 hallazgos a 1</strong>, y se movió la
+      búsqueda de escudos —que estaba a fuego en el cliente de la web— a la
+      base de datos: <strong>202 de 255</strong> nombres distintos de equipo resuelven
+      escudo automáticamente.
+    </p>
+
+    <h2><span class="rotulo">Proceso</span><br>El fallo del que más he aprendido</h2>
+
+    <p class="primera">
+      En julio, el scraper dejó de traer partidos. Durante semanas. Y no avisó
+      nadie, porque no avisaba nada.
+    </p>
+
+    <p>
+      La federación <strong>renumera</strong> los identificadores de competición cada
+      temporada manteniendo la misma dirección legible. Cuando los IDs
+      2445-2447 empezaron a redirigir a una página de error, todas las
+      ejecuciones siguieron terminando <em>en verde</em> con cero partidos
+      encontrados.
+    </p>
+
+    <p>El fallo estaba tapado dos veces, y ninguna de las dos era el scraping:</p>
+
+    <ul>
+      <li>La función que scrapea una competición estaba anotada como si devolviera dos valores, mientras quien la llamaba desempaquetaba cuatro. Así que <strong>todo camino de error reventaba con un <code>ValueError</code></strong> de desempaquetado en lugar de contar la causa real.</li>
+      <li>El proceso <strong>salía con código 0</strong> aunque fallaran las tres competiciones. Para GitHub Actions, eso es un éxito.</li>
+    </ul>
+
+    <blockquote>
+      Un trabajo automático que falla en silencio es peor que no tenerlo:
+      crees que los datos están al día.
+    </blockquote>
+
+    <p>
+      El arreglo fue reconectar las URLs, sí, pero lo que quedó es lo otro:
+      alinear la firma con lo que se consume, y <strong>salir con código distinto de
+      cero cuando no se ha traído nada</strong>. Desde entonces, cuando la federación
+      vuelve a cambiar algo, me entero el mismo día.
+    </p>
+
+    <h3>Lo que haría distinto</h3>
+    <p>
+      Los reintentos —máximo cinco, cada diez minutos, con estado que caduca a
+      las 48 horas— los escribí antes que la observabilidad. Debería haber
+      sido al revés: reintentar bien un error que no sabes que existe no sirve
+      de nada.
+    </p>
+
+    <div class="caso-siguiente vidrio vidrio--vivo">
+      <p><strong>Lo siguiente:</strong> la plataforma que consume todo esto.</p>
+      <a class="btn btn-linea" href="adesa-digital.html">El caso de ADESA Digital <span class="flecha" aria-hidden="true">→</span></a>
+    </div>
+
+  </article>
+</main>
+
+<footer class="pie">
+  <div class="env">
+    <div class="pie-fin">
+      <span>© <span id="anio">2026</span> Fernando García Buzón</span>
+      <span><a href="../index.html">Volver al inicio</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/campo.js?v=1" defer></script>
+<script src="../js/main.js?v=1" defer></script>
+</body>
+</html>

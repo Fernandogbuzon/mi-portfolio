@@ -1,0 +1,602 @@
+/* ============================================================
+   Fernando García Buzón · Sistema
+   ------------------------------------------------------------
+   Tinta y papel de fgbuzon.com, más una capa de vidrio.
+   La marca no cambia: cambia el material.
+   ============================================================ */
+
+/* ---------- 01 · Fichas ---------- */
+
+@property --ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@property --luz { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+
+:root{
+  /* tinta y papel — heredados de fgbuzon.com sin tocar */
+  --papel:#F2EFE7;
+  --papel-hondo:#EAE6DC;
+  --tinta:#14201B;
+  --tinta-suave:#4E5C56;
+  --tinta-tenue:#59645E;
+  --regla:#D9D4C7;
+  --verde:#146B45;
+  --verde-vivo:#17845C;
+  --verde-invertido:#3ED294;
+  --grano:.05;
+
+  /* vidrio — lo único nuevo del sistema.
+     Sobre papel el vidrio es blanco y sustrae; sobre tinta es blanco
+     y suma. Por eso son dos escalas y no una con opacidad distinta. */
+  --vidrio:rgba(255,255,255,.42);
+  --vidrio-hondo:rgba(255,255,255,.60);
+  --vidrio-borde:rgba(255,255,255,.75);
+  --vidrio-sombra:rgba(20,32,27,.16);
+  --especular:rgba(255,255,255,.95);
+
+  /* tipografía */
+  --display:'Fraunces','Georgia',serif;
+  --texto:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+
+  /* medidas */
+  --gutter:clamp(1.25rem, 4vw, 3rem);
+  --ancho:78rem;
+  --radio:18px;
+  --radio-sm:12px;
+
+  /* movimiento — una curva para toda la casa */
+  --curva:cubic-bezier(.2,.7,.3,1);
+  --curva-tinta:cubic-bezier(.22,.61,.24,1);
+  --muelle:linear(0,.0416 6.3%,.1552 12.7%,.4463 25.6%,.5762 31.8%,.6886 38.1%,.7828 44.5%,.8613 51.2%,.9227 58.2%,.9679 65.7%,.9959 74%,1.0086 83.4%,1.0043 94.4%,1);
+}
+
+:root{color-scheme:light dark}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --papel:#121916;
+    --papel-hondo:#0C120F;
+    --tinta:#EFECE3;
+    --tinta-suave:#9AA69F;
+    --tinta-tenue:#7A8880;
+    --regla:#26312C;
+    --verde:#3ED294;
+    --verde-vivo:#5CDFA6;
+    --verde-invertido:#146B45;
+    --grano:.065;
+
+    --vidrio:rgba(255,255,255,.045);
+    --vidrio-hondo:rgba(255,255,255,.075);
+    --vidrio-borde:rgba(255,255,255,.14);
+    --vidrio-sombra:rgba(0,0,0,.5);
+    --especular:rgba(255,255,255,.8);
+  }
+}
+
+/* El interruptor manual gana sobre el sistema, en los dos sentidos.
+   Sin esto, quien fuerza «claro» desde un sistema oscuro no ve nada. */
+html[data-tema="claro"]{
+  --papel:#F2EFE7; --papel-hondo:#EAE6DC; --tinta:#14201B;
+  --tinta-suave:#4E5C56; --tinta-tenue:#59645E; --regla:#D9D4C7;
+  --verde:#146B45; --verde-vivo:#17845C; --verde-invertido:#3ED294;
+  --grano:.05;
+  --vidrio:rgba(255,255,255,.42); --vidrio-hondo:rgba(255,255,255,.60);
+  --vidrio-borde:rgba(255,255,255,.75); --vidrio-sombra:rgba(20,32,27,.16);
+  --especular:rgba(255,255,255,.95);
+  color-scheme:light;
+}
+html[data-tema="noche"]{
+  --papel:#121916; --papel-hondo:#0C120F; --tinta:#EFECE3;
+  --tinta-suave:#9AA69F; --tinta-tenue:#7A8880; --regla:#26312C;
+  --verde:#3ED294; --verde-vivo:#5CDFA6; --verde-invertido:#146B45;
+  --grano:.065;
+  --vidrio:rgba(255,255,255,.045); --vidrio-hondo:rgba(255,255,255,.075);
+  --vidrio-borde:rgba(255,255,255,.14); --vidrio-sombra:rgba(0,0,0,.5);
+  --especular:rgba(255,255,255,.8);
+  color-scheme:dark;
+}
+
+/* ---------- 02 · Reset ---------- */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  scroll-padding-top:6rem;
+}
+
+body{
+  font-family:var(--texto);
+  font-size:clamp(1rem,.96rem + .2vw,1.075rem);
+  line-height:1.65;
+  color:var(--tinta-suave);
+  background:var(--papel);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+img,svg,canvas{max-width:100%;display:block}
+ul,ol{list-style:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+table{border-collapse:collapse;width:100%}
+
+::selection{background:var(--verde);color:var(--papel)}
+
+/* Un anillo de foco propio para todo. El azul del sistema desentona
+   con el papel y encima no se ve sobre el vidrio. */
+:focus-visible{
+  outline:2px solid var(--verde);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+.ocultovisual{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;
+}
+
+.salto{
+  position:fixed;top:.75rem;left:.75rem;z-index:999;
+  padding:.7rem 1.1rem;border-radius:999px;
+  background:var(--tinta);color:var(--papel);font-weight:600;
+  transform:translateY(-160%);transition:transform .25s var(--curva);
+}
+.salto:focus{transform:none}
+
+/* ---------- 03 · Grano y campo ---------- */
+
+/* El grano va sobre todo y no intercepta el ratón. Es lo que impide
+   que el vidrio parezca plástico: le devuelve la textura del papel. */
+body::after{
+  content:"";position:fixed;inset:0;z-index:400;pointer-events:none;
+  opacity:var(--grano);mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark){ body::after{mix-blend-mode:screen} }
+html[data-tema="noche"] body::after{mix-blend-mode:screen}
+html[data-tema="claro"] body::after{mix-blend-mode:multiply}
+
+/* El lienzo de tinta: WebGL detrás de todo. Si no arranca, queda el
+   degradado de debajo y no se nota que falta nada. */
+#campo{
+  position:fixed;inset:0;z-index:-2;
+  width:100%;height:100%;
+  background:
+    radial-gradient(120% 80% at 15% 0%, color-mix(in oklab, var(--verde) 12%, transparent), transparent 60%),
+    radial-gradient(90% 70% at 95% 20%, color-mix(in oklab, var(--verde-vivo) 9%, transparent), transparent 55%),
+    var(--papel);
+}
+#campo canvas{width:100%;height:100%;display:block}
+
+/* ---------- 04 · Tipografía ---------- */
+
+h1,h2,h3,h4{
+  font-family:var(--display);
+  color:var(--tinta);
+  font-weight:400;
+  line-height:1.06;
+  letter-spacing:-.022em;
+  font-variation-settings:'SOFT' 0,'WONK' 1;
+  text-wrap:balance;
+}
+
+h1{font-size:clamp(2.75rem,1.6rem + 5.4vw,6.5rem)}
+h2{font-size:clamp(2rem,1.4rem + 2.6vw,3.5rem)}
+h3{font-size:clamp(1.25rem,1.1rem + .7vw,1.6rem)}
+
+p{text-wrap:pretty;max-width:66ch}
+
+em.acento{font-style:italic;color:var(--verde);font-variation-settings:'WONK' 1}
+
+/* El folio: el número de sección al margen. Es lo que hace que la
+   página se lea como un dossier y no como una landing. */
+.folio{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--tinta-tenue);
+  font-variant-numeric:tabular-nums;
+}
+
+.entradilla{
+  font-size:clamp(1.075rem,1rem + .5vw,1.3rem);
+  color:var(--tinta-suave);
+  max-width:52ch;
+}
+
+.apunte{color:var(--tinta-tenue);font-size:.95rem;max-width:56ch}
+
+/* ---------- 05 · Rejilla ---------- */
+
+.env{
+  width:100%;max-width:var(--ancho);
+  margin-inline:auto;padding-inline:var(--gutter);
+}
+
+.seccion{padding-block:clamp(4rem,10vw,8rem);position:relative}
+
+.encabezado{
+  display:grid;
+  grid-template-columns:minmax(0,10rem) minmax(0,1fr);
+  gap:clamp(1rem,4vw,3rem);
+  align-items:start;
+  margin-bottom:clamp(2.5rem,5vw,4rem);
+}
+.encabezado > div{max-width:44rem}
+.encabezado h2{margin-bottom:.9rem}
+
+@media (max-width:60rem){
+  .encabezado{grid-template-columns:1fr;gap:.9rem}
+}
+
+.regla{height:1px;background:var(--regla);border:0;margin:0}
+
+/* ---------- 06 · Vidrio ---------- */
+/* El componente del sistema. Tres capas, y las tres hacen falta:
+   1. el fondo difuso (backdrop-filter)  → el material
+   2. el borde especular (conic + mask)  → el canto
+   3. el brillo interior (inset shadow)  → el grosor
+   Quitando cualquiera se cae en «caja translúcida», que es lo que
+   hace todo el mundo. */
+
+.vidrio{
+  position:relative;
+  border-radius:var(--radio);
+  background:var(--vidrio);
+  -webkit-backdrop-filter:blur(20px) saturate(1.7);
+  backdrop-filter:blur(20px) saturate(1.7);
+  box-shadow:
+    inset 0 1px 0 var(--vidrio-borde),
+    inset 0 -1px 1px rgba(255,255,255,.10),
+    0 1px 2px color-mix(in oklab, var(--vidrio-sombra) 60%, transparent),
+    0 18px 40px -20px var(--vidrio-sombra);
+  isolation:isolate;
+}
+
+/* El canto. padding:1px + máscara compuesta = un borde de un píxel
+   que puede llevar degradado y seguir el radio. */
+.vidrio::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  padding:1px;pointer-events:none;z-index:2;
+  background:conic-gradient(from var(--ang),
+    transparent 0deg,
+    var(--especular) 55deg,
+    color-mix(in oklab, var(--verde-vivo) 70%, white) 110deg,
+    transparent 175deg,
+    transparent 200deg,
+    var(--especular) 285deg,
+    transparent 340deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+          mask-composite:exclude;
+  opacity:.55;
+  transition:opacity .4s var(--curva);
+}
+
+/* El reflejo de arriba: una lente real recoge luz por el canto
+   superior. Sin esto el vidrio se lee plano. */
+.vidrio::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  pointer-events:none;z-index:1;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(255,255,255,.28), transparent 60%),
+    radial-gradient(80% 50% at var(--luz) 0%, rgba(255,255,255,.22), transparent 55%);
+  mix-blend-mode:soft-light;
+}
+@media (prefers-color-scheme: dark){
+  .vidrio::after{mix-blend-mode:overlay;opacity:.7}
+}
+
+.vidrio > *{position:relative;z-index:3}
+
+.vidrio--hondo{background:var(--vidrio-hondo)}
+
+/* Refracción de verdad, solo donde el navegador la soporta.
+   Chrome/Edge la aplican; el resto se queda con el desenfoque y la
+   pieza sigue siendo correcta. */
+@supports (backdrop-filter: url(#refraccion)) {
+  .vidrio--refracta{
+    -webkit-backdrop-filter:blur(14px) saturate(1.8) url(#refraccion);
+            backdrop-filter:blur(14px) saturate(1.8) url(#refraccion);
+  }
+}
+
+/* El canto se enciende y gira al pasar por encima. El giro es la
+   diferencia entre «tiene un borde claro» y «es vidrio». */
+.vidrio--vivo{
+  transition:transform .5s var(--curva), box-shadow .5s var(--curva);
+}
+.vidrio--vivo:hover,
+.vidrio--vivo:focus-within{
+  transform:translateY(-4px);
+  box-shadow:
+    inset 0 1px 0 var(--vidrio-borde),
+    inset 0 -1px 1px rgba(255,255,255,.14),
+    0 2px 4px color-mix(in oklab, var(--vidrio-sombra) 60%, transparent),
+    0 30px 60px -24px var(--vidrio-sombra);
+}
+.vidrio--vivo:hover::before,
+.vidrio--vivo:focus-within::before{opacity:1;animation:girar 6s linear infinite}
+
+@keyframes girar{ to{--ang:360deg} }
+
+/* ---------- 07 · Botones ---------- */
+
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.85rem 1.5rem;border-radius:999px;
+  font-family:var(--texto);font-weight:600;font-size:.95rem;
+  letter-spacing:-.01em;
+  position:relative;overflow:hidden;isolation:isolate;
+  transition:transform .35s var(--muelle), color .3s var(--curva), border-color .3s var(--curva);
+}
+.btn:active{transform:scale(.97)}
+
+.btn-solido{background:var(--verde);color:var(--papel)}
+.btn-solido::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:var(--tinta);
+  transform:translateY(101%);
+  transition:transform .45s var(--curva-tinta);
+}
+.btn-solido:hover::before{transform:none}
+.btn-solido:hover{color:var(--papel)}
+
+.btn-linea{
+  border:1px solid var(--regla);color:var(--tinta);
+  background:var(--vidrio);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.btn-linea:hover{border-color:var(--verde);color:var(--verde)}
+
+/* La flecha que sale por un lado y entra por el otro. Cuesta dos
+   líneas y es de las pocas microinteracciones que la gente recuerda. */
+.btn .flecha{display:inline-block;transition:transform .4s var(--curva)}
+.btn:hover .flecha{animation:cruza .5s var(--curva)}
+@keyframes cruza{
+  50%{transform:translateX(1.4em);opacity:0}
+  51%{transform:translateX(-1.4em);opacity:0}
+  100%{transform:none;opacity:1}
+}
+
+/* ---------- 08 · Cursor ---------- */
+/* Dos piezas: el punto, que va pegado al ratón, y el anillo, que
+   llega tarde con muelle. El retardo es todo el efecto. */
+
+.cursor,.cursor-anillo{
+  position:fixed;top:0;left:0;z-index:500;pointer-events:none;
+  border-radius:50%;
+  opacity:0;
+  transition:opacity .3s var(--curva);
+}
+.cursor{
+  width:6px;height:6px;margin:-3px 0 0 -3px;
+  background:var(--verde);
+}
+.cursor-anillo{
+  width:38px;height:38px;margin:-19px 0 0 -19px;
+  border:1px solid color-mix(in oklab, var(--verde) 55%, transparent);
+  -webkit-backdrop-filter:blur(2px) saturate(1.4);
+  backdrop-filter:blur(2px) saturate(1.4);
+  transition:opacity .3s var(--curva), width .35s var(--muelle),
+             height .35s var(--muelle), margin .35s var(--muelle),
+             background .35s var(--curva), border-color .35s var(--curva);
+}
+html.cursor-listo .cursor,
+html.cursor-listo .cursor-anillo{opacity:1}
+
+html.cursor-listo.cursor-sobre .cursor-anillo{
+  width:74px;height:74px;margin:-37px 0 0 -37px;
+  background:color-mix(in oklab, var(--verde) 14%, transparent);
+  border-color:transparent;
+}
+html.cursor-listo.cursor-sobre .cursor{opacity:0}
+
+/* Solo en ratón fino. En táctil no hay cursor que sustituir y el
+   anillo se quedaría clavado en una esquina. */
+@media (pointer:coarse),(hover:none){
+  .cursor,.cursor-anillo{display:none}
+}
+
+/* ---------- 09 · Cabecera ---------- */
+
+.cabecera{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  padding-block:.7rem;
+  transition:transform .45s var(--curva);
+}
+.cabecera.oculta{transform:translateY(-120%)}
+
+.cabecera .env{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.5rem .75rem .5rem 1.25rem;
+  max-width:calc(var(--ancho) - 2rem);
+  border-radius:999px;
+}
+
+.marca{
+  font-family:var(--display);font-size:1.15rem;font-weight:500;
+  color:var(--tinta);letter-spacing:-.03em;
+  font-variation-settings:'WONK' 1;
+}
+.marca .punto{
+  color:var(--verde);display:inline-block;
+  transition:transform .5s var(--muelle);
+}
+.marca:hover .punto{transform:translateY(-.32em)}
+
+.menu{display:flex;align-items:center;gap:.35rem}
+.menu a{
+  padding:.5rem .8rem;border-radius:999px;
+  font-size:.88rem;font-weight:500;color:var(--tinta-suave);
+  transition:color .25s var(--curva), background .25s var(--curva);
+}
+.menu a:hover{color:var(--tinta);background:var(--vidrio-hondo)}
+.menu a[aria-current="true"]{color:var(--verde)}
+
+.interruptor{
+  display:grid;place-items:center;width:36px;height:36px;
+  border-radius:50%;border:1px solid var(--regla);color:var(--tinta);
+  transition:border-color .25s var(--curva), transform .5s var(--muelle);
+}
+.interruptor:hover{border-color:var(--verde);transform:rotate(35deg)}
+.interruptor .luna{display:none}
+html[data-tema="noche"] .interruptor .sol{display:none}
+html[data-tema="noche"] .interruptor .luna{display:block}
+@media (prefers-color-scheme: dark){
+  html:not([data-tema="claro"]) .interruptor .sol{display:none}
+  html:not([data-tema="claro"]) .interruptor .luna{display:block}
+}
+
+.hamburguesa{display:none;flex-direction:column;gap:5px;padding:.55rem}
+.hamburguesa span{
+  width:20px;height:1.5px;background:var(--tinta);border-radius:2px;
+  transition:transform .35s var(--curva), opacity .2s var(--curva);
+}
+.hamburguesa[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburguesa[aria-expanded="true"] span:nth-child(2){opacity:0}
+.hamburguesa[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+@media (max-width:56rem){
+  .hamburguesa{display:flex}
+  .menu{
+    position:fixed;inset:5rem var(--gutter) auto;
+    flex-direction:column;align-items:stretch;gap:.15rem;
+    padding:1rem;border-radius:var(--radio);
+    background:var(--papel);
+    border:1px solid var(--regla);
+    box-shadow:0 24px 50px -20px var(--vidrio-sombra);
+    transform:translateY(-8px) scale(.97);
+    opacity:0;visibility:hidden;
+    transition:transform .4s var(--curva), opacity .3s var(--curva), visibility .3s;
+  }
+  .menu.abierto{transform:none;opacity:1;visibility:visible}
+  .menu a{padding:.75rem 1rem;font-size:1rem}
+  .menu li:last-child{margin-top:.5rem;padding-top:.75rem;border-top:1px solid var(--regla)}
+}
+
+/* ---------- 10 · Métricas ---------- */
+
+.metricas{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
+  gap:1px;
+  background:var(--regla);
+  border:1px solid var(--regla);
+  border-radius:var(--radio-sm);
+  overflow:hidden;
+}
+.metricas li{
+  padding:1.15rem 1.25rem;
+  background:var(--papel);
+  display:flex;flex-direction:column;gap:.2rem;
+}
+.metricas .cifra{
+  font-family:var(--display);
+  font-size:clamp(1.9rem,1.5rem + 1.4vw,2.6rem);
+  line-height:1;color:var(--tinta);
+  font-variant-numeric:tabular-nums;
+  font-variation-settings:'WONK' 1;
+}
+.metricas .que{
+  font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-tenue);
+}
+
+/* ---------- 11 · Etiquetas ---------- */
+
+.etiquetas{display:flex;flex-wrap:wrap;gap:.4rem}
+.etiquetas i{
+  font-style:normal;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;
+  padding:.3rem .6rem;border-radius:999px;
+  border:1px solid var(--regla);color:var(--tinta-tenue);
+  transition:border-color .3s var(--curva), color .3s var(--curva);
+}
+.etiquetas i:hover{border-color:var(--verde);color:var(--verde)}
+
+/* ---------- 12 · Movimiento ---------- */
+/* Tres reglas heredadas de fgbuzon.com, y ninguna es negociable:
+   1. el contenido se ve siempre por defecto;
+   2. todo estado inicial oculto vive dentro de no-preference;
+   3. el revelado no puede depender de que una animación llegue a su fin.
+
+   La 3 cambió sobre la marcha. El revelado estaba hecho con
+   `animation-timeline: view()`, que es más elegante porque lo conduce
+   el navegador sin JavaScript. Medido en Chromium, no aguanta: con
+   varios rangos distintos (`entry 2% cover 16%`, `cover 0% cover 25%`,
+   `entry`...) siempre quedaban elementos con la animación en progreso 0
+   estando centrados en pantalla — es decir, texto invisible. Un efecto
+   bonito no vale un párrafo que no se lee.
+
+   Así que el revelado lo lleva un IntersectionObserver, que es
+   determinista, y se aplica AÑADIENDO `.js-revela` a <html>: si JS no
+   corre, no hay nada oculto que revelar y la página se ve entera. */
+
+@keyframes entra{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:none}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation:none !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  html{scroll-behavior:auto}
+}
+
+/* ---------- 13 · Pie ---------- */
+
+.pie{
+  border-top:1px solid var(--regla);
+  padding-block:clamp(3rem,6vw,4.5rem) 2rem;
+  margin-top:clamp(3rem,8vw,6rem);
+}
+.pie-rejilla{
+  display:grid;
+  grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr));
+  gap:clamp(1.5rem,4vw,3rem);
+}
+.pie h2{
+  font-family:var(--mono);font-size:.7rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-tenue);
+  margin-bottom:.9rem;
+}
+.pie ul{display:grid;gap:.45rem}
+.pie li a{font-size:.92rem;color:var(--tinta-suave);transition:color .25s var(--curva)}
+.pie li a:hover{color:var(--verde)}
+.pie-marca p{font-size:.92rem;margin-top:.6rem;max-width:32ch}
+.pie-fin{
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
+  margin-top:clamp(2rem,5vw,3.5rem);padding-top:1.25rem;
+  border-top:1px solid var(--regla);
+  font-size:.82rem;color:var(--tinta-tenue);
+}
+@media (max-width:48rem){ .pie-rejilla{grid-template-columns:1fr 1fr} .pie-marca{grid-column:1/-1} }
+
+/* ---------- 14 · Revelado ---------- */
+/* Solo actúa si JS ha puesto .js-revela en <html>. El estado oculto no
+   existe en la hoja base a propósito: sin JS, o con movimiento
+   reducido, no hay nada que revelar y la página se ve entera. */
+
+@media (prefers-reduced-motion: no-preference){
+  html.js-revela .revela,
+  html.js-revela .coro > *{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity .7s var(--curva) var(--retardo,0ms),
+               transform .7s var(--curva) var(--retardo,0ms);
+  }
+  html.js-revela .revela.dentro,
+  html.js-revela .coro > .dentro{
+    opacity:1;
+    transform:none;
+  }
+}

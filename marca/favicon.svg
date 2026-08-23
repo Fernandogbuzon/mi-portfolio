@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Fernando García Buzón">
+  <rect width="120" height="120" rx="26" fill="#F4F2ED"/>
+  <text x="21" y="84" font-family="'Archivo','Helvetica Neue',Arial,sans-serif"
+        font-size="70" font-weight="600" letter-spacing="-4" fill="#101A16">fg</text>
+  <circle cx="93" cy="76" r="9" fill="#17794F"/>
+</svg>

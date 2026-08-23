@@ -1,389 +1,498 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Fernando García Buzón — Desarrollador Full-Stack en Sanlúcar de Barrameda (Cádiz), disponible para Sevilla y remoto. Titulado en DAM. Portfolio de proyectos web y multiplataforma." />
-  <meta name="author" content="Fernando García Buzón" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Open Graph / redes sociales -->
-  <meta property="og:title" content="Fernando García Buzón · Desarrollador Full-Stack" />
-  <meta property="og:description" content="Portfolio de Fernando García Buzón, desarrollador Full-Stack en Sanlúcar de Barrameda (Cádiz), disponible para Sevilla y remoto." />
-  <meta property="og:type" content="website" />
+<title>Fernando García Buzón — Desarrollador full-stack</title>
+<meta name="description" content="Diseñé y mantengo adesa80.com: la plataforma en producción que gestiona inscripciones, cobros, horarios y competición de un club de baloncesto.">
 
-  <title>Fernando García Buzón · Desarrollador Full-Stack</title>
+<link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/">
+<link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
 
-  <!-- Fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<meta property="og:type" content="profile">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://fernandogbuzon.github.io/mi-portfolio/">
+<meta property="og:title" content="Fernando García Buzón — Desarrollador full-stack">
+<meta property="og:description" content="Un club entero funciona con lo que construí. adesa80.com: 27 módulos, pagos con Stripe y datos de federación, en producción.">
+<meta property="og:image" content="https://fernandogbuzon.github.io/mi-portfolio/marca/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fernando García Buzón, desarrollador full-stack. Sanlúcar de Barrameda.">
+<meta name="twitter:card" content="summary_large_image">
 
-  <link rel="stylesheet" href="css/styles.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/sistema.css?v=1">
+<link rel="stylesheet" href="css/paginas.css?v=1">
+
+<!-- El tema se decide ANTES de pintar. Si esto vive al final del body,
+     quien navega en oscuro se come un fogonazo blanco en cada carga. -->
+<script>
+  try {
+    var t = localStorage.getItem("tema");
+    if (t === "claro" || t === "noche") document.documentElement.setAttribute("data-tema", t);
+  } catch (e) {}
+</script>
 </head>
 <body>
-  <!-- ===== Header / Navegación ===== -->
-  <header class="site-header" id="top">
-    <nav class="nav container" aria-label="Navegación principal">
-      <a href="#inicio" class="nav__logo">FG<span class="accent">.</span></a>
 
-      <button class="nav__burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMenu">
-        <span></span><span></span><span></span>
-      </button>
+<a class="salto" href="#contenido">Saltar al contenido</a>
 
-      <ul class="nav__menu" id="navMenu">
-        <li><a href="#sobre-mi">Sobre mí</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#proyectos">Proyectos</a></li>
-        <li><a href="#formacion">Formación</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-        <li>
-          <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema claro/oscuro">
-            <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </button>
-        </li>
+<!-- El campo de tinta. Si WebGL no arranca, queda el degradado del CSS. -->
+<div id="campo" aria-hidden="true"></div>
+
+<!-- Refracción para el vidrio. Solo la aplican los navegadores que
+     admiten url() en backdrop-filter; el resto se queda con el
+     desenfoque y la pieza sigue estando bien. -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <filter id="refraccion" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.014" numOctaves="2" seed="7" result="ruido"/>
+    <feGaussianBlur in="ruido" stdDeviation="1.4" result="suave"/>
+    <feDisplacementMap in="SourceGraphic" in2="suave" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-anillo" aria-hidden="true"></div>
+
+<header class="cabecera">
+  <div class="env vidrio">
+    <a class="marca" href="#inicio">fgbuzon<span class="punto">.</span></a>
+    <nav aria-label="Principal">
+      <ul class="menu" id="menu">
+        <li><a href="#trabajo">Trabajo</a></li>
+        <li><a href="#criterio">Criterio</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#trayectoria">Trayectoria</a></li>
+        <li><a href="#hablamos">Hablamos</a></li>
       </ul>
     </nav>
-  </header>
+    <div style="display:flex;align-items:center;gap:.4rem">
+      <button class="interruptor" id="interruptor" type="button" aria-label="Cambiar de tema">
+        <svg class="sol" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="luna" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburguesa" id="hamburguesa" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
 
-  <main>
-    <!-- ===== Hero ===== -->
-    <section class="hero" id="inicio">
-      <div class="container hero__inner">
-        <div class="hero__content">
-          <p class="hero__eyebrow reveal">Desarrollador Full-Stack · Sanlúcar de Barrameda (Cádiz)</p>
-          <h1 class="hero__title reveal">Hola, soy <span class="accent">Fernando García Buzón</span></h1>
-          <p class="hero__subtitle reveal">
-            Construyo aplicaciones web full-stack de principio a fin, de la base
-            de datos a la interfaz. Trabajo con Next.js, React, TypeScript y
-            Supabase, y he desarrollado plataformas completas con pagos online y
-            datos en tiempo real. Titulado en DAM y con ganas de aportar en mi
-            primer equipo.
+<main id="contenido">
+
+  <!-- ─────────── PORTADA ─────────── -->
+  <section class="portada" id="inicio">
+    <div class="env">
+      <div>
+        <span class="folio">Desarrollador full-stack · Sanlúcar de Barrameda</span>
+
+        <h1 class="titular">
+          <span class="linea" style="--i:0"><span>Un club entero</span></span>
+          <span class="linea" style="--i:1"><span>funciona con lo</span></span>
+          <span class="linea" style="--i:2"><span>que <em class="viva">construí</em>.</span></span>
+        </h1>
+
+        <p class="entradilla">
+          ADESA 80 lleva sus inscripciones, sus cobros, sus horarios y su
+          competición sobre una plataforma que diseñé, escribí y mantengo yo.
+        </p>
+
+        <p class="tesis">Busco mi primer puesto. No mi primer proyecto.</p>
+
+        <div class="botonera">
+          <a class="btn btn-solido" href="https://adesa80.com" target="_blank" rel="noopener">
+            Ver adesa80.com <span class="flecha" aria-hidden="true">→</span><span class="ocultovisual"> (se abre en una pestaña nueva)</span>
+          </a>
+          <a class="btn btn-linea" href="casos/adesa-digital.html">Leer el caso completo</a>
+        </div>
+
+        <p class="pie-cta">
+          <span class="pulso" aria-hidden="true"></span>
+          En producción desde agosto de 2026 · 2236 tests en verde
+        </p>
+      </div>
+
+      <aside class="ficha vidrio vidrio--refracta revela">
+        <dl>
+          <div class="fila">
+            <dt>Estado</dt>
+            <dd class="libre">Buscando equipo</dd>
+          </div>
+          <div class="fila">
+            <dt>Dónde</dt>
+            <dd>Sevilla o remoto</dd>
+          </div>
+          <div class="fila">
+            <dt>Título</dt>
+            <dd>Téc. Superior en DAM, 2025</dd>
+          </div>
+          <div class="fila">
+            <dt>Correo</dt>
+            <dd><a href="mailto:fernandogbuzon@gmail.com">fernandogbuzon@gmail.com</a></dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ─────────── TIRA ─────────── -->
+  <div class="tira" aria-hidden="true">
+    <div class="rueda">
+      <span>TypeScript</span><span>Next.js</span><span>PostgreSQL</span><span>Supabase</span>
+      <span>Stripe</span><span>Python</span><span>Playwright</span><span>Vitest</span>
+      <span>TypeScript</span><span>Next.js</span><span>PostgreSQL</span><span>Supabase</span>
+      <span>Stripe</span><span>Python</span><span>Playwright</span><span>Vitest</span>
+    </div>
+  </div>
+
+  <!-- ─────────── TRABAJO ─────────── -->
+  <section class="seccion" id="trabajo">
+    <div class="env">
+      <div class="encabezado">
+        <span class="folio">§ 01 — Trabajo</span>
+        <div>
+          <h2>Dos cosas en producción y una en equipo</h2>
+          <p class="apunte">
+            Las dos primeras las mantengo yo y siguen corriendo mientras lees
+            esto. La tercera es donde aprendí a entrar en el código de otros,
+            que es distinto y cuesta más.
+          </p>
+        </div>
+      </div>
+
+      <div class="bento coro">
+
+        <!-- ADESA -->
+        <article class="bento-pieza vidrio vidrio--vivo pieza--ancha" data-inclina>
+          <div class="pieza-folio">
+            <span class="folio">Plataforma · 2026</span>
+            <span class="estado"><span class="pulso" aria-hidden="true"></span> En producción</span>
+          </div>
+
+          <h3>ADESA Digital</h3>
+          <p>
+            La plataforma que gestiona un club de baloncesto entero: web
+            pública, portal del socio y back-office. Inscripciones con pago
+            real, horarios de pista sin solapes, finanzas del club y arbitraje
+            de torneos 3x3 en directo. Multi-club por configuración: el mismo
+            despliegue sirve a otro club sin tocar una línea.
           </p>
 
-          <div class="hero__cta reveal">
-            <a href="#proyectos" class="btn btn--primary">Ver proyectos</a>
-            <a href="#contacto" class="btn btn--ghost">Contáctame</a>
-          </div>
-
-          <ul class="social reveal" aria-label="Redes sociales">
-            <li>
-              <a href="https://github.com/Fernandogbuzon" target="_blank" rel="noopener" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.42.36.8 1.08.8 2.18v3.23c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9V9z"/></svg>
-              </a>
-            </li>
-            <li>
-              <a href="mailto:fernandogbuzon@gmail.com" aria-label="Email">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-              </a>
-            </li>
+          <ul class="metricas" aria-label="Métricas del proyecto">
+            <li><span class="cifra" data-cifra="27">27</span><span class="que">Módulos</span></li>
+            <li><span class="cifra" data-cifra="81">81</span><span class="que">Tablas</span></li>
+            <li><span class="cifra" data-cifra="2236">2236</span><span class="que">Tests en verde</span></li>
+            <li><span class="cifra" data-cifra="0">0</span><span class="que">Escrituras desde cliente</span></li>
           </ul>
-        </div>
 
-        <div class="hero__visual reveal" aria-hidden="true">
-          <div class="avatar">FG</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Sobre mí ===== -->
-    <section class="section about" id="sobre-mi">
-      <div class="container">
-        <header class="section__head reveal">
-          <p class="section__eyebrow">01 — Sobre mí</p>
-          <h2 class="section__title">Un poco sobre quién soy</h2>
-        </header>
-
-        <div class="about__grid">
-          <div class="about__text reveal">
-            <p>
-              Soy desarrollador <strong>Full-Stack</strong> de Sanlúcar de Barrameda
-              (Cádiz), titulado en <strong>DAM</strong> y con experiencia construyendo
-              aplicaciones <strong>en uso real</strong>. Trabajo con Java,
-              JavaScript/TypeScript y SQL, y me muevo en todo el ciclo: modelado de
-              datos, capa de API REST e interfaz.
-            </p>
-            <p>
-              Me interesa entender la <strong>arquitectura</strong> de cada sistema y
-              el porqué de cada decisión técnica, no solo que funcione. Busco
-              incorporarme como <strong>programador junior</strong>, con previsión de
-              mudarme a Sevilla. Fuera del código juego al baloncesto y colaboro con un
-              club — de hecho, de ahí nació ADESA.
-            </p>
+          <div class="etiquetas">
+            <i>Next.js 16</i><i>React 19</i><i>TypeScript strict</i><i>PostgreSQL</i><i>Supabase</i><i>Stripe</i><i>Zod</i><i>Vitest</i>
           </div>
 
-          <ul class="about__facts reveal">
-            <li><span class="about__label">Ubicación</span><span>Sanlúcar de Barrameda, Cádiz</span></li>
-            <li><span class="about__label">Formación</span><span>Téc. Superior en DAM</span></li>
-            <li><span class="about__label">Idiomas</span><span>Español nativo · Inglés técnico</span></li>
-            <li><span class="about__label">Disponibilidad</span><span class="badge--available">Disponible · Sevilla y remoto</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
+          <a class="tapa" href="casos/adesa-digital.html"><span>Leer el caso de ADESA Digital</span></a>
+          <span class="abre">Leer el caso <span class="flecha" aria-hidden="true">→</span></span>
+        </article>
 
-    <!-- ===== Skills ===== -->
-    <section class="section skills" id="skills">
-      <div class="container">
-        <header class="section__head reveal">
-          <p class="section__eyebrow">02 — Skills</p>
-          <h2 class="section__title">Tecnologías con las que trabajo</h2>
-        </header>
-
-        <div class="skills__grid">
-          <article class="skill-card reveal">
-            <h3>Lenguajes</h3>
-            <ul class="tags">
-              <li>Java</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li><li>Python</li><li>Dart</li>
-            </ul>
-          </article>
-          <article class="skill-card reveal">
-            <h3>Frontend &amp; Móvil</h3>
-            <ul class="tags">
-              <li>React</li><li>Next.js</li><li>Tailwind CSS</li><li>HTML5</li><li>CSS3</li><li>Flutter</li>
-            </ul>
-          </article>
-          <article class="skill-card reveal">
-            <h3>Backend &amp; BBDD</h3>
-            <ul class="tags">
-              <li>Node.js</li><li>API REST</li><li>PostgreSQL</li><li>MySQL</li><li>Supabase</li><li>Stripe</li><li>Spring</li>
-            </ul>
-          </article>
-          <article class="skill-card reveal">
-            <h3>Herramientas &amp; Ágil</h3>
-            <ul class="tags">
-              <li>Git</li><li>GitHub</li><li>Firebase</li><li>Android Studio</li><li>Vitest</li><li>Scrum / Kanban</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Proyectos ===== -->
-    <section class="section projects" id="proyectos">
-      <div class="container">
-        <header class="section__head reveal">
-          <p class="section__eyebrow">03 — Proyectos</p>
-          <h2 class="section__title">Cosas que he construido</h2>
-        </header>
-
-        <!-- Proyecto destacado: ADESA Digital -->
-        <article class="project-featured reveal">
-          <div class="project-featured__media thumb--1" aria-hidden="true">
-            <span>ADESA Digital</span>
+        <!-- MÉTRICA DE RESULTADO -->
+        <article class="bento-pieza vidrio vidrio--hondo pieza--tercio pieza--dato">
+          <div class="pieza-folio">
+            <span class="folio">El dato que importa</span>
           </div>
-          <div class="project-featured__content">
-            <span class="badge--featured">Proyecto destacado</span>
-            <h3>ADESA Digital — Plataforma web para club de baloncesto</h3>
-            <p class="project-featured__lead">
-              Plataforma web full-stack que digitaliza por completo la gestión de un
-              club de baloncesto: web pública (resultados de la federación en tiempo
-              real, noticias, galería, inscripciones con pago y torneos 3x3 en vivo)
-              y panel de administración con permisos por rol. Diseñada como
-              <strong>white-label</strong>: el mismo despliegue sirve a cualquier club
-              cambiando solo su configuración, sin tocar una línea de código.
-            </p>
-            <ul class="feature-list">
-              <li>🏀 16 módulos de dominio integrados (inscripciones, horarios, equipos, torneos, finanzas…)</li>
-              <li>💳 Pagos reales con Stripe (checkout + webhooks), Bizum y transferencia</li>
-              <li>🔄 Datos de la federación en tiempo real mediante scraper propio</li>
-              <li>🏆 Torneos 3x3 con marcador en vivo y mesa de árbitro</li>
-              <li>🔐 Autorización por rol en el servidor + seguridad a nivel de fila (RLS)</li>
-              <li>⚙️ Multi-club / white-label configurable en vivo, sin redeploy</li>
-            </ul>
-            <ul class="metrics" aria-label="Métricas del proyecto">
-              <li><strong>48</strong><span>tablas</span></li>
-              <li><strong>26</strong><span>migraciones SQL</span></li>
-              <li><strong>16</strong><span>módulos</span></li>
-              <li><strong>0</strong><span>vulnerabilidades</span></li>
-            </ul>
-            <ul class="tags tags--sm">
-              <li>Next.js 16</li><li>React 19</li><li>TypeScript</li><li>Tailwind CSS v4</li><li>Supabase</li><li>PostgreSQL</li><li>Stripe</li><li>Zod</li><li>Vitest</li><li>Nodemailer</li><li>Node.js</li>
-            </ul>
-            <div class="project-card__links">
-              <span class="project-link project-link--soon">🌐 Demo en producción — próximamente</span>
-              <span class="project-link project-link--private" title="Repositorio privado">🔒 Repo privado</span>
-            </div>
+          <p class="pieza-cifra"><span data-cifra="25" data-sufijo=" min">25 min</span></p>
+          <p>
+            Del pitido final al resultado publicado en la web del club.
+            Antes lo transcribía una persona a mano, cuando podía.
+          </p>
+        </article>
+
+        <!-- SCRAPER -->
+        <article class="bento-pieza vidrio vidrio--vivo pieza--media" data-inclina>
+          <div class="pieza-folio">
+            <span class="folio">Automatización · 2026</span>
+            <span class="estado"><span class="pulso" aria-hidden="true"></span> Código abierto</span>
+          </div>
+
+          <h3>FAB Cádiz Scraper</h3>
+          <p>
+            La federación andaluza no tiene API: publica los resultados en una
+            página ASP.NET detrás de Cloudflare. Este scraper los saca, calcula
+            las clasificaciones con desempate particular y los deja en Postgres.
+            Corre en GitHub Actions, sin servidor, y casi nunca escribe nada:
+            compara un SHA-256 del grupo y solo toca la base si cambió algo.
+          </p>
+
+          <div class="etiquetas">
+            <i>Python</i><i>Playwright</i><i>PostgreSQL</i><i>GitHub Actions</i><i>SHA-256</i>
+          </div>
+
+          <a class="tapa" href="casos/fab-cadiz-scraper.html"><span>Leer el caso del FAB Cádiz Scraper</span></a>
+          <span class="abre">Leer el caso <span class="flecha" aria-hidden="true">→</span></span>
+        </article>
+
+        <!-- WESPACES -->
+        <article class="bento-pieza vidrio pieza--media">
+          <div class="pieza-folio">
+            <span class="folio">En equipo · 2025</span>
+            <span class="estado estado--gris">Prácticas · Grupo Solutia</span>
+          </div>
+
+          <h3>WeSpaces</h3>
+          <p>
+            Módulos de reservas y salas dentro de una base de código que ya
+            existía y que no había escrito yo. Interfaces en Flutter contra una
+            API REST con sincronización en tiempo real. Lo que me llevé no fue
+            Dart: fue leer el código de otros antes de tocarlo.
+          </p>
+
+          <div class="etiquetas">
+            <i>Flutter</i><i>Dart</i><i>API REST</i><i>Git</i><i>Scrum</i>
           </div>
         </article>
 
-        <!-- Resto de proyectos -->
-        <div class="projects__grid">
-          <article class="project-card reveal">
-            <div class="project-card__thumb thumb--2">
-              <span>FAB Cádiz Scraper</span>
-            </div>
-            <div class="project-card__body">
-              <div class="project-card__top">
-                <h3>FAB Cádiz Scraper</h3>
-              </div>
-              <p>
-                Scraper que extrae automáticamente competiciones, partidos y
-                clasificaciones de la federación andaluza de baloncesto y los vuelca
-                en PostgreSQL. Usa scrapeo <strong>incremental</strong> (detecta
-                cambios con hashes y solo actualiza lo nuevo) y alimenta en tiempo
-                real a ADESA Digital, eliminando la carga manual de resultados.
-              </p>
-              <ul class="tags tags--sm">
-                <li>Python</li><li>Playwright</li><li>Supabase</li><li>PostgreSQL</li><li>GitHub Actions</li>
-              </ul>
-              <div class="project-card__links">
-                <a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper" target="_blank" rel="noopener" class="project-link">Código →</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Proyecto: Wespaces (FCT, en equipo) -->
-          <article class="project-card reveal">
-            <div class="project-card__thumb thumb--3">
-              <span>Wespaces</span>
-            </div>
-            <div class="project-card__body">
-              <div class="project-card__top">
-                <h3>Wespaces</h3>
-                <span class="badge--featured">En equipo</span>
-              </div>
-              <p>
-                Módulos de la app <strong>WeSpaces</strong> para la gestión de
-                <strong>reservas y salas</strong>, integrándome en un equipo y una
-                base de código existente. Construí interfaces en <strong>Flutter</strong>
-                y consumí APIs REST con sincronización en tiempo real.
-              </p>
-              <ul class="tags tags--sm">
-                <li>Flutter</li><li>Dart</li><li>API REST</li><li>Git</li>
-              </ul>
-              <div class="project-card__links">
-                <span class="project-link project-link--private" title="Repositorio privado">🔒 Repo privado</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Plantilla para más proyectos: duplica este bloque -->
-          <article class="project-card project-card--add reveal">
-            <div class="project-card__body project-card__body--center">
-              <p class="add-hint">➕ Aquí caben más proyectos.<br />Pásame otros que quieras enseñar.</p>
-            </div>
-          </article>
-        </div>
       </div>
-    </section>
-
-    <!-- ===== Formación / Experiencia ===== -->
-    <section class="section timeline-section" id="formacion">
-      <div class="container">
-        <header class="section__head reveal">
-          <p class="section__eyebrow">04 — Trayectoria</p>
-          <h2 class="section__title">Formación y experiencia</h2>
-        </header>
-
-        <div class="trajectory__grid">
-          <div class="trajectory__col reveal">
-            <h3 class="trajectory__heading">💼 Experiencia</h3>
-            <ol class="timeline">
-              <li class="timeline__item">
-                <span class="timeline__dot"></span>
-                <div class="timeline__content">
-                  <span class="timeline__date">2025 — Actualidad</span>
-                  <h4>Atención al cliente y gestión</h4>
-                  <p class="timeline__org">MH Inmobiliaria</p>
-                  <p>
-                    Trato directo con clientes a diario: entender lo que necesitan,
-                    explicar opciones y hacer seguimiento. Me ha dado soltura con
-                    perfiles no técnicos y para traducir una necesidad en algo
-                    concreto y accionable.
-                  </p>
-                </div>
-              </li>
-              <li class="timeline__item">
-                <span class="timeline__dot"></span>
-                <div class="timeline__content">
-                  <span class="timeline__date">Mar 2025 — Jun 2025</span>
-                  <h4>Desarrollador Multiplataforma</h4>
-                  <p class="timeline__org">Grupo Solutia</p>
-                  <p>
-                    Desarrollé módulos de la app <strong>WeSpaces</strong> (reservas y
-                    salas) en <strong>Flutter</strong>, integrándome en un equipo y una
-                    base de código existente. Consumí APIs REST con sincronización en
-                    tiempo real y trabajé con Git y metodología ágil.
-                  </p>
-                </div>
-              </li>
-              <li class="timeline__item">
-                <span class="timeline__dot"></span>
-                <div class="timeline__content">
-                  <span class="timeline__date">2023 — 2024</span>
-                  <h4>Camarero</h4>
-                  <p class="timeline__org">Taberna Cabildo</p>
-                  <p>
-                    Servicio en sala con mucho ritmo: organización, trato con el
-                    cliente y trabajo en equipo bajo presión.
-                  </p>
-                </div>
-              </li>
-            </ol>
-          </div>
-
-          <div class="trajectory__col reveal">
-            <h3 class="trajectory__heading">🎓 Formación</h3>
-            <ol class="timeline">
-              <li class="timeline__item">
-                <span class="timeline__dot"></span>
-                <div class="timeline__content">
-                  <span class="timeline__date">2023 — 2025</span>
-                  <h4>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</h4>
-                  <p class="timeline__org">VictoriaFP · Sanlúcar de Barrameda (Cádiz)</p>
-                  <p>
-                    Programación orientada a objetos, bases de datos, acceso a datos,
-                    desarrollo de interfaces y aplicaciones móviles.
-                  </p>
-                </div>
-              </li>
-              <li class="timeline__item">
-                <span class="timeline__dot"></span>
-                <div class="timeline__content">
-                  <span class="timeline__date">2021 — 2023</span>
-                  <h4>Bachillerato</h4>
-                  <p class="timeline__org">IES San Lucas</p>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Contacto ===== -->
-    <section class="section contact" id="contacto">
-      <div class="container contact__inner reveal">
-        <p class="section__eyebrow">05 — Contacto</p>
-        <h2 class="section__title">¿Hablamos?</h2>
-        <p class="contact__text">
-          Estoy disponible y con ganas de empezar. Si crees que puedo encajar
-          en tu equipo, escríbeme — respondo rápido.
-        </p>
-        <div class="contact__actions">
-          <a href="mailto:fernandogbuzon@gmail.com" class="btn btn--primary">fernandogbuzon@gmail.com</a>
-          <a href="tel:+34674036944" class="btn btn--ghost">+34 674 036 944</a>
-          <a href="https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/" target="_blank" rel="noopener" class="btn btn--ghost">LinkedIn</a>
-          <a href="https://github.com/Fernandogbuzon" target="_blank" rel="noopener" class="btn btn--ghost">GitHub</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ===== Footer ===== -->
-  <footer class="site-footer">
-    <div class="container site-footer__inner">
-      <p>© <span id="year"></span> Fernando García Buzón</p>
-      <a href="#top" class="back-to-top">Volver arriba ↑</a>
     </div>
-  </footer>
+  </section>
 
-  <script src="js/main.js"></script>
+  <!-- ─────────── CRITERIO ─────────── -->
+  <section class="seccion" id="criterio">
+    <div class="env">
+      <div class="criterio">
+        <span class="folio">§ 02 — Criterio</span>
+        <h2 class="manifiesto">
+          Lo difícil de un club no es la web. Es que el sábado, cuando suena el
+          pitido, <strong>el resultado esté puesto sin que nadie lo escriba</strong>.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── STACK ─────────── -->
+  <section class="seccion" id="stack">
+    <div class="env">
+      <div class="encabezado">
+        <span class="folio">§ 03 — Stack</span>
+        <div>
+          <h2>Dónde soy fuerte, y dónde todavía no</h2>
+          <p class="apunte">
+            Ordenado por lo que puedo defender en una entrevista, no por lo que
+            he tocado alguna vez. Si algo está en la tercera fila es porque
+            todavía no lo he mantenido con gente dentro.
+          </p>
+        </div>
+      </div>
+
+      <div class="vias coro" style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))">
+        <article class="via vidrio">
+          <span class="folio">01 — En producción</span>
+          <h3>Lo mantengo con usuarios reales</h3>
+          <div class="etiquetas">
+            <i>TypeScript</i><i>Next.js</i><i>React</i><i>PostgreSQL</i><i>Supabase</i><i>Stripe</i><i>Python</i><i>Zod</i><i>Vitest</i><i>Playwright</i><i>Tailwind</i>
+          </div>
+        </article>
+
+        <article class="via vidrio">
+          <span class="folio">02 — Sólido</span>
+          <h3>Lo he usado en proyectos cerrados</h3>
+          <div class="etiquetas">
+            <i>Java</i><i>SQL</i><i>Node.js</i><i>API REST</i><i>Flutter</i><i>Dart</i><i>Git</i>
+          </div>
+        </article>
+
+        <article class="via vidrio">
+          <span class="folio">03 — De la formación</span>
+          <h3>Sin producción detrás todavía</h3>
+          <div class="etiquetas">
+            <i>Spring</i><i>Firebase</i><i>Android Studio</i>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── TRAYECTORIA ─────────── -->
+  <section class="seccion" id="trayectoria">
+    <div class="env">
+      <div class="encabezado">
+        <span class="folio">§ 04 — Trayectoria</span>
+        <div><h2>De dónde vengo</h2></div>
+      </div>
+
+      <div class="trayectoria">
+        <div>
+          <h3>Experiencia técnica</h3>
+
+          <div class="hito">
+            <span class="cuando">2026 — act.</span>
+            <div>
+              <h4>Diseño, desarrollo y mantenimiento</h4>
+              <p class="donde">ADESA 80 · proyecto propio en producción</p>
+              <p>
+                Plataforma completa del club: 27 módulos, 115 migraciones y
+                2236 tests. Sigo siendo quien la despliega y quien contesta
+                cuando algo falla un sábado por la tarde.
+              </p>
+            </div>
+          </div>
+
+          <div class="hito">
+            <span class="cuando">Mar — Jun 2025</span>
+            <div>
+              <h4>Desarrollador multiplataforma (FCT)</h4>
+              <p class="donde">Grupo Solutia</p>
+              <p>
+                Módulos de reservas y salas de WeSpaces en Flutter, dentro de un
+                equipo y de un código que ya existía. APIs REST con
+                sincronización en tiempo real, Git y trabajo por sprints.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Formación</h3>
+
+          <div class="hito">
+            <span class="cuando">2023 — 2025</span>
+            <div>
+              <h4>Téc. Superior en Desarrollo de Aplicaciones Multiplataforma</h4>
+              <p class="donde">VictoriaFP · Sanlúcar de Barrameda</p>
+              <p>Programación orientada a objetos, acceso a datos, bases de datos, interfaces y desarrollo móvil.</p>
+            </div>
+          </div>
+
+          <div class="hito">
+            <span class="cuando">2021 — 2023</span>
+            <div>
+              <h4>Bachillerato</h4>
+              <p class="donde">IES San Lucas</p>
+            </div>
+          </div>
+
+          <div class="hito">
+            <span class="cuando">Otra</span>
+            <div>
+              <h4>Fuera del código</h4>
+              <p class="donde">MH Inmobiliaria (2025 — act.) · Taberna Cabildo (2023 — 2024)</p>
+              <p>
+                Atención al cliente y sala. De ahí me traje algo que uso a
+                diario: traducir lo que alguien necesita a algo concreto,
+                aunque no sepa nombrarlo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── HABLAMOS ─────────── -->
+  <section class="seccion" id="hablamos">
+    <div class="env">
+      <div class="encabezado">
+        <span class="folio">§ 05 — Hablamos</span>
+        <div>
+          <h2>Si buscas a alguien que ya ha puesto algo en producción</h2>
+          <p class="apunte">
+            Contesto el mismo día. Si prefieres verlo antes de escribir, el
+            código del scraper está abierto y adesa80.com está en pie.
+          </p>
+        </div>
+      </div>
+
+      <div class="vias coro">
+        <article class="via vidrio vidrio--vivo">
+          <span class="folio">La vía directa</span>
+          <h3>fernandogbuzon@gmail.com</h3>
+          <p>
+            Cuéntame qué construye tu equipo y qué haría yo ahí las primeras
+            semanas. Con eso me vale para saber si encajo.
+          </p>
+          <div class="botonera">
+            <a class="btn btn-solido" href="mailto:fernandogbuzon@gmail.com?subject=Hola%20Fernando">
+              Escribirme <span class="flecha" aria-hidden="true">→</span>
+            </a>
+            <button class="btn btn-linea" id="copiar-correo" type="button"
+                    data-correo="fernandogbuzon@gmail.com" aria-live="polite">
+              Copiar la dirección
+            </button>
+          </div>
+        </article>
+
+        <article class="via vidrio vidrio--vivo">
+          <span class="folio">Si prefieres mirar antes</span>
+          <h3>El código y la web</h3>
+          <p>
+            El scraper es público y se puede leer entero. adesa80.com está en
+            producción: entra y trastea.
+          </p>
+          <div class="botonera">
+            <a class="btn btn-linea" href="https://github.com/Fernandogbuzon" target="_blank" rel="noopener">GitHub<span class="ocultovisual"> (se abre en una pestaña nueva)</span></a>
+            <a class="btn btn-linea" href="https://adesa80.com" target="_blank" rel="noopener">adesa80.com<span class="ocultovisual"> (se abre en una pestaña nueva)</span></a>
+          </div>
+        </article>
+      </div>
+
+      <div class="canales">
+        <a class="canal" href="mailto:fernandogbuzon@gmail.com">
+          <span class="que">Correo</span><span class="valor">fernandogbuzon@gmail.com</span>
+        </a>
+        <a class="canal" href="tel:+34674036944">
+          <span class="que">Teléfono</span><span class="valor">674 036 944</span>
+        </a>
+        <a class="canal" href="https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/" target="_blank" rel="noopener">
+          <span class="que">LinkedIn</span><span class="valor">Fernando García Buzón</span>
+        </a>
+        <a class="canal" href="https://fgbuzon.com" target="_blank" rel="noopener">
+          <span class="que">Por mi cuenta</span><span class="valor">fgbuzon.com</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="env">
+    <div class="pie-rejilla">
+      <div class="pie-marca">
+        <a class="marca" href="#inicio">fgbuzon<span class="punto">.</span></a>
+        <p>Desarrollador full-stack. Desde Sanlúcar de Barrameda, para donde haga falta.</p>
+      </div>
+
+      <nav aria-labelledby="pie-nav">
+        <h2 id="pie-nav">Navegación</h2>
+        <ul>
+          <li><a href="#trabajo">Trabajo</a></li>
+          <li><a href="#criterio">Criterio</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a href="#trayectoria">Trayectoria</a></li>
+          <li><a href="#hablamos">Hablamos</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="pie-casos">
+        <h2 id="pie-casos">Casos</h2>
+        <ul>
+          <li><a href="casos/adesa-digital.html">ADESA Digital</a></li>
+          <li><a href="casos/fab-cadiz-scraper.html">FAB Cádiz Scraper</a></li>
+          <li><a href="https://adesa80.com" target="_blank" rel="noopener">adesa80.com</a></li>
+          <li><a href="https://fgbuzon.com" target="_blank" rel="noopener">fgbuzon.com</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="pie-fin">
+      <span>© <span id="anio">2026</span> Fernando García Buzón</span>
+      <span>Sin frameworks. HTML, CSS y WebGL a mano.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/campo.js?v=1" defer></script>
+<script src="js/main.js?v=1" defer></script>
 </body>
 </html>
