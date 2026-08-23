@@ -37,8 +37,8 @@ body{
   font-family:var(--texto);
   color:var(--tinta-suave);
   background:#EDEAE2;
-  line-height:1.33;
-  font-size:9.4pt;
+  line-height:1.38;
+  font-size:9.9pt;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -70,22 +70,22 @@ body{
 
 /* ---------- Secciones ---------- */
 
-section{margin-bottom:2.7mm}
+section{margin-bottom:3.1mm}
 section:last-child{margin-bottom:0}
 
 h2{
   font-size:8pt;font-weight:700;color:var(--tinta);
   letter-spacing:.12em;text-transform:uppercase;
-  padding-bottom:.9mm;margin-bottom:1.5mm;
+  padding-bottom:1.1mm;margin-bottom:1.9mm;
   border-bottom:.6pt solid var(--regla);
 }
 
-.perfil{font-size:9.3pt;color:var(--tinta-suave);max-width:none}
+.perfil{font-size:9.8pt;color:var(--tinta-suave);max-width:none}
 .perfil b{color:var(--tinta);font-weight:600}
 
 /* ---------- Entradas ---------- */
 
-.entrada{margin-bottom:2.1mm;break-inside:avoid}
+.entrada{margin-bottom:2.4mm;break-inside:avoid}
 .entrada:last-child{margin-bottom:0}
 
 .linea1{display:flex;justify-content:space-between;align-items:baseline;gap:4mm}
@@ -95,9 +95,9 @@ h2{
   font-variant-numeric:tabular-nums;
 }
 .donde{font-size:8.8pt;color:var(--verde);font-weight:600;margin-bottom:1mm}
-.entrada p{font-size:8.9pt;color:var(--tinta-suave)}
+.entrada p{font-size:9.3pt;color:var(--tinta-suave)}
 .entrada ul{list-style:none;margin-top:1mm}
-.entrada li{font-size:8.9pt;padding-left:3.5mm;position:relative;margin-bottom:.6mm}
+.entrada li{font-size:9.3pt;padding-left:3.5mm;position:relative;margin-bottom:.6mm}
 .entrada li::before{
   content:"";position:absolute;left:0;top:1.75mm;
   width:1.6mm;height:.5pt;background:var(--verde);
@@ -112,12 +112,15 @@ h2{
   font-size:8.2pt;font-weight:700;color:var(--tinta);
   letter-spacing:.05em;text-transform:uppercase;
 }
-.nivel dd{font-size:8.9pt;color:var(--tinta-suave)}
+.nivel dd{font-size:9.3pt;color:var(--tinta-suave)}
 .nivel .apunte{display:block;font-size:8pt;color:var(--tinta-tenue);font-weight:400;text-transform:none;letter-spacing:0;margin-top:.3mm}
 
 /* ---------- Dos columnas al pie ---------- */
 
-.par{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+/* Una sola columna, a propósito. El estudio de seguimiento ocular de
+   Ladders midió que los CV a varias columnas rinden peor: rompen la
+   lectura en F con la que se escanea. */
+.matiz{font-size:8.4pt;color:var(--tinta-tenue);margin-top:.3mm}
 
 /* ---------- Pie ---------- */
 
@@ -146,21 +149,20 @@ h2{
 @page{size:A4;margin:0}
 
 @media print{
-  body{background:#fff;font-size:9.4pt}
+  body{background:#fff;font-size:9.9pt}
   .hoja{
     width:auto;min-height:auto;margin:0;
-    padding:8mm 12mm;box-shadow:none;
+    padding:11mm 13mm;box-shadow:none;
   }
   .barra{display:none}
   a{text-decoration:none}
 }
 
-@media (max-width:230mm){
+@media screen and (max-width:230mm){
   .hoja{width:auto;max-width:100%;margin:0;padding:7vw 6vw;box-shadow:none}
   body{background:#fff}
   .linea1{flex-direction:column;gap:0}
   .nivel{grid-template-columns:1fr;gap:.5mm}
-  .par{grid-template-columns:1fr;gap:0}
 }
 </style>
 </head>
@@ -203,10 +205,11 @@ h2{
 
     <div class="entrada">
       <div class="linea1">
-        <h3>Diseño, desarrollo y mantenimiento — proyecto propio en producción</h3>
+        <h3>Desarrollador Full-Stack</h3>
         <span class="cuando">2026 — actualidad</span>
       </div>
-      <p class="donde">ADESA 80 · Club de baloncesto · adesa80.com</p>
+      <p class="donde">ADESA 80 · Club de baloncesto · Sanlúcar de Barrameda</p>
+      <p class="matiz">Proyecto propio, en producción · adesa80.com</p>
       <ul>
         <li>Web pública, portal del socio y back-office en <b>Next.js 16, React 19 y TypeScript estricto</b> sobre PostgreSQL (Supabase).</li>
         <li><b>Pagos con Stripe</b>: webhook con firma verificada sobre el cuerpo en crudo e idempotencia en tres capas.</li>
@@ -217,10 +220,11 @@ h2{
 
     <div class="entrada">
       <div class="linea1">
-        <h3>Desarrollador Multiplataforma — prácticas (FCT)</h3>
+        <h3>Desarrollador Multiplataforma · Flutter</h3>
         <span class="cuando">Mar — Jun 2025</span>
       </div>
       <p class="donde">Grupo Solutia · Cádiz</p>
+      <p class="matiz">Prácticas de formación (FCT)</p>
       <ul>
         <li>Módulos de reservas y salas de <b>WeSpaces</b> en <b>Flutter</b>, dentro de un equipo y de una base de código que ya existía. <b>APIs REST</b> con sincronización en tiempo real, Git y sprints.</li>
       </ul>
@@ -228,10 +232,11 @@ h2{
 
     <div class="entrada">
       <div class="linea1">
-        <h3>Automatización de datos — proyecto propio, código abierto</h3>
+        <h3>Desarrollador Python · Automatización de datos</h3>
         <span class="cuando">2026</span>
       </div>
-      <p class="donde">FAB Cádiz Scraper · github.com/Fernandogbuzon/fab-cadiz-scraper</p>
+      <p class="donde">FAB Cádiz Scraper</p>
+      <p class="matiz">Proyecto propio, código abierto · github.com/Fernandogbuzon/fab-cadiz-scraper</p>
       <ul>
         <li><b>Python y Playwright</b> contra una federación sin API (ASP.NET tras Cloudflare), volcando a PostgreSQL. Corre en <b>GitHub Actions sin servidor</b>, detecta cambios por SHA-256 y publica el resultado ~25 min tras el final del partido.</li>
       </ul>
@@ -256,7 +261,6 @@ h2{
     </dl>
   </section>
 
-  <div class="par">
     <section>
       <h2>Formación</h2>
       <div class="entrada">
@@ -268,10 +272,9 @@ h2{
       </div>
       <div class="entrada">
         <div class="linea1">
-          <h3>Bachillerato</h3>
+          <h3>Bachillerato <span style="font-weight:400;color:var(--tinta-suave)">· IES San Lucas</span></h3>
           <span class="cuando">2021 — 2023</span>
         </div>
-        <p class="donde">IES San Lucas</p>
       </div>
     </section>
 
@@ -285,7 +288,6 @@ h2{
         </ul>
       </div>
     </section>
-  </div>
 
   <div class="pie">
     <span>Portfolio y casos completos: <a href="https://fernandogbuzon.github.io/mi-portfolio/">fernandogbuzon.github.io/mi-portfolio</a></span>

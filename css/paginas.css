@@ -183,20 +183,11 @@
 .bento-pieza p{font-size:.95rem;margin-bottom:1.1rem}
 .bento-pieza .etiquetas{margin-top:auto;padding-top:1rem}
 
-/* El enlace tapa la ficha entera: toda la pieza es zona de clic, pero
-   en el árbol de accesibilidad sigue habiendo un solo enlace con
-   nombre propio, no seis anidados. */
-.tapa{position:absolute;inset:0;z-index:4;border-radius:inherit}
-.tapa span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-
-.bento-pieza .abre{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-weight:600;font-size:.9rem;color:var(--verde);
-  margin-top:1rem;
-}
-
-/* La cifra grande de una pieza de métrica. */
-.pieza-cifra{
+/* La cifra grande de una pieza de métrica.
+   Va calificada con .bento-pieza a propósito: `.bento-pieza p` tiene
+   especificidad (0,1,1) y le ganaba a `.pieza-cifra` (0,1,0), así que
+   el número salía con el tamaño del texto corrido. */
+.bento-pieza .pieza-cifra{
   font-family:var(--display);
   font-size:clamp(3rem,2rem + 4vw,5.5rem);
   line-height:.9;color:var(--tinta);
@@ -485,3 +476,38 @@ p > code{
   .caso-contacto{grid-template-columns:1fr}
   .caso-contacto .botonera{flex-direction:row;flex-wrap:wrap}
 }
+
+/* ---------- 12 · Enlaces de la ficha ---------- */
+/* La encuesta a 60+ responsables de contratación es explícita: cada
+   proyecto tiene que llevar enlace al código Y a la versión desplegada.
+   Antes toda la ficha era un enlace invisible al caso, así que la web
+   en producción —la prueba más fuerte— no se enlazaba desde ningún
+   sitio. Y cuando el código es privado, se dice: callarlo se lee como
+   que no existe. */
+.enlaces{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.1rem;
+  margin-top:1.1rem;padding-top:1rem;
+  border-top:1px solid color-mix(in oklab, var(--regla) 65%, transparent);
+}
+.enlaces a{
+  font-size:.87rem;font-weight:600;color:var(--verde);
+  display:inline-flex;align-items:center;gap:.35rem;
+  border-bottom:1px solid transparent;
+  transition:border-color .25s var(--curva);
+}
+.enlaces a:hover{border-color:var(--verde)}
+.enlaces .principal{margin-left:auto}
+.enlaces .cerrado{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.03em;
+  color:var(--tinta-tenue);
+}
+@media (max-width:38rem){ .enlaces .principal{margin-left:0} }
+
+/* El título de la ficha lleva el enlace al caso: un nombre de enlace
+   con sentido propio, en vez de una capa transparente encima de todo. */
+.bento-pieza h3 a{
+  color:inherit;
+  border-bottom:1px solid transparent;
+  transition:border-color .25s var(--curva);
+}
+.bento-pieza h3 a:hover{border-color:var(--verde)}
