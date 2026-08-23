@@ -18,12 +18,33 @@ las fuentes.
 index.html                        portada
 casos/adesa-digital.html          caso: la plataforma del club
 casos/fab-cadiz-scraper.html      caso: el scraper de la federación
+cv.html                           el CV, pensado para imprimirse
+cv-fernando-garcia-buzon.pdf      el mismo CV, generado desde cv.html
 css/sistema.css                   fichas, vidrio, tipografía, movimiento
 css/paginas.css                   portada, bento, casos, trayectoria
 js/campo.js                       el fondo WebGL2 (sin librerías)
-js/main.js                        tema, menú, cursor, cifras
-marca/                            favicon claro y oscuro
+js/main.js                        tema, menú, revelado, cifras
+marca/                            favicon y tarjeta de Open Graph
 ```
+
+## El CV se genera, no se mantiene a mano
+
+`cv.html` es la fuente. El PDF sale de ahí con Chromium en modo impresión,
+así que **no hay dos versiones que se desincronicen**. Al tocar el CV, hay que
+regenerar el PDF:
+
+```bash
+# con playwright-core instalado
+node -e "const{chromium}=require('playwright-core');(async()=>{
+  const b=await chromium.launch();const p=await(await b.newContext()).newPage();
+  await p.goto('file://'+process.cwd()+'/cv.html',{waitUntil:'networkidle'});
+  await p.pdf({path:'cv-fernando-garcia-buzon.pdf',format:'A4',printBackground:true,
+    margin:{top:'0',right:'0',bottom:'0',left:'0'}});await b.close()})()"
+```
+
+Tiene que caber en **una página**. En media `print` el contenido no puede pasar
+de 1123 px (297 mm a 96 dpi); si se pasa, se recorta contenido antes que
+encoger más la tipografía.
 
 ## Decisiones que no se deshacen sin motivo
 
@@ -46,6 +67,16 @@ no se pierde nada. Con movimiento reducido pinta un fotograma y para.
 
 **Cero dependencias.** El shader son ~120 líneas de WebGL2 escritas a mano.
 `three.js` pesa 600 KB para hacer esto mismo.
+
+**El revelado no usa `requestAnimationFrame`.** Se estrangula por tiempo. Con
+rAF compartía cola con el bucle de `campo.js`, y cuando el shader va por
+software se queda sin fotogramas: medido, se saltaba tres piezas de una sección
+entera y el texto quedaba invisible. Hay además un `setInterval` de respaldo que
+se apaga solo cuando todas las piezas han entrado.
+
+**Sin cursor personalizado.** Lo hubo. Se quitó a propósito: es el elemento que
+antes hace leer la página como «portfolio de diseñador» en vez de como dossier
+profesional, y en un trackpad estorba.
 
 ## Ver en local
 

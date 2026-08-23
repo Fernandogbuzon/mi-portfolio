@@ -364,46 +364,7 @@ em.acento{font-style:italic;color:var(--verde);font-variation-settings:'WONK' 1}
   100%{transform:none;opacity:1}
 }
 
-/* ---------- 08 · Cursor ---------- */
-/* Dos piezas: el punto, que va pegado al ratón, y el anillo, que
-   llega tarde con muelle. El retardo es todo el efecto. */
-
-.cursor,.cursor-anillo{
-  position:fixed;top:0;left:0;z-index:500;pointer-events:none;
-  border-radius:50%;
-  opacity:0;
-  transition:opacity .3s var(--curva);
-}
-.cursor{
-  width:6px;height:6px;margin:-3px 0 0 -3px;
-  background:var(--verde);
-}
-.cursor-anillo{
-  width:38px;height:38px;margin:-19px 0 0 -19px;
-  border:1px solid color-mix(in oklab, var(--verde) 55%, transparent);
-  -webkit-backdrop-filter:blur(2px) saturate(1.4);
-  backdrop-filter:blur(2px) saturate(1.4);
-  transition:opacity .3s var(--curva), width .35s var(--muelle),
-             height .35s var(--muelle), margin .35s var(--muelle),
-             background .35s var(--curva), border-color .35s var(--curva);
-}
-html.cursor-listo .cursor,
-html.cursor-listo .cursor-anillo{opacity:1}
-
-html.cursor-listo.cursor-sobre .cursor-anillo{
-  width:74px;height:74px;margin:-37px 0 0 -37px;
-  background:color-mix(in oklab, var(--verde) 14%, transparent);
-  border-color:transparent;
-}
-html.cursor-listo.cursor-sobre .cursor{opacity:0}
-
-/* Solo en ratón fino. En táctil no hay cursor que sustituir y el
-   anillo se quedaría clavado en una esquina. */
-@media (pointer:coarse),(hover:none){
-  .cursor,.cursor-anillo{display:none}
-}
-
-/* ---------- 09 · Cabecera ---------- */
+/* ---------- 08 · Cabecera ---------- */
 
 .cabecera{
   position:fixed;top:0;left:0;right:0;z-index:300;
@@ -480,7 +441,7 @@ html[data-tema="noche"] .interruptor .luna{display:block}
   .menu li:last-child{margin-top:.5rem;padding-top:.75rem;border-top:1px solid var(--regla)}
 }
 
-/* ---------- 10 · Métricas ---------- */
+/* ---------- 09 · Métricas ---------- */
 
 .metricas{
   display:grid;
@@ -508,7 +469,7 @@ html[data-tema="noche"] .interruptor .luna{display:block}
   letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-tenue);
 }
 
-/* ---------- 11 · Etiquetas ---------- */
+/* ---------- 10 · Etiquetas ---------- */
 
 .etiquetas{display:flex;flex-wrap:wrap;gap:.4rem}
 .etiquetas i{
@@ -520,7 +481,7 @@ html[data-tema="noche"] .interruptor .luna{display:block}
 }
 .etiquetas i:hover{border-color:var(--verde);color:var(--verde)}
 
-/* ---------- 12 · Movimiento ---------- */
+/* ---------- 11 · Movimiento ---------- */
 /* Tres reglas heredadas de fgbuzon.com, y ninguna es negociable:
    1. el contenido se ve siempre por defecto;
    2. todo estado inicial oculto vive dentro de no-preference;
@@ -552,7 +513,7 @@ html[data-tema="noche"] .interruptor .luna{display:block}
   html{scroll-behavior:auto}
 }
 
-/* ---------- 13 · Pie ---------- */
+/* ---------- 12 · Pie ---------- */
 
 .pie{
   border-top:1px solid var(--regla);
@@ -581,7 +542,7 @@ html[data-tema="noche"] .interruptor .luna{display:block}
 }
 @media (max-width:48rem){ .pie-rejilla{grid-template-columns:1fr 1fr} .pie-marca{grid-column:1/-1} }
 
-/* ---------- 14 · Revelado ---------- */
+/* ---------- 13 · Revelado ---------- */
 /* Solo actúa si JS ha puesto .js-revela en <html>. El estado oculto no
    existe en la hoja base a propósito: sin JS, o con movimiento
    reducido, no hay nada que revelar y la página se ve entera. */
@@ -600,3 +561,13 @@ html[data-tema="noche"] .interruptor .luna{display:block}
     transform:none;
   }
 }
+
+/* ---------- 14 · CV en la navegación ---------- */
+/* Quien revisa candidatos busca un fichero que reenviar. Va marcado,
+   pero sin robarle el sitio al contenido. */
+.menu .nav-cv{
+  border:1px solid color-mix(in oklab, var(--verde) 45%, transparent);
+  color:var(--verde);
+  font-weight:600;
+}
+.menu .nav-cv:hover{background:var(--verde);color:var(--papel)}

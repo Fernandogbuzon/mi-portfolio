@@ -25,6 +25,40 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&display=swap" rel="stylesheet">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Fernando García Buzón",
+  "jobTitle": "Desarrollador Full-Stack",
+  "email": "mailto:fernandogbuzon@gmail.com",
+  "telephone": "+34674036944",
+  "url": "https://fernandogbuzon.github.io/mi-portfolio/",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Sanlúcar de Barrameda",
+    "addressRegion": "Cádiz",
+    "addressCountry": "ES"
+  },
+  "alumniOf": {
+    "@type": "EducationalOrganization",
+    "name": "VictoriaFP — Téc. Superior en Desarrollo de Aplicaciones Multiplataforma"
+  },
+  "knowsLanguage": ["es", "en"],
+  "knowsAbout": ["TypeScript", "Next.js", "React", "Node.js", "PostgreSQL",
+                 "Supabase", "Stripe", "Python", "Java", "SQL", "Flutter", "Git"],
+  "sameAs": [
+    "https://github.com/Fernandogbuzon",
+    "https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/",
+    "https://fgbuzon.com"
+  ],
+  "seeks": {
+    "@type": "Demand",
+    "name": "Primer puesto como desarrollador full-stack en Sevilla o remoto"
+  }
+}
+</script>
+
 <link rel="stylesheet" href="css/sistema.css?v=1">
 <link rel="stylesheet" href="css/paginas.css?v=1">
 
@@ -55,19 +89,17 @@
   </filter>
 </svg>
 
-<div class="cursor" aria-hidden="true"></div>
-<div class="cursor-anillo" aria-hidden="true"></div>
-
 <header class="cabecera">
   <div class="env vidrio">
     <a class="marca" href="#inicio">fgbuzon<span class="punto">.</span></a>
     <nav aria-label="Principal">
       <ul class="menu" id="menu">
         <li><a href="#trabajo">Trabajo</a></li>
-        <li><a href="#criterio">Criterio</a></li>
+        <li><a href="#metodo">Cómo trabajo</a></li>
         <li><a href="#stack">Stack</a></li>
         <li><a href="#trayectoria">Trayectoria</a></li>
         <li><a href="#hablamos">Hablamos</a></li>
+        <li><a class="nav-cv" href="cv-fernando-garcia-buzon.pdf" download>CV ↓</a></li>
       </ul>
     </nav>
     <div style="display:flex;align-items:center;gap:.4rem">
@@ -88,7 +120,7 @@
   <section class="portada" id="inicio">
     <div class="env">
       <div>
-        <span class="folio">Desarrollador full-stack · Sanlúcar de Barrameda</span>
+        <span class="folio">Fernando García Buzón · Desarrollador full-stack</span>
 
         <h1 class="titular">
           <span class="linea" style="--i:0"><span>Un club entero</span></span>
@@ -104,35 +136,42 @@
         <p class="tesis">Busco mi primer puesto. No mi primer proyecto.</p>
 
         <div class="botonera">
-          <a class="btn btn-solido" href="https://adesa80.com" target="_blank" rel="noopener">
-            Ver adesa80.com <span class="flecha" aria-hidden="true">→</span><span class="ocultovisual"> (se abre en una pestaña nueva)</span>
+          <a class="btn btn-solido" href="cv-fernando-garcia-buzon.pdf" download>
+            Descargar CV (PDF) <span class="flecha" aria-hidden="true">↓</span>
           </a>
-          <a class="btn btn-linea" href="casos/adesa-digital.html">Leer el caso completo</a>
+          <a class="btn btn-linea" href="mailto:fernandogbuzon@gmail.com?subject=Hola%20Fernando">Escribirme</a>
+          <a class="btn btn-linea" href="https://adesa80.com" target="_blank" rel="noopener">
+            Ver adesa80.com<span class="ocultovisual"> (se abre en una pestaña nueva)</span>
+          </a>
         </div>
 
         <p class="pie-cta">
           <span class="pulso" aria-hidden="true"></span>
-          En producción desde agosto de 2026 · 2236 tests en verde
+          En producción desde agosto de 2026 · 2236 tests en verde · una sola persona
         </p>
       </div>
 
       <aside class="ficha vidrio vidrio--refracta revela">
         <dl>
           <div class="fila">
-            <dt>Estado</dt>
-            <dd class="libre">Buscando equipo</dd>
+            <dt>Busco</dt>
+            <dd class="libre">Primer puesto full-stack</dd>
           </div>
           <div class="fila">
             <dt>Dónde</dt>
-            <dd>Sevilla o remoto</dd>
+            <dd>Sevilla o remoto · resido en Cádiz</dd>
+          </div>
+          <div class="fila">
+            <dt>Disponible</dt>
+            <dd>Incorporación inmediata</dd>
           </div>
           <div class="fila">
             <dt>Título</dt>
             <dd>Téc. Superior en DAM, 2025</dd>
           </div>
           <div class="fila">
-            <dt>Correo</dt>
-            <dd><a href="mailto:fernandogbuzon@gmail.com">fernandogbuzon@gmail.com</a></dd>
+            <dt>Idiomas</dt>
+            <dd>Español nativo · inglés técnico</dd>
           </div>
         </dl>
       </aside>
@@ -257,15 +296,69 @@
     </div>
   </section>
 
-  <!-- ─────────── CRITERIO ─────────── -->
-  <section class="seccion" id="criterio">
+  <!-- ─────────── CÓMO TRABAJO ─────────── -->
+  <section class="seccion" id="metodo">
     <div class="env">
-      <div class="criterio">
-        <span class="folio">§ 02 — Criterio</span>
-        <h2 class="manifiesto">
-          Lo difícil de un club no es la web. Es que el sábado, cuando suena el
-          pitido, <strong>el resultado esté puesto sin que nadie lo escriba</strong>.
-        </h2>
+      <div class="encabezado">
+        <span class="folio">§ 02 — Cómo trabajo</span>
+        <div>
+          <h2>Qué pasa cuando me dais acceso al repositorio</h2>
+          <p class="apunte">
+            Cuatro hábitos que no negocio. Los tres primeros salieron de romper
+            algo y tener que arreglarlo un domingo.
+          </p>
+        </div>
+      </div>
+
+      <div class="vias coro">
+        <article class="via vidrio">
+          <span class="folio">01 — Pruebas</span>
+          <h3>Escribo tests</h3>
+          <p>
+            <strong>2236 en verde, en 192 ficheros.</strong> No es una cifra para
+            lucir: es cómo evito romper en marzo algo que escribí en agosto. Corren
+            en cada push, y si fallan no se despliega.
+          </p>
+        </article>
+
+        <article class="via vidrio">
+          <span class="folio">02 — Base de datos</span>
+          <h3>Nunca toco producción a mano</h3>
+          <p>
+            Todo cambio de esquema es una migración versionada:
+            <strong>115 hasta hoy</strong>. Por eso puedo levantar la base entera
+            desde cero y por eso sé exactamente qué cambió y cuándo.
+          </p>
+        </article>
+
+        <article class="via vidrio">
+          <span class="folio">03 — Seguridad</span>
+          <h3>Denegar por defecto</h3>
+          <p>
+            <strong>81 tablas con RLS y cero políticas de escritura.</strong> Si algo
+            no está permitido explícitamente, no ocurre. Prefiero que el sistema me
+            diga que no a confiar en que yo me acuerde.
+          </p>
+        </article>
+
+        <article class="via vidrio">
+          <span class="folio">04 — Documentación</span>
+          <h3>Escribo el porqué, no el qué</h3>
+          <p>
+            <strong>43 documentos de decisiones</strong> junto al código. El qué ya
+            está en el diff; lo que se pierde es la razón. La escribo para el que
+            venga detrás, que muchas veces soy yo.
+          </p>
+        </article>
+      </div>
+
+      <div class="criterio" style="margin-top:clamp(1.5rem,3vw,2.5rem)">
+        <span class="folio">Lo que busco de un equipo</span>
+        <p class="manifiesto">
+          Dejar de ser el único que revisa mi código. Quiero
+          <strong>que alguien con más oficio me diga que esto se hace de otra
+          manera</strong> — y por qué.
+        </p>
       </div>
     </div>
   </section>
@@ -397,8 +490,9 @@
         <div>
           <h2>Si buscas a alguien que ya ha puesto algo en producción</h2>
           <p class="apunte">
-            Contesto el mismo día. Si prefieres verlo antes de escribir, el
-            código del scraper está abierto y adesa80.com está en pie.
+            Contesto el mismo día. Si prefieres comprobarlo antes de escribir:
+            el CV cabe en una página, el código del scraper está abierto y
+            adesa80.com está en pie ahora mismo.
           </p>
         </div>
       </div>
@@ -415,6 +509,7 @@
             <a class="btn btn-solido" href="mailto:fernandogbuzon@gmail.com?subject=Hola%20Fernando">
               Escribirme <span class="flecha" aria-hidden="true">→</span>
             </a>
+            <a class="btn btn-linea" href="cv-fernando-garcia-buzon.pdf" download>Descargar CV (PDF)</a>
             <button class="btn btn-linea" id="copiar-correo" type="button"
                     data-correo="fernandogbuzon@gmail.com" aria-live="polite">
               Copiar la dirección
@@ -467,10 +562,11 @@
         <h2 id="pie-nav">Navegación</h2>
         <ul>
           <li><a href="#trabajo">Trabajo</a></li>
-          <li><a href="#criterio">Criterio</a></li>
+          <li><a href="#metodo">Cómo trabajo</a></li>
           <li><a href="#stack">Stack</a></li>
           <li><a href="#trayectoria">Trayectoria</a></li>
           <li><a href="#hablamos">Hablamos</a></li>
+          <li><a href="cv-fernando-garcia-buzon.pdf" download>CV en PDF</a></li>
         </ul>
       </nav>
 
