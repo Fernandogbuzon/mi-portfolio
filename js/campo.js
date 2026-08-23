@@ -8,6 +8,9 @@
    Reglas de la casa:
    · Si no hay WebGL2, no pasa nada. El degradado CSS de #campo ya
      está debajo y la página se ve entera.
+   · Va deliberadamente flojo. Esto es un dossier profesional, no una
+     demo de shaders: el campo tiene que leerse como textura de papel,
+     nunca competir con el texto que hay encima.
    · Con «reducir movimiento» pinta UN fotograma y para. No se
      queda en negro: se queda quieto.
    · Se apaga sola con la pestaña oculta. Un shader a pantalla
@@ -97,16 +100,16 @@
 
     // Tres tintas, no dos: papel de base, verde en los filamentos y
     // una pizca de tinta en los senos para dar profundidad.
-    vec3 c = mix(u_papel, u_verde, clamp(f * 0.85, 0.0, 1.0));
+    vec3 c = mix(u_papel, u_verde, clamp(f * 0.55, 0.0, 1.0));
     c = mix(c, u_tinta, clamp(pow(length(r) * 0.55, 3.0), 0.0, 0.35));
-    c = mix(c, u_verde, cerca * u_fuerza * 0.28);
+    c = mix(c, u_verde, cerca * u_fuerza * 0.18);
 
     // Viñeta suave: mantiene el peso en el centro y evita que los
     // filamentos compitan con el texto de los márgenes.
     float vig = smoothstep(1.25, 0.25, length(uv - 0.5) * 1.4);
-    float alfa = (0.55 + 0.45 * f) * vig;
+    float alfa = (0.32 + 0.34 * f) * vig;
 
-    color = vec4(c, alfa * 0.85);
+    color = vec4(c, alfa * 0.62);
   }`;
 
   function compilar(tipo, fuente) {

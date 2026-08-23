@@ -124,10 +124,7 @@
       p.style.setProperty("--retardo", (i % 6) * 70 + "ms");
     });
 
-    var barriendo = false;
-
     var barrer = function () {
-      barriendo = false;
       var alto = window.innerHeight;
 
       piezas = piezas.filter(function (p) {
@@ -144,66 +141,35 @@
       if (!piezas.length) {
         removeEventListener("scroll", pedir);
         removeEventListener("resize", pedir);
+        clearInterval(reloj);
       }
     };
 
+    // Estrangulado por tiempo, no por requestAnimationFrame.
+    // Con rAF esto compartía cola con el bucle de campo.js, y cuando el
+    // shader va por software (portátil sin GPU decente, o un navegador
+    // que lo emula) se queda sin fotogramas: medido, se saltaba tres
+    // piezas de una sección entera. Catorce getBoundingClientRect diez
+    // veces por segundo no le duelen a nadie; un párrafo invisible sí.
+    var ultimo = 0;
     var pedir = function () {
-      if (barriendo) return;
-      barriendo = true;
-      requestAnimationFrame(barrer);
+      var ahora = Date.now();
+      if (ahora - ultimo < 100) return;
+      ultimo = ahora;
+      barrer();
     };
+
+    // Y una red por debajo: si no llegara ni un solo evento de scroll
+    // —restauración de posición al recargar, scroll por teclado en algún
+    // navegador raro— esto lo recoge igual. Se apaga sola al terminar.
+    var reloj = setInterval(function () { barrer(); }, 400);
 
     addEventListener("scroll", pedir, { passive: true });
     addEventListener("resize", pedir, { passive: true });
     barrer();                        // lo que ya se ve, se ve desde el principio
   }
 
-  /* ---------- 06 · Cursor ---------- */
-  // El punto va pegado; el anillo llega tarde. El retardo es el efecto
-  // entero: un anillo que sigue exacto al ratón no se percibe.
-
-  var finoYQuieto = matchMedia("(pointer:fine)").matches && !menosMovimiento.matches;
-
-  if (finoYQuieto) {
-    var punto = document.querySelector(".cursor");
-    var anillo = document.querySelector(".cursor-anillo");
-
-    if (punto && anillo) {
-      var rx = innerWidth / 2, ry = innerHeight / 2;
-      var ax = rx, ay = ry, vx = 0, vy = 0;
-
-      addEventListener("pointermove", function (e) {
-        rx = e.clientX; ry = e.clientY;
-        html.classList.add("cursor-listo");
-        punto.style.transform = "translate3d(" + rx + "px," + ry + "px,0)";
-      }, { passive: true });
-
-      // Muelle real: aceleración hacia el objetivo + rozamiento. Un
-      // lerp simple frena de golpe; esto se pasa un poco y vuelve.
-      (function muelle() {
-        vx = (vx + (rx - ax) * 0.14) * 0.72;
-        vy = (vy + (ry - ay) * 0.14) * 0.72;
-        ax += vx; ay += vy;
-        anillo.style.transform = "translate3d(" + ax + "px," + ay + "px,0)";
-        requestAnimationFrame(muelle);
-      })();
-
-      // Delegación: los enlaces de las fichas se pintan después, así
-      // que enganchar uno a uno al cargar dejaría fuera la mitad.
-      var sensible = "a, button, .bento-pieza, .proyecto, [data-cursor]";
-      document.addEventListener("pointerover", function (e) {
-        if (e.target.closest(sensible)) html.classList.add("cursor-sobre");
-      });
-      document.addEventListener("pointerout", function (e) {
-        if (e.target.closest(sensible) && !e.relatedTarget?.closest(sensible)) {
-          html.classList.remove("cursor-sobre");
-        }
-      });
-      addEventListener("blur", function () { html.classList.remove("cursor-sobre"); });
-    }
-  }
-
-  /* ---------- 07 · Luz del vidrio ---------- */
+  /* ---------- 06 · Luz del vidrio ---------- */
   // El reflejo de una lente se mueve con el observador. Fijo, delata
   // que es un degradado pintado.
 
@@ -216,11 +182,11 @@
     }, { passive: true });
   }
 
-  /* ---------- 08 · Inclinación ---------- */
+  /* ---------- 07 · Inclinación ---------- */
   // Rotación pequeña a propósito: 6 grados leen como profundidad,
   // 15 leen como truco de plantilla.
 
-  if (finoYQuieto) {
+  if (matchMedia("(pointer:fine)").matches && !menosMovimiento.matches) {
     Array.prototype.forEach.call(document.querySelectorAll("[data-inclina]"), function (p) {
       p.addEventListener("pointermove", function (e) {
         var c = p.getBoundingClientRect();
@@ -233,7 +199,7 @@
     });
   }
 
-  /* ---------- 09 · Cifras ---------- */
+  /* ---------- 08 · Cifras ---------- */
 
   var cifras = document.querySelectorAll("[data-cifra]");
   if (cifras.length && "IntersectionObserver" in window) {
@@ -269,7 +235,7 @@
     });
   }
 
-  /* ---------- 10 · Copiar el correo ---------- */
+  /* ---------- 09 · Copiar el correo ---------- */
 
   var copiar = document.getElementById("copiar-correo");
   if (copiar && navigator.clipboard) {
@@ -287,7 +253,7 @@
     copiar.hidden = true;   // sin API de portapapeles, un botón que no copia sobra
   }
 
-  /* ---------- 11 · Año ---------- */
+  /* ---------- 10 · Año ---------- */
 
   var anio = document.getElementById("anio");
   if (anio) anio.textContent = new Date().getFullYear();

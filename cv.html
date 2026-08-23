@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV · Fernando García Buzón — Desarrollador Full-Stack</title>
+<meta name="description" content="Currículum de Fernando García Buzón, desarrollador full-stack. Sanlúcar de Barrameda, disponible para Sevilla o remoto.">
+<link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   CV · una página A4, pensada primero para imprimirse.
+   Sin Fraunces a propósito: el display variable es para la web.
+   Un CV lo lee una persona con prisa y, antes que ella, a veces
+   un filtro automático. Una sola columna, texto seleccionable,
+   nada de iconos que sustituyan palabras.
+   ============================================================ */
+
+:root{
+  --tinta:#14201B;
+  --tinta-suave:#414D48;
+  --tinta-tenue:#6A756F;
+  --regla:#D2CEC2;
+  --verde:#146B45;
+  --papel:#FFFFFF;
+  --texto:'Archivo','Helvetica Neue',Arial,sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:var(--texto);
+  color:var(--tinta-suave);
+  background:#EDEAE2;
+  line-height:1.33;
+  font-size:9.4pt;
+  -webkit-font-smoothing:antialiased;
+}
+
+.hoja{
+  background:var(--papel);
+  width:210mm;
+  min-height:297mm;
+  margin:1.5rem auto;
+  padding:11mm 13mm;
+  box-shadow:0 10px 40px rgba(20,32,27,.14);
+}
+
+/* ---------- Cabecera ---------- */
+
+.cab{border-bottom:1.5pt solid var(--tinta);padding-bottom:2.6mm;margin-bottom:3.6mm}
+.cab h1{
+  font-size:19pt;font-weight:700;color:var(--tinta);
+  letter-spacing:-.025em;line-height:1.05;margin-bottom:1mm;
+}
+.rol{font-size:10.5pt;font-weight:600;color:var(--verde);margin-bottom:1.8mm}
+
+.contacto{
+  display:flex;flex-wrap:wrap;gap:1mm 4mm;
+  font-size:9pt;color:var(--tinta-suave);
+}
+.contacto span{white-space:nowrap}
+.contacto a{color:var(--tinta-suave);text-decoration:none;border-bottom:.4pt solid var(--regla)}
+.contacto b{color:var(--tinta);font-weight:600}
+
+/* ---------- Secciones ---------- */
+
+section{margin-bottom:2.7mm}
+section:last-child{margin-bottom:0}
+
+h2{
+  font-size:8pt;font-weight:700;color:var(--tinta);
+  letter-spacing:.12em;text-transform:uppercase;
+  padding-bottom:.9mm;margin-bottom:1.5mm;
+  border-bottom:.6pt solid var(--regla);
+}
+
+.perfil{font-size:9.3pt;color:var(--tinta-suave);max-width:none}
+.perfil b{color:var(--tinta);font-weight:600}
+
+/* ---------- Entradas ---------- */
+
+.entrada{margin-bottom:2.1mm;break-inside:avoid}
+.entrada:last-child{margin-bottom:0}
+
+.linea1{display:flex;justify-content:space-between;align-items:baseline;gap:4mm}
+.entrada h3{font-size:9.8pt;font-weight:600;color:var(--tinta);line-height:1.3}
+.cuando{
+  font-size:8.5pt;color:var(--tinta-tenue);white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.donde{font-size:8.8pt;color:var(--verde);font-weight:600;margin-bottom:1mm}
+.entrada p{font-size:8.9pt;color:var(--tinta-suave)}
+.entrada ul{list-style:none;margin-top:1mm}
+.entrada li{font-size:8.9pt;padding-left:3.5mm;position:relative;margin-bottom:.6mm}
+.entrada li::before{
+  content:"";position:absolute;left:0;top:1.75mm;
+  width:1.6mm;height:.5pt;background:var(--verde);
+}
+.entrada li b{color:var(--tinta);font-weight:600}
+
+/* ---------- Stack ---------- */
+
+.stack{display:grid;gap:1.5mm}
+.nivel{display:grid;grid-template-columns:30mm 1fr;gap:3mm;align-items:baseline}
+.nivel dt{
+  font-size:8.2pt;font-weight:700;color:var(--tinta);
+  letter-spacing:.05em;text-transform:uppercase;
+}
+.nivel dd{font-size:8.9pt;color:var(--tinta-suave)}
+.nivel .apunte{display:block;font-size:8pt;color:var(--tinta-tenue);font-weight:400;text-transform:none;letter-spacing:0;margin-top:.3mm}
+
+/* ---------- Dos columnas al pie ---------- */
+
+.par{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+
+/* ---------- Pie ---------- */
+
+.pie{
+  margin-top:3.4mm;padding-top:2mm;border-top:.6pt solid var(--regla);
+  font-size:8.2pt;color:var(--tinta-tenue);
+  display:flex;justify-content:space-between;gap:4mm;flex-wrap:wrap;
+}
+.pie a{color:var(--tinta-tenue)}
+
+/* ---------- Barra de la web (no se imprime) ---------- */
+
+.barra{
+  max-width:210mm;margin:0 auto;padding:1rem 1.5rem 0;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;
+  font-size:.85rem;
+}
+.barra a{
+  color:var(--verde);font-weight:600;text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.barra a:hover{border-color:var(--verde)}
+
+/* ---------- Impresión ---------- */
+
+@page{size:A4;margin:0}
+
+@media print{
+  body{background:#fff;font-size:9.4pt}
+  .hoja{
+    width:auto;min-height:auto;margin:0;
+    padding:8mm 12mm;box-shadow:none;
+  }
+  .barra{display:none}
+  a{text-decoration:none}
+}
+
+@media (max-width:230mm){
+  .hoja{width:auto;max-width:100%;margin:0;padding:7vw 6vw;box-shadow:none}
+  body{background:#fff}
+  .linea1{flex-direction:column;gap:0}
+  .nivel{grid-template-columns:1fr;gap:.5mm}
+  .par{grid-template-columns:1fr;gap:0}
+}
+</style>
+</head>
+<body>
+
+<div class="barra">
+  <a href="index.html">← Volver al portfolio</a>
+  <a href="cv-fernando-garcia-buzon.pdf" download>Descargar en PDF</a>
+</div>
+
+<div class="hoja">
+
+  <header class="cab">
+    <h1>Fernando García Buzón</h1>
+    <p class="rol">Desarrollador Full-Stack</p>
+    <div class="contacto">
+      <span><b>Correo:</b> <a href="mailto:fernandogbuzon@gmail.com">fernandogbuzon@gmail.com</a></span>
+      <span><b>Teléfono:</b> 674 036 944</span>
+      <span><b>Ubicación:</b> Sanlúcar de Barrameda (Cádiz)</span>
+      <span><b>Disponible en:</b> Sevilla o remoto</span>
+      <span><a href="https://github.com/Fernandogbuzon">github.com/Fernandogbuzon</a></span>
+      <span><a href="https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/">LinkedIn</a></span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Perfil</h2>
+    <p class="perfil">
+      Titulado en DAM. Diseñé, escribí y mantengo <b>adesa80.com</b>, la
+      plataforma en producción que gestiona un club de baloncesto entero:
+      inscripciones con pago real, horarios, finanzas y competición.
+      <b>27 módulos, 2236 tests en verde</b>, y sigo siendo quien la despliega.
+      Busco mi primer puesto en un equipo, y dejar de ser el único que revisa
+      mi código.
+    </p>
+  </section>
+
+  <section>
+    <h2>Experiencia técnica</h2>
+
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Diseño, desarrollo y mantenimiento — proyecto propio en producción</h3>
+        <span class="cuando">2026 — actualidad</span>
+      </div>
+      <p class="donde">ADESA 80 · Club de baloncesto · adesa80.com</p>
+      <ul>
+        <li>Web pública, portal del socio y back-office en <b>Next.js 16, React 19 y TypeScript estricto</b> sobre PostgreSQL (Supabase).</li>
+        <li><b>Pagos con Stripe</b>: webhook con firma verificada sobre el cuerpo en crudo e idempotencia en tres capas.</li>
+        <li>Seguridad por defecto: 81 tablas con RLS y <b>ninguna política de escritura</b>; toda escritura pasa por el servidor tras comprobar permiso.</li>
+        <li><b>2236 tests</b> en 192 ficheros, 115 migraciones versionadas y <code>tsc</code> limpio. Multi-club por configuración, sin redespliegue.</li>
+      </ul>
+    </div>
+
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Desarrollador Multiplataforma — prácticas (FCT)</h3>
+        <span class="cuando">Mar — Jun 2025</span>
+      </div>
+      <p class="donde">Grupo Solutia · Cádiz</p>
+      <ul>
+        <li>Módulos de reservas y salas de <b>WeSpaces</b> en <b>Flutter</b>, dentro de un equipo y de una base de código que ya existía. <b>APIs REST</b> con sincronización en tiempo real, Git y sprints.</li>
+      </ul>
+    </div>
+
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Automatización de datos — proyecto propio, código abierto</h3>
+        <span class="cuando">2026</span>
+      </div>
+      <p class="donde">FAB Cádiz Scraper · github.com/Fernandogbuzon/fab-cadiz-scraper</p>
+      <ul>
+        <li><b>Python y Playwright</b> contra una federación sin API (ASP.NET tras Cloudflare), volcando a PostgreSQL. Corre en <b>GitHub Actions sin servidor</b>, detecta cambios por SHA-256 y publica el resultado ~25 min tras el final del partido.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Stack</h2>
+    <dl class="stack">
+      <div class="nivel">
+        <dt>En producción<span class="apunte">mantenido con usuarios reales</span></dt>
+        <dd>TypeScript · Next.js · React · Node.js · PostgreSQL · Supabase · Stripe · Python · Zod · Vitest · Playwright · Tailwind CSS · Git</dd>
+      </div>
+      <div class="nivel">
+        <dt>Sólido<span class="apunte">proyectos cerrados y formación</span></dt>
+        <dd>Java · SQL · API REST · Flutter · Dart · HTML · CSS · Scrum / Kanban</dd>
+      </div>
+      <div class="nivel">
+        <dt>En aprendizaje<span class="apunte">sin producción detrás todavía</span></dt>
+        <dd>Spring · Firebase · Android Studio</dd>
+      </div>
+    </dl>
+  </section>
+
+  <div class="par">
+    <section>
+      <h2>Formación</h2>
+      <div class="entrada">
+        <div class="linea1">
+          <h3>Téc. Superior en Desarrollo de Aplicaciones Multiplataforma</h3>
+          <span class="cuando">2023 — 2025</span>
+        </div>
+        <p class="donde">VictoriaFP · Sanlúcar de Barrameda</p>
+      </div>
+      <div class="entrada">
+        <div class="linea1">
+          <h3>Bachillerato</h3>
+          <span class="cuando">2021 — 2023</span>
+        </div>
+        <p class="donde">IES San Lucas</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Otros datos</h2>
+      <div class="entrada">
+        <ul>
+          <li><b>Idiomas:</b> español nativo · inglés técnico.</li>
+          <li><b>Disponibilidad:</b> incorporación inmediata. Previsión de mudarme a Sevilla.</li>
+          <li><b>Otra experiencia:</b> MH Inmobiliaria (2025 — act.) y Taberna Cabildo (2023 — 2024). Trato diario con perfiles no técnicos.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div class="pie">
+    <span>Portfolio y casos completos: <a href="https://fernandogbuzon.github.io/mi-portfolio/">fernandogbuzon.github.io/mi-portfolio</a></span>
+    <span>También trabajo por mi cuenta: <a href="https://fgbuzon.com">fgbuzon.com</a></span>
+  </div>
+
+</div>
+
+</body>
+</html>
