@@ -37,8 +37,8 @@ body{
   font-family:var(--texto);
   color:var(--tinta-suave);
   background:#EDEAE2;
-  line-height:1.38;
-  font-size:9.9pt;
+  line-height:1.33;
+  font-size:9.5pt;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -70,7 +70,7 @@ body{
 
 /* ---------- Secciones ---------- */
 
-section{margin-bottom:3.1mm}
+section{margin-bottom:2.4mm}
 section:last-child{margin-bottom:0}
 
 h2{
@@ -80,12 +80,12 @@ h2{
   border-bottom:.6pt solid var(--regla);
 }
 
-.perfil{font-size:9.8pt;color:var(--tinta-suave);max-width:none}
+.perfil{font-size:9.4pt;color:var(--tinta-suave);max-width:none}
 .perfil b{color:var(--tinta);font-weight:600}
 
 /* ---------- Entradas ---------- */
 
-.entrada{margin-bottom:2.4mm;break-inside:avoid}
+.entrada{margin-bottom:2mm;break-inside:avoid}
 .entrada:last-child{margin-bottom:0}
 
 .linea1{display:flex;justify-content:space-between;align-items:baseline;gap:4mm}
@@ -95,9 +95,9 @@ h2{
   font-variant-numeric:tabular-nums;
 }
 .donde{font-size:8.8pt;color:var(--verde);font-weight:600;margin-bottom:1mm}
-.entrada p{font-size:9.3pt;color:var(--tinta-suave)}
+.entrada p{font-size:9pt;color:var(--tinta-suave)}
 .entrada ul{list-style:none;margin-top:1mm}
-.entrada li{font-size:9.3pt;padding-left:3.5mm;position:relative;margin-bottom:.6mm}
+.entrada li{font-size:9pt;padding-left:3.5mm;position:relative;margin-bottom:.6mm}
 .entrada li::before{
   content:"";position:absolute;left:0;top:1.75mm;
   width:1.6mm;height:.5pt;background:var(--verde);
@@ -112,7 +112,7 @@ h2{
   font-size:8.2pt;font-weight:700;color:var(--tinta);
   letter-spacing:.05em;text-transform:uppercase;
 }
-.nivel dd{font-size:9.3pt;color:var(--tinta-suave)}
+.nivel dd{font-size:9pt;color:var(--tinta-suave)}
 .nivel .apunte{display:block;font-size:8pt;color:var(--tinta-tenue);font-weight:400;text-transform:none;letter-spacing:0;margin-top:.3mm}
 
 /* ---------- Dos columnas al pie ---------- */
@@ -149,10 +149,10 @@ h2{
 @page{size:A4;margin:0}
 
 @media print{
-  body{background:#fff;font-size:9.9pt}
+  body{background:#fff;font-size:9.5pt}
   .hoja{
     width:auto;min-height:auto;margin:0;
-    padding:11mm 13mm;box-shadow:none;
+    padding:7.5mm 12mm;box-shadow:none;
   }
   .barra{display:none}
   a{text-decoration:none}
@@ -191,12 +191,12 @@ h2{
   <section>
     <h2>Perfil</h2>
     <p class="perfil">
-      Titulado en DAM. Diseñé, escribí y mantengo <b>adesa80.com</b>, la
-      plataforma en producción que gestiona un club de baloncesto entero:
-      inscripciones con pago real, horarios, finanzas y competición.
-      <b>27 módulos, 2236 tests en verde</b>, y sigo siendo quien la despliega.
-      Busco mi primer puesto en un equipo, y dejar de ser el único que revisa
-      mi código.
+      Titulado en DAM. Hice la web y el sistema de gestión de un club de
+      baloncesto, <b>adesa80.com</b>, y lo mantengo yo: inscripciones con pago,
+      horarios, cuentas del club y resultados de la federación. En producción
+      desde agosto de 2026, con <b>2236 tests</b>. Busco mi primer trabajo en un
+      equipo: hasta ahora he aprendido solo y quiero tener a alguien que me
+      corrija.
     </p>
   </section>
 
@@ -211,10 +211,11 @@ h2{
       <p class="donde">ADESA 80 · Club de baloncesto · Sanlúcar de Barrameda</p>
       <p class="matiz">Proyecto propio, en producción · adesa80.com</p>
       <ul>
-        <li>Web pública, portal del socio y back-office en <b>Next.js 16, React 19 y TypeScript estricto</b> sobre PostgreSQL (Supabase).</li>
-        <li><b>Pagos con Stripe</b>: webhook con firma verificada sobre el cuerpo en crudo e idempotencia en tres capas.</li>
-        <li>Seguridad por defecto: 81 tablas con RLS y <b>ninguna política de escritura</b>; toda escritura pasa por el servidor tras comprobar permiso.</li>
-        <li><b>2236 tests</b> en 192 ficheros, 115 migraciones versionadas y <code>tsc</code> limpio. Multi-club por configuración, sin redespliegue.</li>
+        <li>La web pública, el área de socios y el panel de administración. <b>Next.js 16 y React 19</b> con TypeScript en modo estricto, sobre <b>PostgreSQL</b>.</li>
+        <li><b>Cobros con Stripe.</b> El webhook comprueba la firma antes de leer nada, y controla los envíos repetidos, porque Stripe manda el mismo aviso más de una vez.</li>
+        <li>Ninguna de las <b>81 tablas</b> acepta escrituras desde el navegador: para guardar algo hay que pasar por el servidor y comprobar permiso.</li>
+        <li><b>2236 tests</b> y 115 migraciones. Los tests corren en cada push y si fallan no se despliega.</li>
+        <li>Los precios, textos y colores del club están en la base de datos, no en el código: cambiar una cuota es rellenar un formulario.</li>
       </ul>
     </div>
 
@@ -226,7 +227,7 @@ h2{
       <p class="donde">Grupo Solutia · Cádiz</p>
       <p class="matiz">Prácticas de formación (FCT)</p>
       <ul>
-        <li>Módulos de reservas y salas de <b>WeSpaces</b> en <b>Flutter</b>, dentro de un equipo y de una base de código que ya existía. <b>APIs REST</b> con sincronización en tiempo real, Git y sprints.</li>
+        <li>Trabajé en la app <b>WeSpaces</b>, en reservas y salas. Era código que ya existía y no había escrito yo, así que buena parte del trabajo fue entenderlo antes de tocarlo. <b>Flutter</b> contra una <b>API REST</b>, con Git y sprints.</li>
       </ul>
     </div>
 
@@ -238,7 +239,8 @@ h2{
       <p class="donde">FAB Cádiz Scraper</p>
       <p class="matiz">Proyecto propio, código abierto · github.com/Fernandogbuzon/fab-cadiz-scraper</p>
       <ul>
-        <li><b>Python y Playwright</b> contra una federación sin API (ASP.NET tras Cloudflare), volcando a PostgreSQL. Corre en <b>GitHub Actions sin servidor</b>, detecta cambios por SHA-256 y publica el resultado ~25 min tras el final del partido.</li>
+        <li>La federación andaluza publica los resultados en una web antigua y sin API. Este programa los saca con <b>Python y Playwright</b> y los guarda en <b>PostgreSQL</b>. Corre solo en <b>GitHub Actions</b>, sin servidor.</li>
+        <li>Antes de escribir compara un hash, así que casi nunca toca la base de datos. Los resultados salen en la web del club unos <b>25 minutos</b> después del partido; antes los copiaba alguien a mano.</li>
       </ul>
     </div>
   </section>
@@ -247,15 +249,15 @@ h2{
     <h2>Stack</h2>
     <dl class="stack">
       <div class="nivel">
-        <dt>En producción<span class="apunte">mantenido con usuarios reales</span></dt>
+        <dt>Lo uso a diario<span class="apunte">con usuarios de verdad detrás</span></dt>
         <dd>TypeScript · Next.js · React · Node.js · PostgreSQL · Supabase · Stripe · Python · Zod · Vitest · Playwright · Tailwind CSS · Git</dd>
       </div>
       <div class="nivel">
-        <dt>Sólido<span class="apunte">proyectos cerrados y formación</span></dt>
+        <dt>Me defiendo<span class="apunte">proyectos terminados y clase</span></dt>
         <dd>Java · SQL · API REST · Flutter · Dart · HTML · CSS · Scrum / Kanban</dd>
       </div>
       <div class="nivel">
-        <dt>En aprendizaje<span class="apunte">sin producción detrás todavía</span></dt>
+        <dt>Lo he tocado<span class="apunte">pero aún no en algo real</span></dt>
         <dd>Spring · Firebase · Android Studio</dd>
       </div>
     </dl>
@@ -282,9 +284,9 @@ h2{
       <h2>Otros datos</h2>
       <div class="entrada">
         <ul>
-          <li><b>Idiomas:</b> español nativo · inglés técnico.</li>
-          <li><b>Disponibilidad:</b> incorporación inmediata. Previsión de mudarme a Sevilla.</li>
-          <li><b>Otra experiencia:</b> MH Inmobiliaria (2025 — act.) y Taberna Cabildo (2023 — 2024). Trato diario con perfiles no técnicos.</li>
+          <li><b>Idiomas:</b> español nativo. Inglés suficiente para leer documentación y código.</li>
+          <li><b>Disponibilidad:</b> puedo empezar ya. Tengo pensado mudarme a Sevilla.</li>
+          <li><b>Antes de esto:</b> atención al cliente en MH Inmobiliaria (2025 — actualidad) y camarero en Taberna Cabildo (2023 — 2024). De ahí me traje saber explicarme con gente que no es técnica.</li>
         </ul>
       </div>
     </section>
