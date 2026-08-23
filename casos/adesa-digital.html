@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ADESA Digital — Caso · Fernando García Buzón</title>
+<meta name="description" content="Cómo reconstruí la plataforma de un club de baloncesto: 27 módulos, RLS deny-by-default, pagos con Stripe y un marcador 3x3 que sobrevive a quedarse sin wifi.">
+
+<link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/casos/adesa-digital.html">
+<link rel="icon" href="../marca/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="ADESA Digital — Caso">
+<meta property="og:description" content="27 módulos, 81 tablas, 2236 tests y cero políticas de escritura. La plataforma que gestiona un club de baloncesto entero.">
+<meta property="og:image" content="https://fernandogbuzon.github.io/mi-portfolio/marca/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/sistema.css?v=1">
+<link rel="stylesheet" href="../css/paginas.css?v=1">
+
+<script>
+  try {
+    var t = localStorage.getItem("tema");
+    if (t === "claro" || t === "noche") document.documentElement.setAttribute("data-tema", t);
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<a class="salto" href="#contenido">Saltar al contenido</a>
+<div id="campo" aria-hidden="true"></div>
+
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-anillo" aria-hidden="true"></div>
+
+<header class="cabecera">
+  <div class="env vidrio">
+    <a class="marca" href="../index.html">fgbuzon<span class="punto">.</span></a>
+    <nav aria-label="Principal">
+      <ul class="menu" id="menu">
+        <li><a href="../index.html#trabajo">Trabajo</a></li>
+        <li><a href="fab-cadiz-scraper.html">El scraper</a></li>
+        <li><a href="../index.html#hablamos">Hablamos</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;align-items:center;gap:.4rem">
+      <button class="interruptor" id="interruptor" type="button" aria-label="Cambiar de tema">
+        <svg class="sol" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="luna" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburguesa" id="hamburguesa" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <div class="caso-cabecera">
+    <div class="env">
+      <a class="volver" href="../index.html">← Todo el trabajo</a>
+      <h1>Un club de baloncesto entero, en producción</h1>
+      <p class="entradilla">
+        ADESA 80 llevaba sus inscripciones en hojas de cálculo, sus resultados
+        a mano y sus precios dentro del código. Reconstruí la plataforma desde
+        cero: 27 módulos, pagos reales y una base de datos que dice que no por
+        defecto.
+      </p>
+
+      <dl class="caso-ficha">
+        <div><dt>Cliente</dt><dd>ADESA 80 · Sanlúcar de Barrameda</dd></div>
+        <div><dt>Mi papel</dt><dd>Diseño, desarrollo y despliegue. Solo.</dd></div>
+        <div><dt>Estado</dt><dd>En producción · <a href="https://adesa80.com" target="_blank" rel="noopener">adesa80.com</a></dd></div>
+        <div><dt>Stack</dt><dd>Next.js 16 · TypeScript · PostgreSQL · Stripe</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <article class="caso-cuerpo">
+
+    <h2><span class="rotulo">Problema</span><br>Nada de lo que fallaba era un bug</h2>
+
+    <p class="primera">
+      El club tenía web. El problema no era que estuviera fea: era que cada
+      cosa que necesitaban cambiar exigía a un programador, y algunas exigían
+      un despliegue.
+    </p>
+
+    <p>
+      La API vivía en un puñado de ficheros monolíticos — <strong>2.474 líneas
+      solo para horarios</strong>, con 38 endpoints dentro. El nombre del club,
+      sus colores, su dirección, los patrocinadores en un JSON dentro de una
+      plantilla y los precios de la escuela en un fichero de configuración:
+      subir una cuota significaba tocar código y volver a desplegar.
+    </p>
+
+    <p>
+      La autorización estaba partida entre una columna <code>profiles.role</code> y
+      una tabla <code>user_permisos</code> que llevaban tiempo desincronizadas, así que
+      lo que un usuario podía hacer dependía de cuál de las dos mirase el
+      código en ese momento. Las políticas de escritura de RLS estaban
+      abiertas: una política de <code>INSERT</code> sobre la tabla de noticias dejaba
+      publicar a cualquier usuario autenticado. Así se llenó de spam.
+    </p>
+
+    <ul>
+      <li>Documentos privados servidos como URLs firmadas de siete días.</li>
+      <li>El correo se enviaba dentro de la propia petición, sin reintento: un fallo puntual de SMTP perdía la confirmación de una inscripción y nadie se enteraba.</li>
+      <li>Los resultados de la federación los transcribía una persona a mano, cuando podía.</li>
+    </ul>
+
+    <h2><span class="rotulo">Solución</span><br>Dos reglas, y todo lo demás sale de ahí</h2>
+
+    <h3>1. La base de datos dice que no por defecto</h3>
+
+    <p>
+      Las <strong>81 tablas tienen RLS activado</strong>. Existen 25 políticas y las
+      25 son <code>SELECT</code> para contenido genuinamente público. No hay ni una sola
+      política de <code>INSERT</code>, <code>UPDATE</code> o <code>DELETE</code> en todo el esquema.
+    </p>
+
+    <p>
+      La consecuencia es que <strong>ninguna escritura puede salir del navegador</strong>.
+      Toda pasa por el servidor con la clave de servicio, y esa clave solo es
+      alcanzable después de una comprobación explícita de permiso:
+    </p>
+
+<pre><code><span class="c">// El servidor pregunta antes de tocar nada.</span>
+<span class="k">await</span> requirePermiso(<span class="k">"horarios.gestionar"</span>);</code></pre>
+
+    <p>
+      Hay <strong>76 puertas de este tipo</strong> repartidas por el código, apoyadas en 46
+      claves de permiso granulares y 7 plantillas de rol. Es más trabajo que
+      confiar en el cliente. También es la razón por la que el spam de noticias
+      no puede repetirse: no existe el camino.
+    </p>
+
+    <h3>2. Nada del club vive en el código</h3>
+
+    <p>
+      Identidad, colores, precios, textos y credenciales viven en
+      <code>club_ajustes</code>, en <strong>17 áreas JSONB validadas con Zod</strong>. Cambiar una
+      cuota es un formulario, no un despliegue. Como efecto secundario, la
+      plataforma es <em>multi-club</em>: el mismo despliegue sirve a otro club
+      cambiando su configuración.
+    </p>
+
+    <h3>3. Los datos de la federación no se mezclan</h3>
+
+    <p>
+      Hay dos proyectos de base de datos separados. El de la federación es
+      <strong>de solo lectura</strong> y lo alimenta un scraper externo; la aplicación
+      tiene prohibido escribir en él, y si faltan sus credenciales esas
+      secciones simplemente se ocultan en vez de romper la página.
+    </p>
+
+    <h2><span class="rotulo">Impacto</span><br>Qué cambió para el club</h2>
+
+    <ul class="ancho metricas" style="max-width:none">
+      <li><span class="cifra" data-cifra="27">27</span><span class="que">Módulos de dominio</span></li>
+      <li><span class="cifra" data-cifra="115">115</span><span class="que">Migraciones SQL</span></li>
+      <li><span class="cifra" data-cifra="2236">2236</span><span class="que">Tests en verde</span></li>
+      <li><span class="cifra" data-cifra="97">97</span><span class="que">Páginas</span></li>
+      <li><span class="cifra" data-cifra="0">0</span><span class="que">Políticas de escritura</span></li>
+    </ul>
+
+    <p>
+      Está <strong>en producción en adesa80.com desde agosto de 2026</strong>. Tres
+      generaciones de la web anterior seguían indexadas en Google: 130 reglas de
+      redirección llevan 111 de esas URLs a una página viva en un solo salto, y
+      se migraron 139 artículos con 167 imágenes del blog antiguo para que la
+      historia del club no se perdiera en la mudanza.
+    </p>
+
+    <p>
+      La directiva tiene un módulo de finanzas montado sobre su propio plan
+      contable. Las familias tienen un alta en tres pasos que deduce la
+      categoría del niño por su año de nacimiento y permite inscribir a varios
+      hermanos de una vez. Y la galería pesa <strong>38,9 veces menos</strong> por foto
+      —de 553.746 a 14.246 bytes—, medido en producción, no estimado.
+    </p>
+
+    <h2><span class="rotulo">Proceso</span><br>La decisión de la que más aprendí</h2>
+
+    <h3>Un marcador que sobrevive a quedarse sin wifi</h3>
+
+    <p>
+      El torneo 3x3 se arbitra desde una tablet, a pie de pista, donde la
+      cobertura se cae. La solución obvia —guardar el marcador y actualizarlo—
+      se rompe en cuanto la tablet pierde la conexión y reintenta: cuentas dos
+      veces la misma canasta.
+    </p>
+
+    <blockquote>
+      El marcador no se guarda. Se calcula.
+    </blockquote>
+
+    <p>
+      Lo que se guarda es un <strong>registro de acciones del árbitro que solo crece</strong>
+      (<code>torneo_eventos</code>). Cada evento lleva un UUID generado en el cliente, así
+      que una tablet sin red puede encolar acciones y reproducirlas después sin
+      que ninguna se cuente dos veces. Una equivocación no se borra: se corrige
+      escribiendo un evento que apunta al original (<code>revierte_client_id</code>). El
+      marcador es una función pura de ese registro, y el código dice
+      explícitamente que la foto que manda el cliente no se cree nunca.
+    </p>
+
+    <h3>El webhook de Stripe, que es donde se paga el error</h3>
+
+    <p>
+      Es la única parte del sistema que <strong>falla cerrada</strong>: sin
+      <code>STRIPE_WEBHOOK_SECRET</code> devuelve 500 y no procesa nada, en lugar de
+      degradarse con elegancia como hace el resto. La firma se verifica contra
+      el cuerpo en crudo capturado con <code>request.text()</code> <em>antes</em> de parsear,
+      porque parsear primero invalida una firma que se calcula byte a byte.
+    </p>
+
+    <p>
+      Y la idempotencia va en tres capas, porque Stripe entrega duplicados de
+      verdad, a veces a la vez: la actualización del pago es un
+      <em>compare-and-swap</em> sobre el estado, de modo que dos entregas
+      simultáneas del mismo evento no pueden confirmar dos veces la misma
+      inscripción.
+    </p>
+
+    <h3>Lo que haría distinto</h3>
+
+    <p>
+      Empecé escribiendo componentes de interfaz antes de tener cerrado el
+      modelo de permisos, y hubo que rehacer pantallas cuando el modelo cambió.
+      La segunda mitad del proyecto fue mucho más rápida porque el orden se
+      invirtió: primero la migración y la política de acceso, después la
+      pantalla.
+    </p>
+
+    <div class="caso-siguiente vidrio vidrio--vivo">
+      <p><strong>Lo siguiente:</strong> de dónde salen los resultados que ves en la web.</p>
+      <a class="btn btn-linea" href="fab-cadiz-scraper.html">El scraper de la federación <span class="flecha" aria-hidden="true">→</span></a>
+    </div>
+
+  </article>
+</main>
+
+<footer class="pie">
+  <div class="env">
+    <div class="pie-fin">
+      <span>© <span id="anio">2026</span> Fernando García Buzón</span>
+      <span><a href="../index.html">Volver al inicio</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/campo.js?v=1" defer></script>
+<script src="../js/main.js?v=1" defer></script>
+</body>
+</html>
