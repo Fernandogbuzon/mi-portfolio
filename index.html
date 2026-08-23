@@ -212,13 +212,12 @@
             <span class="estado"><span class="pulso" aria-hidden="true"></span> En producción</span>
           </div>
 
-          <h3>ADESA Digital</h3>
+          <h3><a href="casos/adesa-digital.html">ADESA Digital</a></h3>
           <p>
-            La plataforma que gestiona un club de baloncesto entero: web
-            pública, portal del socio y back-office. Inscripciones con pago
-            real, horarios de pista sin solapes, finanzas del club y arbitraje
-            de torneos 3x3 en directo. Multi-club por configuración: el mismo
-            despliegue sirve a otro club sin tocar una línea.
+            Gestiona un club de baloncesto entero: web pública, portal del socio
+            y back-office. Inscripciones con pago real, horarios sin solapes,
+            finanzas y arbitraje 3x3 en directo. Multi-club por configuración:
+            el mismo despliegue sirve a otro club sin tocar una línea.
           </p>
 
           <ul class="metricas" aria-label="Métricas del proyecto">
@@ -232,8 +231,13 @@
             <i>Next.js 16</i><i>React 19</i><i>TypeScript strict</i><i>PostgreSQL</i><i>Supabase</i><i>Stripe</i><i>Zod</i><i>Vitest</i>
           </div>
 
-          <a class="tapa" href="casos/adesa-digital.html"><span>Leer el caso de ADESA Digital</span></a>
-          <span class="abre">Leer el caso <span class="flecha" aria-hidden="true">→</span></span>
+          <div class="enlaces">
+            <a class="vivo" href="https://adesa80.com" target="_blank" rel="noopener">
+              Ver en producción <span aria-hidden="true">↗</span><span class="ocultovisual"> (se abre en una pestaña nueva)</span>
+            </a>
+            <span class="cerrado">Repositorio privado</span>
+            <a class="principal" href="casos/adesa-digital.html">Leer el caso <span class="flecha" aria-hidden="true">→</span></a>
+          </div>
         </article>
 
         <!-- MÉTRICA DE RESULTADO -->
@@ -255,21 +259,25 @@
             <span class="estado"><span class="pulso" aria-hidden="true"></span> Código abierto</span>
           </div>
 
-          <h3>FAB Cádiz Scraper</h3>
+          <h3><a href="casos/fab-cadiz-scraper.html">FAB Cádiz Scraper</a></h3>
           <p>
-            La federación andaluza no tiene API: publica los resultados en una
-            página ASP.NET detrás de Cloudflare. Este scraper los saca, calcula
-            las clasificaciones con desempate particular y los deja en Postgres.
-            Corre en GitHub Actions, sin servidor, y casi nunca escribe nada:
-            compara un SHA-256 del grupo y solo toca la base si cambió algo.
+            La federación andaluza no tiene API: publica en una página ASP.NET
+            detrás de Cloudflare. Este scraper la saca, calcula las
+            clasificaciones con desempate particular y las deja en Postgres.
+            Corre sin servidor y casi nunca escribe: compara un SHA-256 y solo
+            toca la base si cambió algo.
           </p>
 
           <div class="etiquetas">
             <i>Python</i><i>Playwright</i><i>PostgreSQL</i><i>GitHub Actions</i><i>SHA-256</i>
           </div>
 
-          <a class="tapa" href="casos/fab-cadiz-scraper.html"><span>Leer el caso del FAB Cádiz Scraper</span></a>
-          <span class="abre">Leer el caso <span class="flecha" aria-hidden="true">→</span></span>
+          <div class="enlaces">
+            <a class="vivo" href="https://github.com/Fernandogbuzon/fab-cadiz-scraper" target="_blank" rel="noopener">
+              Ver el código <span aria-hidden="true">↗</span><span class="ocultovisual"> (se abre en una pestaña nueva)</span>
+            </a>
+            <a class="principal" href="casos/fab-cadiz-scraper.html">Leer el caso <span class="flecha" aria-hidden="true">→</span></a>
+          </div>
         </article>
 
         <!-- WESPACES -->
@@ -289,6 +297,10 @@
 
           <div class="etiquetas">
             <i>Flutter</i><i>Dart</i><i>API REST</i><i>Git</i><i>Scrum</i>
+          </div>
+
+          <div class="enlaces">
+            <span class="cerrado">Código de la empresa, privado</span>
           </div>
         </article>
 
