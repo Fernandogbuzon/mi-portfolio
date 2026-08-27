@@ -20,9 +20,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/acta.css?v=1">
+<link rel="stylesheet" href="css/lamina.css?v=1">
 
 <script>
   try {
@@ -35,13 +35,13 @@
 
 <a class="ocultovisual" href="#contenido">Saltar al contenido</a>
 
-<header class="acta-cabecera">
+<header class="lamina-cabecera">
   <div class="env">
-    <span class="agata quien">Acta · F. García Buzón</span>
+    <span class="agata quien">F. García Buzón<span class="rotulo-largo"> · full-stack</span></span>
     <span class="tanteo-corriente">
-      <span class="agata">Pruebas ejecutadas</span>
+      <span class="agata">Pruebas<span class="rotulo-largo"> ejecutadas</span></span>
       <b id="tanteo">0/4</b>
-      <button class="agata" id="tema" type="button" aria-label="Cambiar de tema" style="margin-left:.75rem">Tema</button>
+      <button class="agata" id="tema" type="button" aria-label="Cambiar de tema">Tema</button>
     </span>
   </div>
 </header>
@@ -282,7 +282,7 @@
                 <span class="pts" data-tanteo-tablet="A">0</span>
                 <span class="agata">Local</span>
               </div>
-              <span class="sep">·</span>
+              <span class="sep" aria-hidden="true"></span>
               <div class="eq">
                 <span class="pts" data-tanteo-tablet="B">0</span>
                 <span class="agata">Visitante</span>
@@ -475,22 +475,24 @@
 
 <footer class="firma">
   <div class="env">
-    <div class="firma__reja">
+
+    <div class="cajetin">
       <div>
-        <span class="agata">Firma</span>
-        <p style="margin-top:.5rem">Fernando García Buzón<br>Desarrollador full-stack</p>
+        <span class="agata">Lámina</span>
+        <p><strong>Fernando García Buzón</strong><br>Desarrollador full-stack</p>
       </div>
       <div>
         <span class="agata">Contacto</span>
-        <p style="margin-top:.5rem">
+        <p>
           <a class="enlace" href="mailto:fernandogbuzon@gmail.com">fernandogbuzon@gmail.com</a><br>
-          <a class="enlace" href="https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/" target="_blank" rel="noopener">LinkedIn</a><br>
+          <a class="enlace" href="tel:+34674036944">674 036 944</a><br>
+          <a class="enlace" href="https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/" target="_blank" rel="noopener">LinkedIn</a> ·
           <a class="enlace" href="https://github.com/Fernandogbuzon" target="_blank" rel="noopener">GitHub</a>
         </p>
       </div>
       <div>
         <span class="agata">Documentos</span>
-        <p style="margin-top:.5rem">
+        <p>
           <a class="enlace" href="cv-fernando-garcia-buzon.pdf" download>CV en PDF</a><br>
           <a class="enlace" href="casos/adesa-digital.html">Caso: ADESA Digital</a><br>
           <a class="enlace" href="casos/fab-cadiz-scraper.html">Caso: el scraper</a>
@@ -498,15 +500,18 @@
       </div>
       <div>
         <span class="agata">Esta página</span>
-        <p class="nota" style="margin-top:.5rem;font-size:.85rem">
-          HTML, CSS y JavaScript escritos a mano. Sin framework y sin paso de
-          compilación.
-        </p>
+        <p class="nota">HTML, CSS y JavaScript escritos a mano. Sin framework y sin paso de compilación.</p>
       </div>
     </div>
+
+    <div class="cajetin__sello">
+      <span class="agata">Sanlúcar de Barrameda (Cádiz) · Sevilla o remoto</span>
+      <span class="agata agata--rojo">Disponible para incorporación inmediata</span>
+    </div>
+
   </div>
 </footer>
 
-<script src="js/acta.js?v=1" defer></script>
+<script src="js/lamina.js?v=1" defer></script>
 </body>
 </html>

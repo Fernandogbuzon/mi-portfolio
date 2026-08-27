@@ -7,10 +7,23 @@ Sitio estático: HTML, CSS y JavaScript planos. Sin build, sin dependencias.
 
 Un portfolio de desarrollador es, además del contenido, una muestra de código.
 Un `create-next-app` con tres secciones no demuestra nada que no demuestre
-mejor un fichero de CSS que alguien pueda abrir y leer entero. Todo lo que
-hace la página —el campo de tinta en WebGL, el vidrio, el cursor con muelle,
-el revelado al hacer scroll— cabe en tres ficheros y carga sin red después de
-las fuentes.
+mejor un fichero de CSS que alguien pueda abrir y leer entero. Todo el sitio
+son dos hojas de estilo, un JavaScript de 220 líneas y cuatro HTML.
+
+## El sistema visual: «la lámina»
+
+El idioma es el del dibujo técnico: blanco frío de plano, azul ultramar como
+única tinta de color, cero serifas, y una retícula milimetrada que se ve.
+Cada sección lleva su número de lámina, las separaciones son líneas de cota
+—con sus dos patillas— y el pie es un cajetín con sus filetes.
+
+Lo que **no** lleva, y es deliberado: degradados, sombras de color, tarjetas
+redondeadas, iconos de librería, terminal falsa, papel crema con serif de
+display. Esa combinación es exactamente la que delata una web generada
+automáticamente, y este sitio no puede permitirse parecerlo.
+
+El segundo color, un naranja quemado, se usa para **una sola cosa**: lo que
+todavía no puede demostrar. Si se usara para más, dejaría de significar.
 
 ## Estructura
 
@@ -20,12 +33,24 @@ casos/adesa-digital.html          caso: la plataforma del club
 casos/fab-cadiz-scraper.html      caso: el scraper de la federación
 cv.html                           el CV, pensado para imprimirse
 cv-fernando-garcia-buzon.pdf      el mismo CV, generado desde cv.html
-css/sistema.css                   fichas, vidrio, tipografía, movimiento
-css/paginas.css                   portada, bento, casos, trayectoria
-js/campo.js                       el fondo WebGL2 (sin librerías)
-js/main.js                        tema, menú, revelado, cifras
+css/lamina.css                    tintas, retícula, cabecera, portada
+css/lamina-caso.css               texto largo, código, citas, cierre
+js/lamina.js                      tema, tanteo y la prueba del marcador
 marca/                            favicon y tarjeta de Open Graph
 ```
+
+## La prueba del marcador
+
+La única pieza interactiva del sitio. Reimplanta el núcleo del marcador de
+torneos 3x3 de adesa80.com y le da al visitante los mandos para romperlo:
+cortar la cobertura, duplicar los envíos, entregarlos del revés. Con el motor
+de verdad —una función pura sobre un registro que solo crece, con UUID de
+cliente por evento— el tanteo del servidor coincide siempre. Con el contador
+ingenuo que suma, no.
+
+No demuestra que producción sea infalible; eso sería mentir. Demuestra que la
+arquitectura elegida aguanta lo que la ingenua no aguanta, y deja que se
+compruebe con las manos en vez de creérselo.
 
 ## El CV se genera, no se mantiene a mano
 
@@ -44,39 +69,32 @@ node -e "const{chromium}=require('playwright-core');(async()=>{
 
 Tiene que caber en **una página**. En media `print` el contenido no puede pasar
 de 1123 px (297 mm a 96 dpi); si se pasa, se recorta contenido antes que
-encoger más la tipografía.
+encoger más la tipografía. El breakpoint móvil del CV va como
+`@media screen and (max-width:230mm)`: sin el `screen`, A4 mide 210 mm, entra
+en la consulta y el PDF sale con el diseño de móvil.
 
 ## Decisiones que no se deshacen sin motivo
 
-**El contenido se ve siempre por defecto.** Ninguna animación esconde nada.
-Todo estado inicial oculto vive dentro de `@media (prefers-reduced-motion:
-no-preference)`, nunca en la regla base: un `opacity:0` en la base dejaría el
-texto invisible para siempre en cuanto alguien pida menos movimiento.
-
-**El revelado lo hace el navegador.** Se usa `animation-timeline: view()`
-dentro de `@supports`. JavaScript solo pone un respaldo donde no existe, y lo
-pone *añadiendo* una clase a `<html>`: sin JS no hay nada oculto que revelar.
+**El contenido se ve siempre.** Ninguna animación esconde nada. No hay ningún
+`opacity:0` en la hoja base, así que la página se lee entera sin JavaScript y
+con movimiento reducido. Se comprueba en los cinco casos:
+`claro / oscuro / reduce / móvil 390 / sin JS`.
 
 **El tema se decide antes de pintar.** Hay un script en línea en el `<head>`
 que lee la preferencia guardada. Si viviera al final del `<body>`, quien
 navega en oscuro se comería un fogonazo blanco en cada carga.
 
-**WebGL es opcional.** Si `campo.js` no arranca —sin WebGL2, con movimiento
-reducido, con la pestaña oculta— queda el degradado CSS que ya está debajo y
-no se pierde nada. Con movimiento reducido pinta un fotograma y para.
+**Las columnas se miden en `rem`, no en `ch`.** El `ch` depende del cuerpo del
+propio elemento: un `max-width:62ch` daba un ancho al titular de 45 px y otro
+al párrafo de 17 px, y la página perdía el eje derecho.
 
-**Cero dependencias.** El shader son ~120 líneas de WebGL2 escritas a mano.
-`three.js` pesa 600 KB para hacer esto mismo.
+**Cada cifra dice cómo se contó.** Un número sin método es un número inflado.
+`herramientas/contar.py` los recuenta desde los repositorios de verdad, y
+cuando no puede, escribe `disponible: false` en vez de inventarse uno.
 
-**El revelado no usa `requestAnimationFrame`.** Se estrangula por tiempo. Con
-rAF compartía cola con el bucle de `campo.js`, y cuando el shader va por
-software se queda sin fotogramas: medido, se saltaba tres piezas de una sección
-entera y el texto quedaba invisible. Hay además un `setInterval` de respaldo que
-se apaga solo cuando todas las piezas han entrado.
-
-**Sin cursor personalizado.** Lo hubo. Se quitó a propósito: es el elemento que
-antes hace leer la página como «portfolio de diseñador» en vez de como dossier
-profesional, y en un trackpad estorba.
+**Sin cursor personalizado y sin fondo WebGL.** Los hubo. Se quitaron: son lo
+que antes hace leer la página como «portfolio de diseñador» en vez de como
+dossier profesional.
 
 ## Ver en local
 
@@ -86,7 +104,7 @@ python3 -m http.server 8000   # y abrir http://localhost:8000
 
 ## Al tocar el CSS
 
-Las hojas se enlazan como `sistema.css?v=N`. Al cambiarlas hay que subir ese
+Las hojas se enlazan como `lamina.css?v=N`. Al cambiarlas hay que subir ese
 número en los tres HTML, o quien las tenga cacheadas verá la página rota
 —clases nuevas contra estilos viejos.
 

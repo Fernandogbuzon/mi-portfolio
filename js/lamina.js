@@ -1,5 +1,5 @@
 /* ============================================================
-   EL ACTA · comportamiento
+   LA LÁMINA · comportamiento
    ------------------------------------------------------------
    Casi todo el sitio es HTML y CSS. Aquí solo hay dos cosas:
    el tanteo corriente de la cabecera y la prueba del marcador.
@@ -53,6 +53,13 @@
     pintaTanteo();
   }
   pintaTanteo();
+
+  /* ---------- 02b · El año del pie ---------- */
+  // Lo ponía main.js, que ya no se carga en las páginas de caso. Un pie
+  // con el año congelado envejece la página sola.
+
+  var anio = document.getElementById("anio");
+  if (anio) anio.textContent = new Date().getFullYear();
 
   /* ---------- 03 · La prueba del marcador ---------- */
 

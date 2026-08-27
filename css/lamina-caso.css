@@ -1,0 +1,226 @@
+/* ============================================================
+   LA LÁMINA · páginas de caso
+   ------------------------------------------------------------
+   Se apoya en lamina.css: aquí solo va lo que la portada no
+   necesita — tipografía de texto largo, código, citas y el
+   cierre de la página.
+
+   Las clases son las que ya traía el HTML de los casos. No se
+   renombran: cambiar cincuenta atributos `class` a mano por
+   coherencia de nombres es la clase de refactor que solo rompe
+   cosas. Lo que cambia es el idioma visual, no el vocabulario.
+   ============================================================ */
+
+/* ---------- 01 · Cabecera y saltos ---------- */
+
+.salto{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;
+}
+.salto:focus-visible{
+  position:fixed;top:.5rem;left:.5rem;width:auto;height:auto;
+  clip-path:none;z-index:80;
+  background:var(--tinta);color:var(--papel);padding:.5rem .8rem;
+  font-family:var(--dato);font-size:.75rem;
+}
+.lamina-cabecera .quien{text-decoration:none}
+
+/* ---------- 02 · Entrada del caso ---------- */
+
+.caso-cabecera{padding-block:clamp(2.5rem,6vw,4.5rem) clamp(1.75rem,4vw,3rem)}
+
+.volver{
+  display:inline-block;margin-bottom:clamp(1.25rem,3vw,2rem);
+  font-family:var(--dato);font-size:.7rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--grafito);text-decoration:none;
+  border-bottom:1px solid var(--pauta);padding-bottom:.15rem;
+}
+.volver:hover{color:var(--tinta);border-color:var(--tinta)}
+
+.caso-cabecera h1{max-width:22ch;margin-bottom:1.15rem}
+.entradilla{
+  font-size:clamp(1.04rem,1rem + .38vw,1.24rem);
+  max-width:56ch;margin-bottom:clamp(1.75rem,4vw,2.75rem);
+}
+
+/* La ficha del caso es el cajetín de identificación de la lámina:
+   quién encarga, quién dibuja, en qué estado está. Va arriba, en
+   fila, con sus filetes. */
+.caso-ficha{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--pauta);
+  border:1px solid var(--pauta);
+}
+@media (max-width:62rem){ .caso-ficha{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:34rem){ .caso-ficha{grid-template-columns:1fr} }
+
+.caso-ficha > div{background:var(--papel);padding:.8rem .95rem 1rem}
+.caso-ficha dt{
+  font-family:var(--dato);font-size:.66rem;font-weight:500;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--grafito);
+  margin-bottom:.3rem;
+}
+.caso-ficha dd{font-size:.92rem;line-height:1.5}
+.caso-ficha dd a{color:var(--azul);text-decoration:none;border-bottom:1px solid var(--pauta)}
+.caso-ficha dd a:hover{border-color:var(--azul)}
+
+/* ---------- 03 · El cuerpo ---------- */
+
+.caso-cuerpo{
+  --col:37rem;               /* la columna de lectura, en unidad absoluta */
+  max-width:var(--ancho);margin-inline:auto;
+  padding-inline:var(--margen);
+  padding-block:clamp(1.5rem,4vw,2.5rem) clamp(2.5rem,6vw,4rem);
+}
+/* Todo mide lo mismo de ancho. `62ch` no vale aquí: el `ch` depende del
+   cuerpo del propio elemento, así que la raya de un h2 a 45px salía de un
+   largo y la de un párrafo a 17px de otro, y la página perdía el eje
+   derecho. En rem, el titular y el texto acaban en la misma vertical. */
+.caso-cuerpo > *{max-width:var(--col)}
+
+.caso-cuerpo h2{
+  margin-block:clamp(2.5rem,6vw,4rem) 1.1rem;
+  padding-top:1.1rem;
+  border-top:1px solid var(--tinta);
+  max-width:var(--col);
+}
+.caso-cuerpo h2:first-child{margin-top:0}
+.rotulo{
+  display:block;margin-bottom:.55rem;
+  font-family:var(--dato);font-size:.68rem;font-weight:500;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--azul);
+}
+/* El <br> que separa el rótulo del titular sobra: el rótulo ya es
+   un bloque. Dejarlo mete una línea vacía de 1.02 de interlínea. */
+.rotulo + br{display:none}
+
+.caso-cuerpo h3{
+  margin-block:clamp(1.75rem,3.5vw,2.4rem) .7rem;
+  padding-left:.85rem;border-left:2px solid var(--azul);
+}
+.caso-cuerpo p{margin-bottom:1.05rem}
+.primera{font-size:1.08rem}
+
+.caso-cuerpo ul{margin-block:1.1rem 1.5rem}
+.caso-cuerpo ul li{
+  padding:.6rem 0 .6rem 1.6rem;position:relative;
+  border-bottom:1px solid var(--pauta);
+}
+.caso-cuerpo ul li::before{
+  content:"";position:absolute;left:.15rem;top:1.15rem;
+  width:.5rem;height:1px;background:var(--azul);
+}
+
+.caso-cuerpo code{
+  font-family:var(--dato);font-size:.86em;
+  background:var(--papel-hondo);
+  padding:.1em .34em;border:1px solid var(--pauta);
+}
+.caso-cuerpo pre{
+  max-width:var(--col);
+  background:var(--papel-hondo);
+  border:1px solid var(--tinta);
+  padding:1rem 1.1rem;margin-block:1.3rem;
+  overflow-x:auto;max-width:none;
+}
+.caso-cuerpo pre code{
+  background:none;border:0;padding:0;
+  font-size:.82rem;line-height:1.75;
+}
+.caso-cuerpo pre .c{color:var(--grafito)}
+.caso-cuerpo pre .k{color:var(--azul);font-weight:500}
+
+blockquote{
+  margin-block:1.6rem;padding:1.1rem 0 1.1rem 1.35rem;
+  border-left:2px solid var(--tinta);
+  font-size:clamp(1.15rem,1rem + .8vw,1.55rem);
+  font-weight:600;letter-spacing:-.02em;line-height:1.25;
+  max-width:28ch;
+}
+
+/* ---------- 04 · Las cifras del caso ---------- */
+
+.metricas{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:1px;background:var(--pauta);
+  border:1px solid var(--pauta);
+  margin-block:1.6rem 2rem;
+}
+@media (max-width:62rem){ .metricas{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:34rem){ .metricas{grid-template-columns:repeat(2,1fr)} }
+
+/* Cualificadas con .caso-cuerpo porque si no pierden por especificidad
+   contra `.caso-cuerpo ul li`, y las casillas de cifras salían con la
+   raya azul de viñeta que solo le toca a las listas de texto. */
+.caso-cuerpo .metricas li{
+  background:var(--papel);padding:1rem .9rem 1.05rem;
+  display:flex;flex-direction:column;gap:.3rem;
+  border-bottom:0;
+}
+.caso-cuerpo .metricas li::before{content:none}
+.cifra{
+  font-family:var(--dato);font-weight:500;
+  font-size:clamp(1.9rem,1.5rem + 1.2vw,2.6rem);
+  line-height:.95;letter-spacing:-.045em;
+  font-variant-numeric:tabular-nums;
+}
+.que{
+  font-family:var(--dato);font-size:.64rem;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--grafito);
+  line-height:1.45;
+}
+
+/* ---------- 05 · Cierre ---------- */
+
+.caso-siguiente{
+  display:flex;flex-wrap:wrap;gap:.9rem 1.75rem;
+  align-items:center;justify-content:space-between;
+  margin-top:clamp(2.5rem,6vw,4rem);
+  padding:1.1rem 1.2rem;
+  border:1px solid var(--tinta);
+  max-width:none;
+}
+.caso-siguiente p{margin:0}
+
+.caso-contacto{
+  max-width:var(--ancho);margin-inline:auto;
+  padding-inline:var(--margen);
+  padding-block:clamp(2.5rem,6vw,4rem);
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:1.75rem clamp(2rem,5vw,4rem);align-items:end;
+  border-top:1px solid var(--tinta);
+}
+@media (max-width:52rem){ .caso-contacto{grid-template-columns:1fr;align-items:start} }
+.folio{
+  display:block;margin-bottom:.6rem;
+  font-family:var(--dato);font-size:.68rem;font-weight:500;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--grafito);
+}
+.caso-contacto h2{margin-bottom:.7rem;max-width:20ch}
+.caso-contacto p{max-width:46ch}
+
+.botonera--cierre{display:flex;flex-wrap:wrap;gap:.6rem}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.6rem 1rem;text-decoration:none;
+  font-family:var(--dato);font-size:.78rem;
+  border:1px solid var(--tinta);
+  transition:background .12s var(--curva), color .12s var(--curva);
+}
+.btn-solido{background:var(--tinta);color:var(--papel)}
+.btn-solido:hover{background:var(--azul);border-color:var(--azul)}
+.btn-linea:hover{background:var(--papel-hondo)}
+.flecha{font-size:1em}
+
+.pie{
+  border-top:1px solid var(--tinta);
+  padding-block:1rem 2rem;margin-top:0;
+}
+.pie-fin{
+  display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;
+  justify-content:space-between;
+  font-family:var(--dato);font-size:.7rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--grafito);
+}
+.pie-fin a{color:var(--grafito);text-decoration:none;border-bottom:1px solid var(--pauta)}
+.pie-fin a:hover{color:var(--tinta);border-color:var(--tinta)}
