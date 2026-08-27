@@ -89,3 +89,24 @@ python3 -m http.server 8000   # y abrir http://localhost:8000
 Las hojas se enlazan como `sistema.css?v=N`. Al cambiarlas hay que subir ese
 número en los tres HTML, o quien las tenga cacheadas verá la página rota
 —clases nuevas contra estilos viejos.
+
+## Publicación
+
+El sitio se despliega solo con GitHub Actions (`.github/workflows/pages.yml`)
+en cada push a la rama por defecto. El workflow comprueba antes que no falte
+ningún fichero: es mejor que falle ahí a que falle en la cara de quien abra el
+enlace.
+
+**Hay que hacer una cosa una sola vez:** en *Settings → Pages → Source*, elegir
+**GitHub Actions** (no «Deploy from a branch»). A partir de ahí no hay que
+volver a tocar los ajustes, que es justo lo que se desconfiguraba.
+
+## `herramientas/empaquetar.py`
+
+Junta las cuatro páginas del sitio en un solo fichero HTML autocontenido, con
+el CSS y el JS en línea y un router mínimo que intercambia las páginas. Sirve
+para enseñar el portfolio de un tirón sin depender de que Pages esté levantado.
+
+```bash
+python3 herramientas/empaquetar.py
+```
