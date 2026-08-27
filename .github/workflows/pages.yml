@@ -45,8 +45,8 @@ jobs:
           # el enlace. Son cuatro comprobaciones y cuestan un segundo.
           set -e
           for f in index.html cv.html casos/adesa-digital.html \
-                   casos/fab-cadiz-scraper.html css/sistema.css \
-                   css/paginas.css js/campo.js js/main.js \
+                   casos/fab-cadiz-scraper.html css/lamina.css \
+                   css/lamina-caso.css js/lamina.js \
                    cv-fernando-garcia-buzon.pdf; do
             [ -f "$f" ] || { echo "::error::falta $f"; exit 1; }
           done
