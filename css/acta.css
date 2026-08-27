@@ -397,3 +397,130 @@ body{padding-top:2.6rem}
   font-size:.92rem;color:var(--grafito);line-height:1.55;
   max-width:44ch;
 }
+
+/* ============================================================
+   15 · MATERIA
+   ------------------------------------------------------------
+   Serio no tiene por qué ser árido. Lo que faltaba no era color
+   ni efectos: era materia y contraste de escala. Un acta de
+   verdad tiene pauta, tiene grano y tiene el tanteo escrito en
+   grande. Eso es lo que se añade aquí.
+   ============================================================ */
+
+/* La pauta del impreso. Va sobre el papel, no sobre el texto, y a
+   una opacidad en la que se intuye más que se ve. Es lo que hace
+   que la página tenga superficie en vez de ser un fondo plano. */
+body{
+  background-image:repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(2.05rem - 1px),
+    color-mix(in oklab, var(--pauta) 42%, transparent) calc(2.05rem - 1px),
+    color-mix(in oklab, var(--pauta) 42%, transparent) 2.05rem
+  );
+  background-position:0 2.6rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-tema="claro"]) body{
+    background-image:repeating-linear-gradient(
+      to bottom, transparent 0, transparent calc(2.05rem - 1px),
+      color-mix(in oklab, var(--pauta) 55%, transparent) calc(2.05rem - 1px),
+      color-mix(in oklab, var(--pauta) 55%, transparent) 2.05rem);
+  }
+}
+
+/* Grano. Muy poco: lo justo para que el papel no parezca pantalla. */
+body::after{
+  content:"";position:fixed;inset:0;z-index:200;pointer-events:none;
+  opacity:.032;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-tema="claro"]) body::after{mix-blend-mode:screen;opacity:.055}
+}
+:root[data-tema="noche"] body::after{mix-blend-mode:screen;opacity:.055}
+:root[data-tema="claro"] body::after{mix-blend-mode:multiply;opacity:.032}
+
+/* ---------- El titular, con presencia ---------- */
+/* El contraste de escala es lo que separa una página cara de una
+   correcta. Aquí el salto va de la ágata de 11px al titular. */
+
+.ficha h1{
+  font-size:clamp(2.5rem,1.2rem + 5.2vw,5.4rem);
+  line-height:.98;
+  letter-spacing:-.028em;
+  font-weight:400;
+}
+
+/* ---------- Las cifras, en grande ---------- */
+/* Antes eran filas de tabla y se leían como un anexo. Un número es
+   lo más bonito que tiene un documento técnico: se pone grande. */
+
+/* Columnas fijas, no auto-fit. Son seis cifras: con auto-fit, la
+   última fila dejaba huecos y el fondo de la rejilla asomaba como una
+   mancha gris. Tres por dos divide exacto en cualquier ancho. */
+.recuento{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--pauta);
+  border:1px solid var(--pauta);
+  margin-block:1.75rem;
+}
+@media (max-width:60rem){ .recuento{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:34rem){ .recuento{grid-template-columns:1fr} }
+.dato{
+  background:var(--papel);
+  padding:1.35rem 1.25rem 1.15rem;
+  display:flex;flex-direction:column;gap:.15rem;
+  min-height:11.5rem;
+}
+.dato__n{
+  font-family:var(--dato);
+  font-weight:500;
+  font-size:clamp(2.9rem,2.2rem + 2.6vw,4.4rem);
+  line-height:.92;
+  letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+  color:var(--tinta);
+}
+.dato--rojo .dato__n{color:var(--rojo)}
+.dato__que{margin-top:.4rem}
+.dato__como{
+  font-family:var(--dato);
+  font-size:.68rem;line-height:1.6;
+  color:var(--grafito);
+  margin-top:auto;padding-top:.9rem;
+  border-top:1px solid color-mix(in oklab, var(--pauta) 70%, transparent);
+}
+
+/* ---------- La prueba, como objeto ---------- */
+/* Le falta peso: es la pieza central de la página y estaba plana. */
+
+.prueba{
+  box-shadow:
+    0 1px 0 var(--pauta),
+    0 14px 40px -22px color-mix(in oklab, var(--tinta) 45%, transparent);
+}
+.marcador .pts{
+  font-size:clamp(3rem,2.2rem + 4.4vw,5rem);
+  letter-spacing:-.045em;
+}
+
+/* ---------- La rejilla, con más presencia ---------- */
+.puerta{width:min(100%, 26rem);gap:4px}
+.celda{font-size:.74rem}
+.celda--lee{
+  box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--pauta) 60%, transparent);
+}
+
+/* ---------- La regla que abre cada sección ---------- */
+/* Un filete grueso arriba de cada sección: es el gesto de imprenta
+   que da ritmo al documento sin añadir ni un color. */
+.seccion{border-top:none;position:relative}
+.seccion::before{
+  content:"";position:absolute;top:0;left:var(--margen);right:var(--margen);
+  height:2px;background:var(--tinta);
+  max-width:calc(var(--ancho) - var(--margen) * 2);
+  margin-inline:auto;
+}
