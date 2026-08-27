@@ -1,0 +1,23 @@
+{
+  "disponible": true,
+  "fuente": "contado en el despliegue",
+  "sitio": {
+    "css": 952,
+    "js": 465,
+    "html": 1673,
+    "ficheros": 10,
+    "dependencias": 0,
+    "actualizado": "2026-08-27T11:21:57+02:00",
+    "commits": 18
+  },
+  "scraper": {
+    "disponible": true,
+    "python": 2555,
+    "ficherosPython": 6,
+    "sql": 393,
+    "migraciones": 6,
+    "tests": 7,
+    "crons": 7,
+    "ultimoCommit": "2026-08-15T10:09:50+02:00"
+  }
+}
