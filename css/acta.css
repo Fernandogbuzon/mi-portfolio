@@ -366,3 +366,34 @@ body{padding-top:2.6rem}
   *{animation:none !important;transition-duration:.01ms !important}
   html{scroll-behavior:auto}
 }
+
+/* ---------- 14 · El índice ---------- */
+/* Lo que hace la plataforma, contado como el índice de un documento:
+   una entrada por módulo y al lado el problema que resuelve. Va ANTES
+   de las decisiones técnicas: nadie puede valorar cómo protegí algo si
+   todavía no sabe qué es ese algo. */
+
+.indice{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));
+  gap:clamp(1.75rem,3.5vw,3rem);
+  margin-top:1.5rem;
+}
+.indice__grupo h3{
+  padding-bottom:.5rem;
+  border-bottom:1px solid var(--tinta);
+  margin-bottom:.25rem;
+}
+.renglon{
+  padding-block:.7rem;
+  border-bottom:1px solid var(--pauta);
+}
+.renglon dt{
+  font-family:var(--voz);
+  font-size:1.02rem;font-weight:600;
+  margin-bottom:.15rem;
+}
+.renglon dd{
+  font-size:.92rem;color:var(--grafito);line-height:1.55;
+  max-width:44ch;
+}
