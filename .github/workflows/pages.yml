@@ -1,0 +1,65 @@
+# Publica el sitio en GitHub Pages en cada push.
+#
+# Por qué un workflow y no "Deploy from a branch": así el despliegue está
+# definido en el repositorio y no en una pantalla de ajustes que se puede
+# desconfigurar sola. Si mañana se renombra la rama, esto sigue funcionando
+# porque escucha a las dos.
+#
+# HAY QUE HACER UNA COSA UNA SOLA VEZ:
+#   Settings → Pages → Source → "GitHub Actions"
+# A partir de ahí no hay que volver a tocar nada.
+
+name: Publicar el sitio
+
+on:
+  push:
+    branches:
+      - main
+      - claude/eager-hawking-cfpypc
+  workflow_dispatch:        # y un botón para lanzarlo a mano
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Si se acumulan varios pushes, que gane el último y no se pisen entre ellos.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Comprobar que el sitio está entero
+        run: |
+          # Si falta algo, mejor que falle aquí y no en la cara de quien abra
+          # el enlace. Son cuatro comprobaciones y cuestan un segundo.
+          set -e
+          for f in index.html cv.html casos/adesa-digital.html \
+                   casos/fab-cadiz-scraper.html css/sistema.css \
+                   css/paginas.css js/campo.js js/main.js \
+                   cv-fernando-garcia-buzon.pdf; do
+            [ -f "$f" ] || { echo "::error::falta $f"; exit 1; }
+          done
+          echo "Todos los ficheros del sitio están."
+
+      - name: Preparar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Empaquetar
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Desplegar
+        id: despliegue
+        uses: actions/deploy-pages@v4
