@@ -52,7 +52,16 @@ body{
 
 /* ---------- Cabecera ---------- */
 
-.cab{border-bottom:1.5pt solid var(--tinta);padding-bottom:3mm;margin-bottom:4mm}
+.cab{
+  display:grid;grid-template-columns:minmax(0,1fr) 30mm;column-gap:5mm;
+  min-height:38mm;border-bottom:1.5pt solid var(--tinta);
+  padding-bottom:2mm;margin-bottom:3mm;
+}
+.cab__datos{min-width:0}
+.foto-slot{
+  grid-column:2;grid-row:1;width:30mm;height:38mm;justify-self:end;
+  border:.6pt solid var(--regla);
+}
 .cab h1{
   font-size:20pt;font-weight:700;color:var(--tinta);
   letter-spacing:-.025em;line-height:1.05;margin-bottom:1mm;
@@ -74,10 +83,10 @@ section{margin-bottom:3mm}
 section:last-child{margin-bottom:0}
 
 h2{
-  font-family:var(--dato);
-  font-size:7.8pt;font-weight:500;color:var(--tinta);
-  letter-spacing:.11em;text-transform:uppercase;
-  padding-bottom:1.2mm;margin-bottom:2.1mm;
+  font-family:var(--texto);
+  font-size:9.2pt;font-weight:700;color:var(--tinta);
+  letter-spacing:.01em;
+  padding-bottom:.8mm;margin-bottom:1.4mm;
   border-bottom:.6pt solid var(--regla);
 }
 
@@ -92,8 +101,8 @@ h2{
 .linea1{display:flex;justify-content:space-between;align-items:baseline;gap:4mm}
 .entrada h3{font-size:10.3pt;font-weight:600;color:var(--tinta);line-height:1.3}
 .cuando{
-  font-family:var(--dato);
-  font-size:7.8pt;color:var(--tinta-tenue);white-space:nowrap;
+  font-family:var(--texto);
+  font-size:8.7pt;color:var(--tinta-tenue);white-space:nowrap;
   font-variant-numeric:tabular-nums;
 }
 .donde{font-size:9.2pt;color:var(--acento);font-weight:600;margin-bottom:1mm}
@@ -108,12 +117,16 @@ h2{
 
 /* ---------- Stack ---------- */
 
-.stack{display:grid;gap:1.2mm}
-.nivel{display:grid;grid-template-columns:42mm minmax(0,1fr);gap:4mm;align-items:baseline;break-inside:avoid}
-.nivel dt{
-  font-size:9pt;font-weight:600;color:var(--acento);
+.stack{display:grid;border-top:.5pt solid var(--regla)}
+.nivel{
+  display:grid;grid-template-columns:42mm minmax(0,1fr);gap:4mm;
+  align-items:baseline;break-inside:avoid;padding:.7mm 0;
+  border-bottom:.5pt solid var(--regla);
 }
-.nivel dd{font-size:9.8pt;color:var(--tinta-suave)}
+.nivel dt{
+  font-size:9pt;font-weight:600;color:var(--tinta);
+}
+.nivel dd{font-size:9.5pt;color:var(--tinta-suave)}
 .nivel .apunte{display:block;font-size:8pt;color:var(--tinta-tenue);font-weight:400;text-transform:none;letter-spacing:0;margin-top:.3mm}
 
 /* ---------- Experiencia adicional ---------- */
@@ -143,10 +156,9 @@ h2{
     width:auto;min-height:auto;margin:0;
     padding:5mm 12mm;box-shadow:none;
   }
-  section{margin-bottom:1.8mm}
+  section{margin-bottom:1.4mm}
   .entrada{margin-bottom:1.5mm}
   .entrada li{margin-bottom:.5mm}
-  .stack{gap:1mm}
   .barra{display:none}
   a{text-decoration:none}
 }
@@ -154,6 +166,11 @@ h2{
 @media screen and (max-width:230mm){
   .hoja{width:auto;max-width:100%;margin:0;padding:7vw 6vw;box-shadow:none}
   body{background:#fff}
+  .cab{grid-template-columns:minmax(0,1fr) 27mm;column-gap:4mm;min-height:0}
+  .cab__datos{display:contents}
+  .cab__identidad{grid-column:1;grid-row:1}
+  .contacto{grid-column:1 / -1;grid-row:2;margin-top:2mm}
+  .foto-slot{grid-column:2;grid-row:1;width:27mm;height:34mm}
   .linea1{flex-direction:column;gap:0}
   .nivel{grid-template-columns:1fr;gap:.5mm}
 }
@@ -170,8 +187,10 @@ h2{
 
   <header class="cab">
     <div class="cab__datos">
-      <h1>Fernando García Buzón</h1>
-      <p class="rol">Desarrollador full stack</p>
+      <div class="cab__identidad">
+        <h1>Fernando García Buzón</h1>
+        <p class="rol">Desarrollador full stack</p>
+      </div>
       <div class="contacto">
         <div class="contacto__grupo">
           <span><b>Correo:</b> <a href="mailto:fernandogbuzon@gmail.com">fernandogbuzon@gmail.com</a></span>
@@ -188,6 +207,7 @@ h2{
         </div>
       </div>
     </div>
+    <div class="foto-slot" role="img" aria-label="Espacio para añadir una fotografía"></div>
   </header>
 
   <section>
@@ -196,7 +216,7 @@ h2{
       Soy técnico superior en Desarrollo de Aplicaciones Multiplataforma.
       He sacado adelante proyectos completos y mantengo una plataforma en
       producción. Quiero incorporarme a un equipo de desarrollo, aportar mi
-      experiencia y seguir aprendiendo de mis compañeros.
+      experiencia y seguir creciendo y aprendiendo de mis compañeros.
     </p>
   </section>
 
@@ -211,9 +231,9 @@ h2{
       <p class="donde">ADESA 80 · Club de baloncesto</p>
       <p class="matiz">Proyecto propio en producción desde agosto de 2026 · <a href="https://adesa80.com/">adesa80.com</a></p>
       <ul>
-        <li>Desarrollé una plataforma web de gestión que reúne inscripciones, documentos, horarios, pagos y trabajo interno del club. Incluye web pública, área personal para familias y un panel con módulos según los permisos de cada usuario.</li>
-        <li>Hice configurables cuotas y contenidos desde el panel, sin tocar código ni volver a desplegar.</li>
-        <li>La construí con <b>Next.js, TypeScript y PostgreSQL</b>. Implementé autorización en el servidor y un flujo de integración continua con GitHub Actions que ejecuta lint, comprobación de tipos, pruebas y build en cada PR.</li>
+        <li>Desarrollé una plataforma que reúne las principales gestiones del club: inscripciones, seguimiento de documentos, horarios, pagos, resultados y comunicaciones. Incluye web pública, área personal para familias y panel interno con módulos según los permisos de cada usuario.</li>
+        <li>Automaticé los correos de inscripciones y dejé cuotas y contenidos configurables desde el panel, reduciendo tareas manuales y permitiendo cambios sin tocar código.</li>
+        <li>La construí con <b>Next.js, TypeScript y PostgreSQL</b>. Los permisos se comprueban en el servidor y GitHub Actions ejecuta lint, comprobación de tipos, pruebas y build en cada PR a main.</li>
       </ul>
     </div>
 
@@ -225,8 +245,7 @@ h2{
       <p class="donde">FAB Cádiz Scraper</p>
       <p class="matiz">Proyecto propio y abierto · <a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper">GitHub</a></p>
       <ul>
-        <li>Automaticé con <b>Python y Playwright</b> la extracción y normalización de partidos y clasificaciones publicados por la federación para mostrarlos en ADESA 80.</li>
-        <li>Resolví los cambios de identificador entre temporadas buscando el vigente y detectando enlaces de competición caducados.</li>
+        <li>Automaticé con <b>Python y Playwright</b> la extracción de partidos y clasificaciones de la federación para ADESA 80. El scraper detecta enlaces caducados y localiza el identificador vigente entre temporadas.</li>
       </ul>
     </div>
 
@@ -237,7 +256,7 @@ h2{
       </div>
       <p class="donde">Grupo Solutia · Cádiz</p>
       <ul>
-        <li>Colaboré con el equipo en <b>WeSpaces</b>, una aplicación Flutter de reservas de salas conectada a una API REST. Trabajé sobre código existente con Git y sprints.</li>
+        <li>Colaboré con el equipo en <b>WeSpaces</b>, una aplicación Flutter para reservar salas conectada a una API REST. Trabajé sobre código existente con Git y en sprints.</li>
       </ul>
     </div>
   </section>
@@ -258,7 +277,7 @@ h2{
         <dd>PostgreSQL · Supabase · API REST</dd>
       </div>
       <div class="nivel">
-        <dt>Validación y pruebas</dt>
+        <dt>Pruebas y validación</dt>
         <dd>Zod · Vitest · Playwright</dd>
       </div>
       <div class="nivel">
@@ -272,11 +291,11 @@ h2{
     <h2>Otra experiencia laboral</h2>
     <div class="entrada">
       <div class="linea1">
-        <h3>Atención comercial y captación de viviendas · MH Inmobiliaria</h3>
+        <h3>Auxiliar administrativo y apoyo al equipo de ventas · MH Inmobiliaria</h3>
         <span class="cuando">2025 — actualidad</span>
       </div>
       <ul>
-        <li>Atiendo llamadas, enseño viviendas y capto inmuebles; adapto mis explicaciones a cada cliente.</li>
+        <li>Atiendo consultas, realizo visitas y capto viviendas con el equipo de ventas. Adapto la información a lo que busca cada cliente.</li>
       </ul>
     </div>
     <div class="entrada">
@@ -285,7 +304,7 @@ h2{
         <span class="cuando">2023 — 2024</span>
       </div>
       <ul>
-        <li>Atendí mesas y peticiones de clientes, y me coordiné con mis compañeros para mantener el servicio fluido.</li>
+        <li>Atendí a clientes en los momentos de más trabajo y me coordiné con mis compañeros para resolver imprevistos y mantener el servicio.</li>
       </ul>
     </div>
   </section>
