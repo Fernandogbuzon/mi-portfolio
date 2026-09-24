@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Fernando García Buzón — Desarrollador Full-Stack</title>
-<meta name="description" content="Desarrollo y mantengo la plataforma que usa un club de baloncesto para inscripciones, gestión y resultados. Aplicaciones de uso diario, datos y automatización.">
+<meta name="description" content="Desarrollo y mantengo la plataforma de ADESA 80: 28 áreas para familias, entrenadores, directiva y competición. Aplicaciones de uso diario, datos y automatización.">
 
 <link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/">
 <link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
@@ -74,7 +74,7 @@
           </p>
           <div class="enlaces-fila">
             <a class="enlace" href="cv-fernando-garcia-buzon.pdf" download>Descargar el CV (PDF)</a>
-            <a class="enlace" href="casos/adesa-digital.html">Ver el caso ADESA</a>
+            <a class="enlace" href="casos/adesa-digital.html#modulos">Ver la plataforma ADESA</a>
             <a class="enlace" href="mailto:fernandogbuzon@gmail.com?subject=Hola%20Fernando">fernandogbuzon@gmail.com</a>
           </div>
         </div>
@@ -96,11 +96,11 @@
     <div class="env">
       <div class="seccion__cab">
         <span class="agata">El encargo</span>
-        <h2>De tareas sueltas a una herramienta de trabajo.</h2>
+        <h2>De tareas sueltas a una plataforma de trabajo.</h2>
         <p class="nota">
           El club llevaba las inscripciones en hojas de cálculo, los
-          desplazamientos por WhatsApp y los resultados a mano. Hoy todo eso vive
-          en un sitio, y lo mantengo yo.
+          desplazamientos por WhatsApp y los resultados a mano. Hoy reúne 28
+          áreas para familias, entrenadores, directiva y competición.
         </p>
       </div>
 
@@ -137,8 +137,7 @@
       </div>
 
       <p class="margen" style="margin-top:1.5rem">
-        Y los que no se ven: identidad y permisos, avisos, buscador, boletín y el
-        puente con la base de datos de la federación.
+        Estas son doce muestras. <a class="enlace" href="casos/adesa-digital.html#modulos">Ver el mapa de las 28 áreas y dos pantallas de gestión →</a>
       </p>
     </div>
   </section>
@@ -148,52 +147,24 @@
     <div class="env">
       <div class="seccion__cab">
         <span class="agata">La decisión</span>
-        <h2>Y nada de eso se puede escribir desde el navegador.</h2>
+        <h2>Las escrituras pasan por el servidor.</h2>
         <p class="nota">
-          Las tablas del club tienen RLS activado. Abajo hay una casilla por
-          cada política: 25 permiten <em>leer</em> y ninguna permite escribir.
-          <strong>Busca una E.</strong>
+          Las tablas del club tienen RLS activado. Las políticas que conceden
+          acceso directo al navegador son de lectura; las operaciones protegidas
+          comprueban sesión y permiso en el servidor.
         </p>
       </div>
 
-      <div class="puerta" role="img" aria-label="25 políticas de lectura y ninguna de escritura.">
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-        <span class="celda celda--lee" aria-hidden="true">L</span>
-      </div>
-
-      <div class="puerta-pie">
-        <span class="leyenda agata"><i class="lee"></i> 25 políticas de lectura</span>
-        <span class="leyenda agata agata--rojo">0 políticas de escritura</span>
-      </div>
+      <ol class="acceso">
+        <li><span class="agata">Lectura pública</span><strong>Navegador → RLS → datos permitidos</strong></li>
+        <li><span class="agata">Escritura protegida</span><strong>Navegador → servidor → permiso → base del club</strong></li>
+      </ol>
 
       <p style="margin-top:1.25rem">
-        No es que sea difícil escribir desde el cliente: es que no existe el
-        camino. Todo lo que guarda algo pasa por el servidor y antes comprueba
-        permiso. El pago por tarjeta también está implementado, pero el club
-        cobra hoy por transferencia y esa opción sigue apagada.
+        No hay camino directo para escribir desde el cliente. Todo lo que guarda
+        algo pasa por el servidor; los cambios protegidos comprueban permiso.
+        El pago por tarjeta también está implementado, pero el club cobra hoy
+        por transferencia y esa opción sigue apagada.
       </p>
     </div>
   </section>
@@ -342,7 +313,7 @@
         <div class="dato dato--rojo">
           <span class="dato__n">0</span>
           <span class="agata dato__que">Políticas de escritura</span>
-          <span class="dato__como">25 políticas y las 25 son for select · ni un insert, update o delete</span>
+          <span class="dato__como">Las migraciones no crean políticas INSERT, UPDATE ni DELETE para el navegador</span>
         </div>
         <div class="dato">
           <span class="dato__n">2</span>
