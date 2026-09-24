@@ -141,8 +141,13 @@ h2{
   body{background:#fff;font-size:10pt}
   .hoja{
     width:auto;min-height:auto;margin:0;
-    padding:7.5mm 12mm;box-shadow:none;
+    padding:5mm 12mm;box-shadow:none;
   }
+  section{margin-bottom:1.8mm}
+  .entrada{margin-bottom:1.5mm}
+  .entrada li{margin-bottom:.5mm}
+  .stack{gap:.8mm}
+  .nivel{grid-template-columns:55mm 1fr}
   .barra{display:none}
   a{text-decoration:none}
 }
@@ -175,7 +180,7 @@ h2{
           <span><b>Ubicación:</b> Sanlúcar de Barrameda (Cádiz)</span>
         </div>
         <div class="contacto__grupo">
-          <span><b>Disponibilidad:</b> presencial, híbrida o remota; posibilidad de traslado</span>
+          <span><b>Disponibilidad:</b> presencial, híbrida o remota</span>
         </div>
         <div class="contacto__grupo">
           <span><a href="https://github.com/Fernandogbuzon">github.com/Fernandogbuzon</a></span>
@@ -191,8 +196,8 @@ h2{
     <p class="perfil">
       Soy técnico superior en Desarrollo de Aplicaciones Multiplataforma.
       He sacado adelante proyectos completos y mantengo una plataforma en
-      producción. Quiero incorporarme a un equipo de desarrollo, aportar esa
-      experiencia y seguir aprendiendo de otros programadores.
+      producción. Quiero incorporarme a un equipo de desarrollo, aportar mi
+      experiencia y seguir aprendiendo de mis compañeros.
     </p>
   </section>
 
@@ -204,12 +209,12 @@ h2{
         <h3>Desarrollador full stack</h3>
         <span class="cuando">2026 — actualidad</span>
       </div>
-      <p class="donde">ADESA 80 · Club de baloncesto · Sanlúcar de Barrameda</p>
+      <p class="donde">ADESA 80 · Club de baloncesto</p>
       <p class="matiz">Proyecto propio en producción desde agosto de 2026 · <a href="https://adesa80.com/">adesa80.com</a></p>
       <ul>
-        <li>Reuní inscripciones, anexos, horarios y pagos, antes repartidos entre hojas y mensajes, en una plataforma con área personal y panel. Familias y personal la usan según sus permisos.</li>
-        <li>Construí un panel de ajustes para que el club cambie cuotas y textos sin tocar código.</li>
-        <li>Desarrollé la plataforma con <b>Next.js, TypeScript y PostgreSQL</b>. Los permisos se verifican en el servidor y GitHub Actions ejecuta pruebas y comprueba el tipado y la compilación en cada PR.</li>
+        <li>Desarrollé una plataforma web de gestión que reúne inscripciones, documentos, horarios, pagos y trabajo interno del club. Incluye web pública, área personal para familias y un panel con módulos según los permisos de cada usuario.</li>
+        <li>Hice configurables las cuotas, los contenidos y otros ajustes desde el panel para que el club los actualice sin cambiar código ni desplegar de nuevo.</li>
+        <li>La construí con <b>Next.js, TypeScript y PostgreSQL</b>. Implementé autorización en el servidor y un flujo de integración continua con GitHub Actions que ejecuta lint, comprobación de tipos, pruebas y build en cada PR.</li>
       </ul>
     </div>
 
@@ -221,8 +226,8 @@ h2{
       <p class="donde">FAB Cádiz Scraper</p>
       <p class="matiz">Proyecto propio y abierto · <a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper">GitHub</a></p>
       <ul>
-        <li>La federación publica partidos y clasificaciones en su web. Automaticé con <b>Python y Playwright</b> su lectura y normalización para mostrarlos en ADESA 80 sin copiarlos a mano.</li>
-        <li>Cuando la federación cambió los identificadores de competición, el scraper dejó de encontrar partidos. Añadí una búsqueda del identificador vigente y detección de enlaces caducados para recuperar los datos.</li>
+        <li>Automaticé con <b>Python y Playwright</b> la extracción y normalización de partidos y clasificaciones publicados por la federación para mostrarlos en ADESA 80.</li>
+        <li>Resolví los cambios de identificador entre temporadas buscando el vigente y detectando enlaces de competición caducados.</li>
       </ul>
     </div>
 
@@ -233,7 +238,7 @@ h2{
       </div>
       <p class="donde">Grupo Solutia · Cádiz</p>
       <ul>
-        <li>Contribuí a <b>WeSpaces</b>, una aplicación Flutter de reservas y salas conectada a una API REST. Trabajé sobre código existente con Git y sprints.</li>
+        <li>Colaboré con el equipo en <b>WeSpaces</b>, una aplicación Flutter de reservas de salas conectada a una API REST. Trabajé sobre código existente con Git y sprints.</li>
       </ul>
     </div>
   </section>
@@ -242,11 +247,11 @@ h2{
     <h2>Otra experiencia laboral</h2>
     <div class="entrada">
       <div class="linea1">
-        <h3>Atención al cliente · MH Inmobiliaria</h3>
+        <h3>Atención comercial y captación de viviendas · MH Inmobiliaria</h3>
         <span class="cuando">2025 — actualidad</span>
       </div>
       <ul>
-        <li>Atiendo consultas y adapto mis explicaciones a las dudas de cada persona.</li>
+        <li>Atiendo llamadas y consultas, enseño viviendas durante las visitas y capto inmuebles. Adapto mis explicaciones a lo que busca cada cliente.</li>
       </ul>
     </div>
     <div class="entrada">
@@ -255,7 +260,7 @@ h2{
         <span class="cuando">2023 — 2024</span>
       </div>
       <ul>
-        <li>Atendía mesas y me coordinaba con mis compañeros para sacar el servicio.</li>
+        <li>Atendí mesas y peticiones de clientes, y me coordiné con mis compañeros para mantener el servicio fluido.</li>
       </ul>
     </div>
   </section>
@@ -264,16 +269,24 @@ h2{
     <h2>Competencias técnicas</h2>
     <dl class="stack">
       <div class="nivel">
+        <dt>Lenguajes</dt>
+        <dd>TypeScript · JavaScript · Python · SQL</dd>
+      </div>
+      <div class="nivel">
         <dt>Desarrollo web</dt>
-        <dd>TypeScript · JavaScript · React · Next.js · Node.js · HTML · CSS</dd>
+        <dd>React · Next.js · Node.js · HTML · CSS</dd>
       </div>
       <div class="nivel">
         <dt>Datos y APIs</dt>
-        <dd>PostgreSQL · SQL · Supabase · Python · API REST</dd>
+        <dd>PostgreSQL · Supabase · API REST</dd>
       </div>
       <div class="nivel">
-        <dt>Calidad y entrega</dt>
-        <dd>Git · GitHub Actions · Vitest · Playwright · Zod</dd>
+        <dt>Validación y pruebas</dt>
+        <dd>Zod · Vitest · Playwright</dd>
+      </div>
+      <div class="nivel">
+        <dt>Control de versiones y CI</dt>
+        <dd>Git · GitHub Actions</dd>
       </div>
     </dl>
   </section>
