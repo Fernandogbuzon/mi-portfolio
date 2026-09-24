@@ -74,6 +74,7 @@ button{font:inherit}
 .hero h1,.caso-hero h1{animation:entrada .48s cubic-bezier(.2,.8,.2,1) both}
 .hero>div,.caso-hero__intro{animation:entrada .5s .08s cubic-bezier(.2,.8,.2,1) both}
 @keyframes entrada{from{opacity:.8;transform:translateY(.65rem)}to{opacity:1;transform:translateY(0)}}
+.hero__retrato{width:clamp(8rem,12vw,10rem);height:auto;aspect-ratio:1121/1403;object-fit:cover;display:block;margin-bottom:1.45rem;border:1px solid var(--borde);border-radius:.7rem;background:#fff}
 .hero p{max-width:33ch;color:var(--secundario);font-size:clamp(1.05rem,1.35vw,1.22rem);padding-bottom:.35rem}
 .acciones{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.8rem;margin-top:2rem}
 .boton{display:inline-flex;align-items:center;justify-content:center;gap:1.3rem;min-height:2.85rem;padding:.7rem 1.15rem;border-radius:100px;background:var(--tinta);color:var(--fondo);font-size:.9rem;font-weight:620;transition:transform .18s cubic-bezier(.2,.8,.2,1),background .18s ease}
@@ -180,6 +181,10 @@ button{font:inherit}
   .navegacion .cv-enlace{padding:.36rem .68rem;font-size:.8rem}
   .hero{padding-top:clamp(3rem,9vw,4.5rem);gap:1.5rem}
   h1{font-size:clamp(2.65rem,10vw,4rem)}
+  .hero__presentacion{display:grid;grid-template-columns:7.25rem minmax(0,1fr);column-gap:1rem;align-items:start}
+  .hero__retrato{width:100%;grid-column:1;grid-row:1;margin:0}
+  .hero__presentacion p{grid-column:2;grid-row:1;align-self:center;padding:0}
+  .hero__presentacion .acciones{grid-column:1/-1;grid-row:2;margin-top:1.5rem}
   .hero p{font-size:1.03rem}
   .escena{height:20rem;border-radius:0}
   .escena__escritorio{border-width:.3rem;border-radius:.65rem .65rem 0 0}
@@ -207,6 +212,6 @@ button{font:inherit}
   .caso-otro{align-items:start;flex-direction:column}
   .pie__enlaces{justify-content:flex-start;margin-top:.5rem}
 }
-@media(max-width:370px){.grupo li{grid-template-columns:1fr;gap:.15rem}}
+@media(max-width:370px){.grupo li{grid-template-columns:1fr;gap:.15rem}.hero__presentacion{grid-template-columns:6rem minmax(0,1fr);column-gap:.8rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media(prefers-reduced-transparency:reduce){.cabecera{background:var(--fondo);backdrop-filter:none}}
