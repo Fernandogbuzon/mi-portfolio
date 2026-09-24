@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
-"""Cuenta cifras reales sobre el código y las deja en un JSON.
+"""Cuenta el código disponible y guarda una foto local en datos.json.
 
-Se ejecuta en cada despliegue. La gracia es que las cifras de la web no
-están escritas a mano: salen de contar el código en ese momento. Si el
-proyecto cambia y nadie actualiza el texto, la web no miente — se
-actualiza sola.
-
-Regla: si algo no se puede contar, NO se inventa. Se marca como no
-disponible y la página se limita a no enseñar ese dato. Un hueco es
-recuperable; un número falso en una entrevista, no.
+Este script se ejecuta a mano. Las cifras visibles del HTML se revisan
+por separado; el despliegue no las actualiza. Si falta el repositorio del
+scraper, sus datos quedan marcados como no disponibles.
 """
 import json, subprocess, pathlib, sys, re
 
@@ -53,16 +48,14 @@ datos['sitio'] = {
     'dependencias': 0,
 }
 
-# Fecha del último commit, en ISO. Es lo único "vivo" que no puede fallar:
-# el workflow siempre tiene el repositorio delante.
+# Fecha del último commit local, si Git está disponible.
 ultimo = corre(['git', 'log', '-1', '--format=%cI'], cwd=RAIZ)
 datos['sitio']['actualizado'] = ultimo
 commits = corre(['git', 'rev-list', '--count', 'HEAD'], cwd=RAIZ)
 datos['sitio']['commits'] = int(commits) if commits and commits.isdigit() else None
 
 # --- el scraper, si se ha podido clonar ------------------------------
-# El workflow lo clona antes de llamar a este script. Si no está, no pasa
-# nada: el bloque se marca no disponible y la página no lo enseña.
+# Si no está junto al portfolio, el bloque queda como no disponible.
 scraper = RAIZ.parent / 'fab-cadiz-scraper'
 if (scraper / '.git').exists():
     py_lineas, py_ficheros = contar_lineas(scraper, ['*.py'], excluir=('__pycache__',))

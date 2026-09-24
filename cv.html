@@ -3,14 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CV · Fernando García Buzón — Desarrollador Full-Stack</title>
-<meta name="description" content="Currículum de Fernando García Buzón, desarrollador full-stack. Sanlúcar de Barrameda, disponible para Sevilla o remoto.">
+<title>Fernando García Buzón · Desarrollador full stack</title>
+<meta name="description" content="Currículum de Fernando García Buzón, desarrollador full stack de aplicaciones de negocio y datos.">
 <link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
 <meta name="robots" content="index, follow">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
@@ -22,9 +18,8 @@
    nada de iconos que sustituyan palabras.
    ============================================================ */
 
-/* La misma tinta que el sitio: blanco frío, grafito y el azul del plano.
-   El verde cálido de antes venía del sistema visual anterior; si el CV y
-   la web no coinciden, quien abre las dos cosas ve dos personas. */
+/* La misma tinta que el sitio, con fuentes estándar para que el texto
+   siga siendo legible al imprimirlo y al extraerlo de un PDF. */
 :root{
   --tinta:#0D1114;
   --tinta-suave:#2A333A;
@@ -32,8 +27,8 @@
   --regla:#C3CBD3;
   --azul:#17399B;
   --papel:#FFFFFF;
-  --texto:'Archivo','Helvetica Neue',Arial,sans-serif;
-  --dato:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --texto:Arial,'Helvetica Neue',sans-serif;
+  --dato:Consolas,'Courier New',monospace;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -43,7 +38,7 @@ body{
   color:var(--tinta-suave);
   background:#EFF1F3;
   line-height:1.33;
-  font-size:9.5pt;
+  font-size:10pt;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -58,16 +53,16 @@ body{
 
 /* ---------- Cabecera ---------- */
 
-.cab{border-bottom:1.5pt solid var(--tinta);padding-bottom:2.6mm;margin-bottom:3.6mm}
+.cab{border-bottom:1.5pt solid var(--tinta);padding-bottom:3mm;margin-bottom:4mm}
 .cab h1{
-  font-size:19pt;font-weight:700;color:var(--tinta);
+  font-size:20pt;font-weight:700;color:var(--tinta);
   letter-spacing:-.025em;line-height:1.05;margin-bottom:1mm;
 }
-.rol{font-size:10.5pt;font-weight:600;color:var(--azul);margin-bottom:1.8mm}
+.rol{font-size:10.8pt;font-weight:600;color:var(--azul);margin-bottom:2mm}
 
 .contacto{
   display:flex;flex-wrap:wrap;gap:1mm 4mm;
-  font-size:9pt;color:var(--tinta-suave);
+  font-size:9.2pt;color:var(--tinta-suave);
 }
 .contacto span{white-space:nowrap}
 .contacto a{color:var(--tinta-suave);text-decoration:none;border-bottom:.4pt solid var(--regla)}
@@ -75,36 +70,36 @@ body{
 
 /* ---------- Secciones ---------- */
 
-section{margin-bottom:2.4mm}
+section{margin-bottom:3mm}
 section:last-child{margin-bottom:0}
 
 h2{
   font-family:var(--dato);
-  font-size:7.4pt;font-weight:500;color:var(--tinta);
+  font-size:7.8pt;font-weight:500;color:var(--tinta);
   letter-spacing:.11em;text-transform:uppercase;
-  padding-bottom:1.1mm;margin-bottom:1.9mm;
+  padding-bottom:1.2mm;margin-bottom:2.1mm;
   border-bottom:.6pt solid var(--regla);
 }
 
-.perfil{font-size:9.4pt;color:var(--tinta-suave);max-width:none}
+.perfil{font-size:10pt;color:var(--tinta-suave);max-width:none}
 .perfil b{color:var(--tinta);font-weight:600}
 
 /* ---------- Entradas ---------- */
 
-.entrada{margin-bottom:2mm;break-inside:avoid}
+.entrada{margin-bottom:2.5mm;break-inside:avoid}
 .entrada:last-child{margin-bottom:0}
 
 .linea1{display:flex;justify-content:space-between;align-items:baseline;gap:4mm}
-.entrada h3{font-size:9.8pt;font-weight:600;color:var(--tinta);line-height:1.3}
+.entrada h3{font-size:10.3pt;font-weight:600;color:var(--tinta);line-height:1.3}
 .cuando{
   font-family:var(--dato);
   font-size:7.8pt;color:var(--tinta-tenue);white-space:nowrap;
   font-variant-numeric:tabular-nums;
 }
-.donde{font-size:8.8pt;color:var(--azul);font-weight:600;margin-bottom:1mm}
-.entrada p{font-size:9pt;color:var(--tinta-suave)}
+.donde{font-size:9.2pt;color:var(--azul);font-weight:600;margin-bottom:1mm}
+.entrada p{font-size:9.4pt;color:var(--tinta-suave)}
 .entrada ul{list-style:none;margin-top:1mm}
-.entrada li{font-size:9pt;padding-left:3.5mm;position:relative;margin-bottom:.6mm}
+.entrada li{font-size:9.5pt;padding-left:3.5mm;position:relative;margin-bottom:.8mm}
 .entrada li::before{
   content:"";position:absolute;left:0;top:1.75mm;
   width:1.6mm;height:.5pt;background:var(--azul);
@@ -116,24 +111,20 @@ h2{
 .stack{display:grid;gap:1.5mm}
 .nivel{display:grid;grid-template-columns:30mm 1fr;gap:3mm;align-items:baseline}
 .nivel dt{
-  font-size:8.2pt;font-weight:700;color:var(--tinta);
+  font-size:8.4pt;font-weight:700;color:var(--tinta);
   letter-spacing:.05em;text-transform:uppercase;
 }
-.nivel dd{font-size:9pt;color:var(--tinta-suave)}
+.nivel dd{font-size:9.5pt;color:var(--tinta-suave)}
 .nivel .apunte{display:block;font-size:8pt;color:var(--tinta-tenue);font-weight:400;text-transform:none;letter-spacing:0;margin-top:.3mm}
 
-/* ---------- Dos columnas al pie ---------- */
-
-/* Una sola columna, a propósito. El estudio de seguimiento ocular de
-   Ladders midió que los CV a varias columnas rinden peor: rompen la
-   lectura en F con la que se escanea. */
-.matiz{font-size:8.4pt;color:var(--tinta-tenue);margin-top:.3mm}
+/* ---------- Experiencia adicional ---------- */
+.matiz{font-size:8.7pt;color:var(--tinta-tenue);margin-top:.4mm}
 
 /* ---------- Pie ---------- */
 
 .pie{
   margin-top:3.4mm;padding-top:2mm;border-top:.6pt solid var(--regla);
-  font-size:8.2pt;color:var(--tinta-tenue);
+  font-size:8.5pt;color:var(--tinta-tenue);
   display:flex;justify-content:space-between;gap:4mm;flex-wrap:wrap;
 }
 .pie a{color:var(--tinta-tenue)}
@@ -156,7 +147,7 @@ h2{
 @page{size:A4;margin:0}
 
 @media print{
-  body{background:#fff;font-size:9.5pt}
+  body{background:#fff;font-size:10pt}
   .hoja{
     width:auto;min-height:auto;margin:0;
     padding:7.5mm 12mm;box-shadow:none;
@@ -184,13 +175,14 @@ h2{
 
   <header class="cab">
     <h1>Fernando García Buzón</h1>
-    <p class="rol">Desarrollador Full-Stack</p>
+    <p class="rol">Desarrollador full stack · aplicaciones de negocio y datos</p>
     <div class="contacto">
       <span><b>Correo:</b> <a href="mailto:fernandogbuzon@gmail.com">fernandogbuzon@gmail.com</a></span>
-      <span><b>Teléfono:</b> 674 036 944</span>
+      <span><b>Teléfono:</b> +34 674 036 944</span>
       <span><b>Ubicación:</b> Sanlúcar de Barrameda (Cádiz)</span>
-      <span><b>Disponible en:</b> Sevilla o remoto</span>
+      <span><b>Movilidad:</b> A Coruña o remoto con desplazamientos</span>
       <span><a href="https://github.com/Fernandogbuzon">github.com/Fernandogbuzon</a></span>
+      <span><a href="https://fernandogbuzon.github.io/mi-portfolio/">Portfolio y casos</a></span>
       <span><a href="https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/">LinkedIn</a></span>
     </div>
   </header>
@@ -198,74 +190,69 @@ h2{
   <section>
     <h2>Perfil</h2>
     <p class="perfil">
-      Titulado en DAM. Hice la web y el sistema de gestión de un club de
-      baloncesto, <b>adesa80.com</b>, y lo mantengo yo: inscripciones con pago,
-      horarios, cuentas del club y resultados de la federación. En producción
-      desde agosto de 2026, con <b>2236 tests</b>. Busco mi primer trabajo en un
-      equipo: hasta ahora he aprendido solo y quiero tener a alguien que me
-      corrija.
+      Soy técnico superior en DAM. Hice y mantengo una plataforma que un club
+      de baloncesto usa para gestionar inscripciones, horarios y resultados.
+      Me gusta entender primero el trabajo de quien la va a usar y quitarle
+      pasos manuales. Ahora busco hacerlo dentro de un equipo de desarrollo.
     </p>
   </section>
 
   <section>
-    <h2>Experiencia técnica</h2>
+    <h2>Experiencia y proyectos</h2>
 
     <div class="entrada">
       <div class="linea1">
-        <h3>Desarrollador Full-Stack</h3>
+        <h3>Desarrollador full stack</h3>
         <span class="cuando">2026 — actualidad</span>
       </div>
       <p class="donde">ADESA 80 · Club de baloncesto · Sanlúcar de Barrameda</p>
-      <p class="matiz">Proyecto propio, en producción · adesa80.com</p>
+      <p class="matiz">Proyecto propio en producción desde agosto de 2026 · <a href="https://adesa80.com/">adesa80.com</a></p>
       <ul>
-        <li>La web pública, el área de socios y el panel de administración. <b>Next.js 16 y React 19</b> con TypeScript en modo estricto, sobre <b>PostgreSQL</b>.</li>
-        <li><b>Cobros con Stripe.</b> El webhook comprueba la firma antes de leer nada, y controla los envíos repetidos, porque Stripe manda el mismo aviso más de una vez.</li>
-        <li>Ninguna de las <b>81 tablas</b> acepta escrituras desde el navegador: para guardar algo hay que pasar por el servidor y comprobar permiso.</li>
-        <li><b>2236 tests</b> y 115 migraciones. Los tests corren en cada push y si fallan no se despliega.</li>
-        <li>Los precios, textos y colores del club están en la base de datos, no en el código: cambiar una cuota es rellenar un formulario.</li>
+        <li>Construí la web pública, el área de usuarios y el panel de gestión con <b>Next.js, TypeScript y PostgreSQL</b>. Sigo manteniéndolos para el club.</li>
+        <li>Trabajé en inscripciones, pagos por transferencia, horarios y datos federativos. Los precios y textos se editan desde el panel sin cambiar código.</li>
+        <li>Los permisos se comprueban en el servidor y el CI ejecuta pruebas, tipos y build en cada PR y al actualizar main. Preparé también el flujo de <b>Stripe</b> para cuando el club active la tarjeta.</li>
       </ul>
     </div>
 
     <div class="entrada">
       <div class="linea1">
-        <h3>Desarrollador Multiplataforma · Flutter</h3>
-        <span class="cuando">Mar — Jun 2025</span>
-      </div>
-      <p class="donde">Grupo Solutia · Cádiz</p>
-      <p class="matiz">Prácticas de formación (FCT)</p>
-      <ul>
-        <li>Trabajé en la app <b>WeSpaces</b>, en reservas y salas. Era código que ya existía y no había escrito yo, así que buena parte del trabajo fue entenderlo antes de tocarlo. <b>Flutter</b> contra una <b>API REST</b>, con Git y sprints.</li>
-      </ul>
-    </div>
-
-    <div class="entrada">
-      <div class="linea1">
-        <h3>Desarrollador Python · Automatización de datos</h3>
+        <h3>Automatización de resultados deportivos</h3>
         <span class="cuando">2026</span>
       </div>
       <p class="donde">FAB Cádiz Scraper</p>
-      <p class="matiz">Proyecto propio, código abierto · github.com/Fernandogbuzon/fab-cadiz-scraper</p>
+      <p class="matiz">Proyecto propio y abierto · <a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper">GitHub</a></p>
       <ul>
-        <li>La federación andaluza publica los resultados en una web antigua y sin API. Este programa los saca con <b>Python y Playwright</b> y los guarda en <b>PostgreSQL</b>. Corre solo en <b>GitHub Actions</b>, sin servidor.</li>
-        <li>Antes de escribir compara un hash, así que casi nunca toca la base de datos. Los resultados salen en la web del club unos <b>25 minutos</b> después del partido; antes los copiaba alguien a mano.</li>
+        <li>La federación publica resultados en una web sin API. Escribí un proceso con <b>Python y Playwright</b> que los lee, normaliza y actualiza en PostgreSQL desde GitHub Actions.</li>
+        <li>Evita reprocesar grupos sin cambios. Los resultados llegan automáticamente a la web del club; antes había que copiarlos a mano.</li>
+      </ul>
+    </div>
+
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Desarrollador Flutter · prácticas</h3>
+        <span class="cuando">Mar — Jun 2025</span>
+      </div>
+      <p class="donde">Grupo Solutia · Cádiz</p>
+      <ul>
+        <li>Trabajé en <b>WeSpaces</b>, una app de reservas y salas conectada a una API REST. Tuve que entender código que ya existía antes de modificarlo y trabajar con Git y sprints.</li>
       </ul>
     </div>
   </section>
 
   <section>
-    <h2>Stack</h2>
+    <h2>Tecnologías</h2>
     <dl class="stack">
       <div class="nivel">
-        <dt>Lo uso a diario<span class="apunte">con usuarios de verdad detrás</span></dt>
-        <dd>TypeScript · Next.js · React · Node.js · PostgreSQL · Supabase · Stripe · Python · Zod · Vitest · Playwright · Tailwind CSS · Git</dd>
+        <dt>Trabajo habitual</dt>
+        <dd>TypeScript · React · Next.js · Node.js · PostgreSQL · Supabase · Python · Git</dd>
       </div>
       <div class="nivel">
-        <dt>Me defiendo<span class="apunte">proyectos terminados y clase</span></dt>
-        <dd>Java · SQL · API REST · Flutter · Dart · HTML · CSS · Scrum / Kanban</dd>
+        <dt>Integración y calidad</dt>
+        <dd>API REST · GitHub Actions · Vitest · Playwright · Stripe · SQL</dd>
       </div>
       <div class="nivel">
-        <dt>Lo he tocado<span class="apunte">pero aún no en algo real</span></dt>
-        <dd>Spring · Firebase · Android Studio</dd>
+        <dt>Otras bases</dt>
+        <dd>Flutter · Dart · Java · HTML · CSS</dd>
       </div>
     </dl>
   </section>
@@ -274,16 +261,10 @@ h2{
       <h2>Formación</h2>
       <div class="entrada">
         <div class="linea1">
-          <h3>Téc. Superior en Desarrollo de Aplicaciones Multiplataforma</h3>
+          <h3>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma</h3>
           <span class="cuando">2023 — 2025</span>
         </div>
         <p class="donde">VictoriaFP · Sanlúcar de Barrameda</p>
-      </div>
-      <div class="entrada">
-        <div class="linea1">
-          <h3>Bachillerato <span style="font-weight:400;color:var(--tinta-suave)">· IES San Lucas</span></h3>
-          <span class="cuando">2021 — 2023</span>
-        </div>
       </div>
     </section>
 
@@ -291,16 +272,14 @@ h2{
       <h2>Otros datos</h2>
       <div class="entrada">
         <ul>
-          <li><b>Idiomas:</b> español nativo. Inglés suficiente para leer documentación y código.</li>
-          <li><b>Disponibilidad:</b> puedo empezar ya. Tengo pensado mudarme a Sevilla.</li>
-          <li><b>Antes de esto:</b> atención al cliente en MH Inmobiliaria (2025 — actualidad) y camarero en Taberna Cabildo (2023 — 2024). De ahí me traje saber explicarme con gente que no es técnica.</li>
+          <li><b>Idiomas:</b> español nativo; inglés técnico para documentación y código.</li>
+          <li><b>Experiencia adicional:</b> atención al cliente en MH Inmobiliaria (2025 — actualidad) y camarero en Taberna Cabildo (2023 — 2024).</li>
         </ul>
       </div>
     </section>
 
   <div class="pie">
-    <span>Portfolio y casos completos: <a href="https://fernandogbuzon.github.io/mi-portfolio/">fernandogbuzon.github.io/mi-portfolio</a></span>
-    <span>También trabajo por mi cuenta: <a href="https://fgbuzon.com">fgbuzon.com</a></span>
+    <span>Casos completos: <a href="https://fernandogbuzon.github.io/mi-portfolio/">fernandogbuzon.github.io/mi-portfolio</a></span>
   </div>
 
 </div>

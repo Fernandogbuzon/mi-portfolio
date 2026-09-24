@@ -98,6 +98,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--azul);outline-offset:3px}
 
 .ocultovisual{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ocultovisual:focus-visible{
+  position:fixed;top:.5rem;left:.5rem;width:auto;height:auto;
+  clip-path:none;z-index:80;background:var(--tinta);color:var(--papel);
+  padding:.5rem .8rem;font-family:var(--dato);font-size:.75rem;
+}
 
 .env{width:100%;max-width:var(--ancho);margin-inline:auto;padding-inline:var(--margen)}
 
@@ -320,31 +325,22 @@ main{counter-reset:lamina}
 .renglon dt{font-size:.98rem;font-weight:600;margin-bottom:.12rem}
 .renglon dd{font-size:.89rem;color:var(--grafito);line-height:1.5;max-width:40ch}
 
-/* ---------- 10 · La puerta ---------- */
+/* ---------- 10 · Recorrido de una lectura y una escritura ---------- */
 
-.puerta{
-  display:grid;grid-template-columns:repeat(9,1fr);
-  gap:3px;width:min(100%,25rem);margin-block:1.5rem;
-  background:var(--papel);
-  box-shadow:0 0 0 .55rem var(--papel);
+.acceso{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1px;background:var(--tinta);border:1px solid var(--tinta);
+  margin-block:1.5rem;
 }
-.celda{
-  aspect-ratio:1;display:grid;place-items:center;
-  border:1px solid var(--pauta);
-  font-family:var(--dato);font-size:.7rem;
-  color:transparent;
-}
-.celda--lee{color:var(--azul);border-color:var(--azul);background:color-mix(in oklab, var(--azul) 7%, transparent)}
-
-.puerta-pie{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;align-items:baseline;margin-top:1rem}
-.leyenda{display:inline-flex;align-items:center;gap:.45rem}
-.leyenda i{width:.8rem;height:.8rem;border:1px solid var(--pauta);display:inline-block}
-.leyenda i.lee{border-color:var(--azul);background:color-mix(in oklab, var(--azul) 7%, transparent)}
+.acceso li{display:flex;flex-direction:column;gap:.7rem;min-width:0;padding:1.25rem;background:var(--papel)}
+.acceso strong{font-family:var(--dato);font-size:clamp(.78rem,.72rem + .2vw,.92rem);font-weight:500;line-height:1.6;overflow-wrap:anywhere}
+.acceso li:last-child strong{color:var(--azul)}
+@media (max-width:40rem){.acceso{grid-template-columns:1fr}}
 
 /* ---------- 11 · El recuento ---------- */
 
 .recuento{
-  display:grid;grid-template-columns:repeat(3,1fr);
+  display:grid;grid-template-columns:repeat(2,1fr);
   gap:1px;background:var(--pauta);
   border:1px solid var(--pauta);margin-block:1.75rem;
 }
