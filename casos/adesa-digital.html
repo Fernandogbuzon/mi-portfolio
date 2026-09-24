@@ -1,370 +1,159 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>ADESA Digital — Caso · Fernando García Buzón</title>
-<meta name="description" content="La plataforma de ADESA 80: inscripciones, documentos, pistas, equipos, autobuses, finanzas, contenidos, resultados federativos y torneos 3x3.">
-
-<link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/casos/adesa-digital.html">
-<link rel="icon" href="../marca/favicon.svg" type="image/svg+xml">
-
-<meta property="og:type" content="article">
-<meta property="og:locale" content="es_ES">
-<meta property="og:title" content="ADESA Digital — Caso">
-<meta property="og:description" content="Familias, entrenadores, directiva y competición trabajan en la misma plataforma. Mapa de módulos y pantallas de gestión con datos de prueba.">
-<meta property="og:image" content="https://fernandogbuzon.github.io/mi-portfolio/marca/og.png">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="../css/lamina.css?v=2">
-<link rel="stylesheet" href="../css/lamina-caso.css?v=2">
-
-<script>
-  try {
-    var t = localStorage.getItem("tema");
-    if (t === "claro" || t === "noche") document.documentElement.setAttribute("data-tema", t);
-  } catch (e) {}
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADESA 80 · Fernando García Buzón</title>
+  <meta name="description" content="La plataforma que desarrollé para ADESA 80: 28 áreas para familias, entrenadores, directiva y competición, con capturas de prueba y decisiones técnicas.">
+  <link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/casos/adesa-digital.html">
+  <link rel="icon" href="../marca/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:url" content="https://fernandogbuzon.github.io/mi-portfolio/casos/adesa-digital.html">
+  <meta property="og:title" content="ADESA 80 · Fernando García Buzón">
+  <meta property="og:description" content="Una plataforma en producción para el trabajo diario de un club, con 28 áreas conectadas.">
+  <meta property="og:image" content="https://fernandogbuzon.github.io/mi-portfolio/marca/og.png?v=2">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/portfolio.css?v=1">
+  <script>try{var t=localStorage.getItem('tema');if(t==='claro'||t==='noche')document.documentElement.dataset.tema=t}catch(e){}</script>
+  <script src="../js/portfolio.js?v=1" defer></script>
 </head>
 <body>
-
-<a class="salto" href="#contenido">Saltar al contenido</a>
-
-<header class="lamina-cabecera">
-  <div class="env">
-    <a class="agata quien" href="../index.html">← F. García Buzón<span class="rotulo-largo"> · full-stack</span></a>
-    <span class="tanteo-corriente">
-      <span class="agata rotulo-largo">Caso de estudio</span>
-      <button class="agata" id="tema" type="button" aria-label="Cambiar de tema">Tema</button>
-    </span>
-  </div>
-</header>
-
-<main id="contenido">
-
-  <div class="caso-cabecera">
-    <div class="env">
-      <a class="volver" href="../index.html">← Todo el trabajo</a>
-      <h1>La plataforma con la que trabaja ADESA 80</h1>
-      <p class="entradilla">
-        ADESA 80 llevaba sus inscripciones en hojas de cálculo, sus resultados
-        a mano y sus precios dentro del código. Reconstruí la plataforma desde
-        cero para que familias, entrenadores y directiva puedan resolver sus
-        gestiones en un mismo sitio. El club cobra hoy por transferencia.
-      </p>
-
-      <dl class="caso-ficha">
-        <div><dt>Cliente</dt><dd>ADESA 80 · Sanlúcar de Barrameda</dd></div>
-        <div><dt>Mi papel</dt><dd>Diseño, desarrollo y despliegue. Solo.</dd></div>
-        <div><dt>Estado</dt><dd>En producción · <a href="https://adesa80.com" target="_blank" rel="noopener">adesa80.com</a></dd></div>
-        <div><dt>Stack</dt><dd>Next.js 16 · TypeScript · PostgreSQL · Supabase</dd></div>
-      </dl>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+  <header class="cabecera">
+    <div class="envoltura cabecera__interior">
+      <a class="marca" href="../index.html" aria-label="Fernando García Buzón, inicio">Fernando García Buzón</a>
+      <nav class="navegacion" aria-label="Principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+        <a class="cv-enlace" href="../cv-fernando-garcia-buzon.pdf" download>CV ↗</a>
+        <button class="tema" type="button" data-tema-boton aria-label="Cambiar tema" title="Cambiar tema">◐</button>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <section class="seccion plataforma" id="modulos" aria-labelledby="modulos-titulo">
-    <div class="env">
-      <div class="seccion__cab">
-        <span class="agata">La plataforma</span>
-        <h2 id="modulos-titulo">La web pública es la puerta de entrada.</h2>
-        <p class="nota">Detrás hay herramientas para las familias, el personal deportivo, la directiva y la competición. Cada recorrido atraviesa varias áreas del mismo producto.</p>
-      </div>
-
-      <ol class="recorridos">
-        <li>
-          <span class="recorridos__numero" aria-hidden="true">01</span>
-          <h3>Una familia</h3>
-          <p>Elige actividad, firma anexos, aporta el justificante de la transferencia y sigue sus trámites, documentos y agenda.</p>
-        </li>
-        <li>
-          <span class="recorridos__numero" aria-hidden="true">02</span>
-          <h3>Un entrenador</h3>
-          <p>Consulta entrenamientos, pide o intercambia pista, pasa lista desde el móvil y recibe avisos de los cambios.</p>
-        </li>
-        <li>
-          <span class="recorridos__numero" aria-hidden="true">03</span>
-          <h3>La directiva</h3>
-          <p>Revisa altas, lleva cuentas y banco, organiza viajes y publica información sin necesitar un despliegue.</p>
-        </li>
-        <li>
-          <span class="recorridos__numero" aria-hidden="true">04</span>
-          <h3>Un partido</h3>
-          <p>Los datos de la FAB llegan a resultados y clasificaciones. En un 3x3, el árbitro anota en tablet y el tanteo aparece en la pantalla.</p>
-        </li>
-      </ol>
-
-      <div class="mapa-cabecera">
-        <div>
-          <span class="agata">Inventario · septiembre de 2026</span>
-          <h3>Las 28 áreas construidas</h3>
-        </div>
-        <p>El mapa incluye las áreas documentadas del proyecto. Algunas se usan según temporada o configuración; el cobro con tarjeta sigue apagado.</p>
-      </div>
-
-      <div class="mapa-grupos">
-        <section class="mapa-grupo" aria-labelledby="grupo-familias">
-          <div class="mapa-grupo__cab"><span class="agata">01 / 09</span><h4 id="grupo-familias">Familias y socios</h4></div>
-          <p>Del alta y la firma a los documentos, actividades y avisos de cada persona.</p>
-          <ul>
-            <li>Acceso</li><li>Inscripciones</li><li>Cuenta personal</li>
-            <li>Documentos</li><li>Autobuses</li><li>Escuela de invierno</li>
-            <li>Escuela de verano</li><li>Notificaciones</li><li>Agenda</li>
-          </ul>
-        </section>
-        <section class="mapa-grupo" aria-labelledby="grupo-deporte">
-          <div class="mapa-grupo__cab"><span class="agata">02 / 04</span><h4 id="grupo-deporte">Deporte y competición</h4></div>
-          <p>Entrenamientos, equipos, datos federativos y torneos con mesa de árbitro.</p>
-          <ul>
-            <li>Horarios y pistas</li><li>Equipos</li>
-            <li>Resultados FAB</li><li>Torneos 3x3</li>
-          </ul>
-        </section>
-        <section class="mapa-grupo" aria-labelledby="grupo-direccion">
-          <div class="mapa-grupo__cab"><span class="agata">03 / 06</span><h4 id="grupo-direccion">Dirección y operación</h4></div>
-          <p>Personas, permisos, cuentas, consultas y configuración del club.</p>
-          <ul>
-            <li>Usuarios y permisos</li><li>Finanzas</li><li>Contacto</li>
-            <li>Buzón</li><li>Sugerencias</li><li>Ajustes del club</li>
-          </ul>
-        </section>
-        <section class="mapa-grupo" aria-labelledby="grupo-publicacion">
-          <div class="mapa-grupo__cab"><span class="agata">04 / 09</span><h4 id="grupo-publicacion">Comunicación y web pública</h4></div>
-          <p>Lo que el club publica, mantiene y ofrece para que cualquiera lo encuentre.</p>
-          <ul>
-            <li>Portada</li><li>Club</li><li>Noticias</li>
-            <li>Galería</li><li>Patrocinadores</li><li>Boletín</li>
-            <li>Búsqueda</li><li>Preguntas frecuentes</li><li>Textos legales</li>
-          </ul>
-        </section>
-      </div>
-
-      <div class="pantallas" id="pantallas">
-        <div class="pantallas__cab">
-          <span class="agata">Por dentro</span>
-          <h3>Dos pantallas de gestión</h3>
-          <p>Capturas de pruebas locales con datos ficticios. Enseñan cómo se trabaja en el panel; no contienen información de familias del club.</p>
-        </div>
-        <div class="pantallas__reja">
-          <figure>
-            <a class="pantallas__imagen" href="../media/adesa/inscripciones-demo.png" target="_blank" rel="noopener" aria-label="Abrir captura completa de la gestión de inscripciones con datos ficticios">
-              <img src="../media/adesa/inscripciones-demo.png" width="1280" height="800" loading="lazy" decoding="async" alt="Bandeja de inscripciones de un club de prueba: búsqueda, filtros, importes y estados en el panel de gestión.">
-            </a>
-            <figcaption><strong>Inscripciones</strong><span>Bandeja de revisión, filtros e importes. Datos ficticios.</span></figcaption>
-          </figure>
-          <figure>
-            <a class="pantallas__imagen" href="../media/adesa/pase-lista-demo.png" target="_blank" rel="noopener" aria-label="Abrir captura completa del pase de lista móvil con datos ficticios">
-              <img src="../media/adesa/pase-lista-demo.png" width="390" height="2641" loading="lazy" decoding="async" alt="Pase de lista móvil de la Escuela de Invierno con grupos, búsqueda, marcas de asistencia e informes, usando alumnos ficticios.">
-            </a>
-            <figcaption><strong>Escuela de invierno</strong><span>Pase de lista e informes desde el móvil. Datos ficticios.</span></figcaption>
-          </figure>
+  <main id="contenido" class="envoltura">
+    <div class="caso-hero">
+      <a class="volver" href="../index.html#proyectos">← Volver a proyectos</a>
+      <h1>ADESA 80</h1>
+      <div class="caso-hero__intro">
+        <p>Diseñé y desarrollo la plataforma con la que el club gestiona inscripciones, entrenamientos, cuentas y competiciones. La usan familias, entrenadores y directiva.</p>
+        <div class="caso-enlaces">
+          <a class="enlace-texto" href="https://adesa80.com" target="_blank" rel="noopener">Ver adesa80.com ↗</a>
+          <span>Next.js · TypeScript · PostgreSQL · Supabase</span>
         </div>
       </div>
     </div>
-  </section>
 
-  <article class="caso-cuerpo">
-
-    <h2><span class="rotulo">Problema</span><br>Nada de lo que fallaba era un bug</h2>
-
-    <p class="primera">
-      El club tenía web. El problema no era que estuviera fea: era que cada
-      cosa que necesitaban cambiar exigía a un programador, y algunas exigían
-      un despliegue.
-    </p>
-
-    <p>
-      La API vivía en un puñado de ficheros monolíticos — <strong>2.474 líneas
-      solo para horarios</strong>, con 38 endpoints dentro. El nombre del club,
-      sus colores, su dirección, los patrocinadores en un JSON dentro de una
-      plantilla y los precios de la escuela en un fichero de configuración:
-      subir una cuota significaba tocar código y volver a desplegar.
-    </p>
-
-    <p>
-      La autorización estaba partida entre una columna <code>profiles.role</code> y
-      una tabla <code>user_permisos</code> que llevaban tiempo desincronizadas, así que
-      lo que un usuario podía hacer dependía de cuál de las dos mirase el
-      código en ese momento. Las políticas de escritura de RLS estaban
-      abiertas: una política de <code>INSERT</code> sobre la tabla de noticias dejaba
-      publicar a cualquier usuario autenticado. Así se llenó de spam.
-    </p>
-
-    <ul>
-      <li>Documentos privados servidos como URLs firmadas de siete días.</li>
-      <li>El correo se enviaba dentro de la propia petición, sin reintento: un fallo puntual de SMTP perdía la confirmación de una inscripción y nadie se enteraba.</li>
-      <li>Los resultados de la federación los transcribía una persona a mano, cuando podía.</li>
-    </ul>
-
-    <h2><span class="rotulo">Solución</span><br>Dos reglas, y todo lo demás sale de ahí</h2>
-
-    <h3>1. La base de datos dice que no por defecto</h3>
-
-    <p>
-      Las <strong>tablas del club tienen RLS activado</strong>. En las migraciones,
-      las políticas que conceden acceso directo son de <code>SELECT</code>.
-      Ninguna concede <code>INSERT</code>, <code>UPDATE</code> o <code>DELETE</code>
-      desde el navegador.
-    </p>
-
-    <p>
-      La consecuencia es que <strong>ninguna escritura va directamente del navegador
-      a la base</strong>. Pasa por el servidor. En las operaciones protegidas,
-      se comprueba el permiso antes de usar la clave de servicio:
-    </p>
-
-<pre><code><span class="c">// El servidor pregunta antes de tocar nada.</span>
-<span class="k">await</span> requirePermiso(<span class="k">"horarios.gestionar"</span>);</code></pre>
-
-    <p>
-      Hay comprobaciones de permiso repartidas por las acciones del servidor.
-      Las claves distinguen ver de gestionar: una familia que puede leer una
-      noticia no puede publicarla. Así se cierra el camino que antes permitió
-      publicar spam con una cuenta cualquiera.
-    </p>
-
-    <h3>2. Nada del club vive en el código</h3>
-
-    <p>
-      Identidad, colores, precios, textos y credenciales viven en
-      <code>club_ajustes</code>, en áreas JSONB validadas con Zod. Cambiar una
-      cuota es un formulario, no un despliegue. El efecto secundario es que el
-      código no sabe de qué club es: la identidad entera vive en datos, no en
-      constantes repartidas por las plantillas.
-    </p>
-
-    <h3>3. Los datos de la federación no se mezclan</h3>
-
-    <p>
-      Hay dos proyectos de base de datos separados. El de la federación es
-      <strong>de solo lectura</strong> y lo alimenta un scraper externo; la aplicación
-      tiene prohibido escribir en él, y si faltan sus credenciales esas
-      secciones simplemente se ocultan en vez de romper la página.
-    </p>
-
-    <h2><span class="rotulo">Impacto</span><br>Qué cambió para el club</h2>
-
-    <p class="primera">
-      Las familias hacen el alta y entregan sus documentos desde la web. La
-      directiva cambia cuotas y textos desde su panel. Los resultados llegan
-      desde la federación sin que nadie tenga que copiarlos a mano.
-    </p>
-
-    <ul class="metricas">
-      <li><span class="cifra" data-cifra="139">139</span><span class="que">Noticias antiguas conservadas</span></li>
-      <li><span class="cifra" data-cifra="167">167</span><span class="que">Imágenes migradas</span></li>
-      <li><span class="cifra" data-cifra="305">305</span><span class="que">Archivos de pruebas · sep 2026</span></li>
-      <li><span class="cifra" data-cifra="0">0</span><span class="que">Políticas de escritura</span></li>
-    </ul>
-
-    <p>
-      Está <strong>en producción en adesa80.com desde agosto de 2026</strong>. Las
-      direcciones antiguas tienen redirecciones y el contenido del blog se
-      conservó para que la historia del club no se perdiera en la mudanza.
-    </p>
-
-    <p>
-      La directiva tiene un módulo de finanzas montado sobre su propio plan
-      contable. Las familias tienen un alta en tres pasos que deduce la
-      categoría del niño por su año de nacimiento y permite inscribir a varios
-      hermanos de una vez. Y la galería pesa <strong>38,9 veces menos</strong> por foto
-      —de 553.746 a 14.246 bytes—, medido en producción, no estimado.
-    </p>
-
-    <h2><span class="rotulo">Proceso</span><br>La decisión de la que más aprendí</h2>
-
-    <h3>Un marcador que sobrevive a quedarse sin wifi</h3>
-
-    <p>
-      El torneo 3x3 se arbitra desde una tablet, a pie de pista, donde la
-      cobertura se cae. La solución obvia —guardar el marcador y actualizarlo—
-      se rompe en cuanto la tablet pierde la conexión y reintenta: cuentas dos
-      veces la misma canasta.
-    </p>
-
-    <blockquote>
-      El marcador no se guarda. Se calcula.
-    </blockquote>
-
-    <p>
-      Lo que se guarda es un <strong>registro de acciones del árbitro que solo crece</strong>
-      (<code>torneo_eventos</code>). Cada evento lleva un UUID generado en el cliente, así
-      que una tablet sin red puede encolar acciones y reproducirlas después sin
-      que ninguna se cuente dos veces. Una equivocación no se borra: se corrige
-      escribiendo un evento que apunta al original (<code>revierte_client_id</code>). El
-      marcador es una función pura de ese registro, y el código dice
-      explícitamente que la foto que manda el cliente no se cree nunca.
-    </p>
-
-    <h3>La opción de tarjeta, antes de encenderla</h3>
-
-    <p>
-      El club cobra hoy por transferencia. Dejé implementada la opción de
-      tarjeta con Stripe, apagada por configuración. El webhook
-      <strong>falla cerrado</strong>: sin
-      <code>STRIPE_WEBHOOK_SECRET</code> devuelve 500 y no procesa nada, en lugar de
-      procesar un aviso sin verificar. La firma se comprueba contra
-      el cuerpo en crudo capturado con <code>request.text()</code> <em>antes</em> de parsear,
-      porque parsear primero invalida una firma que se calcula byte a byte.
-    </p>
-
-    <p>
-      La implementación contempla avisos duplicados y concurrentes: la
-      actualización del pago es un
-      <em>compare-and-swap</em> sobre el estado, de modo que dos entregas
-      simultáneas del mismo evento no pueden confirmar dos veces la misma
-      inscripción.
-    </p>
-
-    <h3>Lo que haría distinto</h3>
-
-    <p>
-      Empecé escribiendo componentes de interfaz antes de tener cerrado el
-      modelo de permisos, y hubo que rehacer pantallas cuando el modelo cambió.
-      La segunda mitad del proyecto fue mucho más rápida porque el orden se
-      invirtió: primero la migración y la política de acceso, después la
-      pantalla.
-    </p>
-
-    <div class="caso-siguiente">
-      <p><strong>Lo siguiente:</strong> de dónde salen los resultados que ves en la web.</p>
-      <a class="btn btn-linea" href="fab-cadiz-scraper.html">El scraper de la federación <span class="flecha" aria-hidden="true">→</span></a>
+    <div class="caso-galeria" aria-label="Pantallas de gestión con datos ficticios">
+      <p class="caso-galeria__aviso">Capturas del entorno de prueba; todos los datos son ficticios.</p>
+      <figure>
+        <div class="captura captura--ancha">
+          <span class="captura__aviso">Datos de prueba · no reales</span>
+          <img src="../media/adesa/inscripciones-demo.png" width="1280" height="800" alt="Panel de inscripciones en entorno de prueba, con nombres, correos e importes ficticios">
+        </div>
+        <figcaption>Inscripciones: revisión de altas, filtros e importes.</figcaption>
+        <details class="captura-completa">
+          <summary>Ver captura completa</summary>
+          <div class="captura-completa__interior"><p>ENTORNO DE PRUEBA · DATOS FICTICIOS · NO REALES</p><img src="../media/adesa/inscripciones-demo.png" width="1280" height="800" loading="lazy" alt="Captura completa del panel de inscripciones con datos ficticios"></div>
+        </details>
+      </figure>
+      <figure>
+        <div class="captura captura--estrecha">
+          <span class="captura__aviso">Datos de prueba · no reales</span>
+          <img src="../media/adesa/pase-lista-demo.png" width="390" height="2641" alt="Pase de lista móvil de Escuela de Invierno con alumnado ficticio">
+        </div>
+        <figcaption>Escuela de invierno: pase de lista desde el móvil.</figcaption>
+        <details class="captura-completa">
+          <summary>Ver captura completa</summary>
+          <div class="captura-completa__interior"><p>ENTORNO DE PRUEBA · DATOS FICTICIOS · NO REALES</p><img src="../media/adesa/pase-lista-demo.png" width="390" height="2641" loading="lazy" alt="Captura completa del pase de lista móvil con datos ficticios"></div>
+        </details>
+      </figure>
     </div>
 
-  </article>
-
-      <div class="caso-contacto">
-        <div>
-          <span class="folio">¿Buscas a alguien?</span>
-          <h2>Quiero hacer este trabajo en un equipo</h2>
-          <p>
-            Desarrollo full-stack, en A Coruña, Sevilla o remoto con viajes.
-            Puedo incorporarme ya.
-            Si lo de arriba te encaja, escríbeme.
-          </p>
-        </div>
-        <div class="botonera--cierre">
-          <a class="btn btn-solido" href="../cv-fernando-garcia-buzon.pdf" download>
-            Descargar CV (PDF) <span class="flecha" aria-hidden="true">↓</span>
-          </a>
-          <a class="btn btn-linea" href="mailto:fernandogbuzon@gmail.com?subject=Hola%20Fernando">Escribirme</a>
-        </div>
+    <section class="texto-breve" aria-labelledby="trabajo-titulo">
+      <h2 id="trabajo-titulo">El trabajo diario del club, en una plataforma.</h2>
+      <p>Antes había hojas de cálculo, mensajes y cambios en el código para resolver tareas habituales. Reuní esas gestiones en un producto que el club puede usar y configurar.</p>
+      <div class="recorridos">
+        <article><h3>Familias</h3><p>Inscriben a sus hijos, firman anexos y consultan documentos y actividades.</p></article>
+        <article><h3>Entrenadores</h3><p>Ven entrenamientos, gestionan pistas y pasan lista desde el móvil.</p></article>
+        <article><h3>Directiva</h3><p>Revisa altas, gestiona finanzas y publica contenido desde el panel.</p></article>
+        <article><h3>Competición</h3><p>Consulta datos de la FAB y organiza torneos 3x3 con marcador.</p></article>
       </div>
-</main>
+    </section>
 
-<footer class="pie">
-  <div class="env">
-    <div class="pie-fin">
-      <span>© <span id="anio">2026</span> Fernando García Buzón</span>
-      <span><a href="../index.html">Volver al inicio</a></span>
+    <section class="modulos" id="modulos" aria-labelledby="modulos-titulo">
+      <div class="modulos__cab">
+        <h2 id="modulos-titulo">Las 28 áreas de la plataforma</h2>
+        <p>El mapa completo está aquí para quien quiera entrar en detalle. Abre un grupo y verás qué resuelve cada área.</p>
+      </div>
+
+      <details class="grupo">
+        <summary><strong>Familias y socios</strong><span>Acceso, inscripciones, documentos, actividades y avisos</span></summary>
+        <ul>
+          <li><strong>Acceso</strong><span>Entrar, crear cuenta, recuperar contraseña y confirmar el correo.</span></li>
+          <li><strong>Inscripciones</strong><span>Altas por pasos, firma de anexos y justificantes de transferencia.</span></li>
+          <li><strong>Cuenta personal</strong><span>Perfil, trámites, preferencias, avisos y seguridad de cada usuario.</span></li>
+          <li><strong>Documentos</strong><span>Archivos por tipo, vigencia y persona, con aviso de los que faltan.</span></li>
+          <li><strong>Autobuses</strong><span>Reservas, plazas, paradas y hojas de viaje para conductores.</span></li>
+          <li><strong>Escuela de invierno</strong><span>Inscripción, pase de lista móvil e informes de asistencia.</span></li>
+          <li><strong>Escuela de verano</strong><span>Inscripción al campus y consulta de la actividad desde familia.</span></li>
+          <li><strong>Notificaciones</strong><span>Avisos en la campana; push preparado para futuras suscripciones.</span></li>
+          <li><strong>Agenda</strong><span>Próximos eventos personales a partir del calendario de entrenamientos.</span></li>
+        </ul>
+      </details>
+      <details class="grupo">
+        <summary><strong>Deporte y competición</strong><span>Entrenamientos, equipos, resultados y torneos</span></summary>
+        <ul>
+          <li><strong>Horarios y pistas</strong><span>Planificación de entrenamientos y solicitudes para pedir, ceder o intercambiar pista.</span></li>
+          <li><strong>Equipos</strong><span>Fichas, plantillas y dorsales de los equipos por temporada.</span></li>
+          <li><strong>Resultados FAB</strong><span>Partidos y clasificaciones federativas desde una base de solo lectura.</span></li>
+          <li><strong>Torneos 3x3</strong><span>Inscripciones, sorteo, árbitros, marcador y pantalla del torneo.</span></li>
+        </ul>
+      </details>
+      <details class="grupo">
+        <summary><strong>Dirección y operación</strong><span>Personas, cuentas, consultas y configuración</span></summary>
+        <ul>
+          <li><strong>Usuarios y permisos</strong><span>Cuentas y permisos concretos según las tareas de cada persona.</span></li>
+          <li><strong>Finanzas</strong><span>Presupuesto, movimientos bancarios, liquidaciones e informes por equipo.</span></li>
+          <li><strong>Contacto</strong><span>Consultas recibidas, clasificación y aviso a la persona responsable.</span></li>
+          <li><strong>Buzón</strong><span>Seguimiento de conversaciones y avisos internos sobre cada consulta.</span></li>
+          <li><strong>Sugerencias</strong><span>Ideas de socios y gestión de su respuesta desde el panel.</span></li>
+          <li><strong>Ajustes del club</strong><span>Identidad, textos, precios, módulos e integraciones editables desde el panel.</span></li>
+        </ul>
+      </details>
+      <details class="grupo">
+        <summary><strong>Comunicación y web pública</strong><span>Contenidos, búsqueda, patrocinio y textos del sitio</span></summary>
+        <ul>
+          <li><strong>Portada</strong><span>Bloques públicos y selección de contenidos que aparecen al entrar.</span></li>
+          <li><strong>Club</strong><span>Historia, junta, logros y otros contenidos institucionales editables.</span></li>
+          <li><strong>Noticias</strong><span>Redacción, programación y publicación con comentarios sujetos a moderación.</span></li>
+          <li><strong>Galería</strong><span>Álbumes por temporada y fotos convertidas para cargar más rápido.</span></li>
+          <li><strong>Patrocinadores</strong><span>Logotipos, espacios, enlaces y medición de clics de patrocinio.</span></li>
+          <li><strong>Boletín</strong><span>Altas verificadas por correo y bajas mediante enlace personal.</span></li>
+          <li><strong>Búsqueda</strong><span>Contenido público y resultados de gestión según los permisos.</span></li>
+          <li><strong>Preguntas frecuentes</strong><span>Respuestas editables a las dudas habituales del club.</span></li>
+          <li><strong>Textos legales</strong><span>Aviso legal, privacidad, cookies y condiciones adaptables al club.</span></li>
+        </ul>
+      </details>
+      <p class="modulos__nota">Las áreas de escuelas y torneos dependen de la temporada o la configuración. El club cobra hoy por transferencia; la opción de tarjeta está implementada y apagada. Las notificaciones push todavía no tienen dispositivos suscritos.</p>
+    </section>
+
+    <section class="decisiones" aria-labelledby="decisiones-titulo">
+      <h2 id="decisiones-titulo">Cómo la construí</h2>
+      <div class="decision"><h3>Configurable desde el panel</h3><p>Precios, textos e identidad del club se cambian sin editar el código ni desplegar de nuevo.</p></div>
+      <div class="decision"><h3>Permisos en el servidor</h3><p>Las acciones protegidas comprueban quién actúa y qué puede hacer antes de escribir en la base.</p></div>
+      <div class="decision"><h3>Resultados separados</h3><p>Los datos federativos viven en otra base que la plataforma consulta en modo de solo lectura.</p></div>
+    </section>
+
+    <div class="caso-otro"><p>Los resultados llegan gracias a otro proyecto que también mantengo.</p><a class="enlace-texto" href="fab-cadiz-scraper.html">Ver el scraper de la federación ↗</a></div>
+  </main>
+
+  <footer class="pie" id="contacto">
+    <div class="envoltura">
+      <div class="pie__principal"><div><h2>Hablemos.</h2><p>Abierto a incorporarme en modalidad presencial, híbrida o remota, con posibilidad de traslado.</p></div><div class="pie__enlaces"><a class="enlace-texto" href="mailto:fernandogbuzon@gmail.com?subject=Hola%20Fernando">Correo ↗</a><a class="enlace-texto" href="../cv-fernando-garcia-buzon.pdf" download>Descargar CV ↗</a></div></div>
+      <div class="pie__base"><span>© <span data-anio>2026</span> Fernando García Buzón</span><a href="../index.html">Volver al inicio ↑</a></div>
     </div>
-  </div>
-</footer>
-
-<script src="../js/lamina.js?v=1" defer></script>
+  </footer>
 </body>
 </html>

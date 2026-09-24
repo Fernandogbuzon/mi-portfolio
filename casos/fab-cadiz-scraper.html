@@ -1,230 +1,73 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>FAB Cádiz Scraper — Caso · Fernando García Buzón</title>
-<meta name="description" content="Cómo integro resultados de una federación sin API, sin servidor y evitando reprocesar grupos sin cambios. Y el fallo silencioso que tuve que corregir.">
-
-<link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/casos/fab-cadiz-scraper.html">
-<link rel="icon" href="../marca/favicon.svg" type="image/svg+xml">
-
-<meta property="og:type" content="article">
-<meta property="og:locale" content="es_ES">
-<meta property="og:title" content="FAB Cádiz Scraper — Caso">
-<meta property="og:description" content="Resultados de la federación en Postgres, sin servidor y con detección de cambios. Con el fallo silencioso incluido.">
-<meta property="og:image" content="https://fernandogbuzon.github.io/mi-portfolio/marca/og.png">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="../css/lamina.css?v=2">
-<link rel="stylesheet" href="../css/lamina-caso.css?v=2">
-
-<script>
-  try {
-    var t = localStorage.getItem("tema");
-    if (t === "claro" || t === "noche") document.documentElement.setAttribute("data-tema", t);
-  } catch (e) {}
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resultados de la federación · Fernando García Buzón</title>
+  <meta name="description" content="Cómo llevo partidos y clasificaciones de la FAB a la plataforma de ADESA 80 con Python, GitHub Actions y detección de cambios.">
+  <link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/casos/fab-cadiz-scraper.html">
+  <link rel="icon" href="../marca/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:url" content="https://fernandogbuzon.github.io/mi-portfolio/casos/fab-cadiz-scraper.html">
+  <meta property="og:title" content="Resultados de la federación · Fernando García Buzón">
+  <meta property="og:description" content="Un scraper que alimenta los resultados de ADESA 80 y avisa cuando deja de hacerlo.">
+  <meta property="og:image" content="https://fernandogbuzon.github.io/mi-portfolio/marca/og.png?v=2">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/portfolio.css?v=1">
+  <script>try{var t=localStorage.getItem('tema');if(t==='claro'||t==='noche')document.documentElement.dataset.tema=t}catch(e){}</script>
+  <script src="../js/portfolio.js?v=1" defer></script>
 </head>
 <body>
-
-<a class="salto" href="#contenido">Saltar al contenido</a>
-
-<header class="lamina-cabecera">
-  <div class="env">
-    <a class="agata quien" href="../index.html">← F. García Buzón<span class="rotulo-largo"> · full-stack</span></a>
-    <span class="tanteo-corriente">
-      <span class="agata rotulo-largo">Caso de estudio</span>
-      <button class="agata" id="tema" type="button" aria-label="Cambiar de tema">Tema</button>
-    </span>
-  </div>
-</header>
-
-<main id="contenido">
-
-  <div class="caso-cabecera">
-    <div class="env">
-      <a class="volver" href="../index.html">← Todo el trabajo</a>
-      <h1>Resultados sin servidor y sin nadie escribiéndolos</h1>
-      <p class="entradilla">
-        La federación andaluza no tiene API. Publica los resultados en una
-        página de 2008 detrás de Cloudflare. Este scraper los saca, calcula las
-        clasificaciones y los deja en Postgres. Antes de procesar un grupo,
-        comprueba si sus partidos han cambiado.
-      </p>
-
-      <dl class="caso-ficha">
-        <div><dt>Para</dt><dd>adesa80.com</dd></div>
-        <div><dt>Mi papel</dt><dd>Lo escribí y lo mantengo.</dd></div>
-        <div><dt>Código</dt><dd><a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper" target="_blank" rel="noopener">Abierto en GitHub</a></dd></div>
-        <div><dt>Stack</dt><dd>Python · Playwright · PostgreSQL · GitHub Actions</dd></div>
-      </dl>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+  <header class="cabecera">
+    <div class="envoltura cabecera__interior">
+      <a class="marca" href="../index.html" aria-label="Fernando García Buzón, inicio">Fernando García Buzón</a>
+      <nav class="navegacion" aria-label="Principal">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+        <a class="cv-enlace" href="../cv-fernando-garcia-buzon.pdf" download>CV ↗</a>
+        <button class="tema" type="button" data-tema-boton aria-label="Cambiar tema" title="Cambiar tema">◐</button>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <article class="caso-cuerpo">
-
-    <h2><span class="rotulo">Problema</span><br>Cuatro restricciones que se pelean entre sí</h2>
-
-    <p class="primera">
-      El club necesitaba calendario, resultados y clasificación al día. La
-      única fuente es la web de la Federación Andaluza de Baloncesto, y no
-      expone nada parecido a una API.
-    </p>
-
-    <ul>
-      <li>Es un <strong>ASP.NET WebForms</strong>: los datos solo salen disparando <code>__doPostBack</code> a través de tres desplegables encadenados —categoría, fase, grupo—, y todo eso detrás de Cloudflare.</li>
-      <li>Los resultados deben llegar a la web sin depender de una transcripción manual.</li>
-      <li>Sin servidor: corre con los minutos gratuitos de GitHub Actions.</li>
-      <li>Escribe en un Postgres <strong>compartido</strong> con la web del club, cuyo contrato de lectura no se puede romper.</li>
-    </ul>
-
-    <p>
-      La solución ingenua —scrapearlo todo cada diez minutos— falla en las
-      cuatro a la vez: agota los minutos de CI, machaca la base de datos con
-      escrituras idénticas y aun así llega tarde.
-    </p>
-
-    <h2><span class="rotulo">Solución</span><br>Dos scrapers con precios distintos</h2>
-
-    <p>
-      En vez de uno que lo haga todo, hay dos con perfiles de coste opuestos:
-    </p>
-
-    <h3>El barrido nocturno</h3>
-    <p>
-      <code>scraper_competicion.py</code> recorre una vez al día cada
-      competición, categoría, fase y grupo. Calcula las clasificaciones en
-      Python —con desempate particular incluido— y borra los <em>partidos
-      fantasma</em> de playoff que la federación deja publicados y nunca se
-      juegan.
-    </p>
-
-    <h3>El sondeo quirúrgico</h3>
-    <p>
-      <code>scraper_resultados.py</code> no recorre todo. Le pregunta a
-      Postgres <strong>qué partidos deberían haber terminado ya y no tienen
-      resultado</strong>, los agrupa, y vuelve a mirar solo esos grupos. Los sábados
-      por la tarde son unos pocos; el resto de la semana, ninguno.
-    </p>
-
-    <h3>Y sobre todo: no repetir trabajo</h3>
-
-    <p>
-      De cada grupo se calcula un <strong>SHA-256 del listado de partidos
-      canonicalizado</strong> y se compara con el hash guardado, a través de una
-      función atómica en Postgres. Si coincide, se omite el procesamiento de ese
-      grupo.
-    </p>
-
-<pre><code><span class="c"># La mayoría de las ejecuciones acaban aquí.</span>
-<span class="k">if</span> hash_nuevo == hash_guardado:
-    logger.info(<span class="k">"grupo %s sin cambios"</span>, grupo)
-    <span class="k">return</span></code></pre>
-
-    <p>
-      Encima va un <em>pre-check</em> sin <code>checkout</code> que mira si hoy hay partidos
-      antes de arrancar el trabajo entero. En los días sin baloncesto evita
-      ejecutar el scraper completo.
-    </p>
-
-    <h2><span class="rotulo">Impacto</span><br>Nadie transcribe nada</h2>
-
-    <ul class="metricas">
-      <li><span class="cifra" data-cifra="0">0</span><span class="que">Resultados copiados a mano</span></li>
-      <li><span class="cifra" data-cifra="2">2</span><span class="que">Trabajos con distinto ritmo</span></li>
-      <li><span class="cifra">SHA-256</span><span class="que">Evita reprocesar grupos sin cambios</span></li>
-      <li><span class="cifra" data-cifra="0">0</span><span class="que">Servidores</span></li>
-    </ul>
-
-    <p>
-      También moví la búsqueda de escudos, que estaba escrita a mano en el
-      cliente, a la base de datos. Los nombres de equipo se normalizan para
-      encontrar su escudo sin mantener una lista paralela en la web.
-    </p>
-
-    <h2><span class="rotulo">Proceso</span><br>El fallo del que más he aprendido</h2>
-
-    <p class="primera">
-      En julio, el scraper dejó de traer partidos. Durante semanas. Y no avisó
-      nadie, porque no avisaba nada.
-    </p>
-
-    <p>
-      La federación <strong>renumera</strong> los identificadores de competición cada
-      temporada manteniendo la misma dirección legible. Cuando los IDs
-      2445-2447 empezaron a redirigir a una página de error, todas las
-      ejecuciones siguieron terminando <em>en verde</em> con cero partidos
-      encontrados.
-    </p>
-
-    <p>El fallo estaba tapado dos veces, y ninguna de las dos era el scraping:</p>
-
-    <ul>
-      <li>La función que scrapea una competición estaba anotada como si devolviera dos valores, mientras quien la llamaba desempaquetaba cuatro. Así que <strong>todo camino de error reventaba con un <code>ValueError</code></strong> de desempaquetado en lugar de contar la causa real.</li>
-      <li>El proceso <strong>salía con código 0</strong> aunque fallaran las tres competiciones. Para GitHub Actions, eso es un éxito.</li>
-    </ul>
-
-    <blockquote>
-      Un trabajo automático que falla en silencio es peor que no tenerlo:
-      crees que los datos están al día.
-    </blockquote>
-
-    <p>
-      El arreglo fue reconectar las URLs, sí, pero lo que quedó es lo otro:
-      alinear la firma con lo que se consume, y <strong>salir con código distinto de
-      cero cuando no se ha traído nada</strong>. Desde entonces, cuando la federación
-      vuelve a cambiar algo, me entero el mismo día.
-    </p>
-
-    <h3>Lo que haría distinto</h3>
-    <p>
-      Los reintentos —máximo cinco, cada diez minutos, con estado que caduca a
-      las 48 horas— los escribí antes que la observabilidad. Debería haber
-      sido al revés: reintentar bien un error que no sabes que existe no sirve
-      de nada.
-    </p>
-
-    <div class="caso-siguiente">
-      <p><strong>Lo siguiente:</strong> la plataforma que consume todo esto.</p>
-      <a class="btn btn-linea" href="adesa-digital.html">El caso de ADESA Digital <span class="flecha" aria-hidden="true">→</span></a>
-    </div>
-
-  </article>
-
-      <div class="caso-contacto">
-        <div>
-          <span class="folio">¿Buscas a alguien?</span>
-          <h2>Quiero hacer este trabajo en un equipo</h2>
-          <p>
-            Desarrollo full-stack, en A Coruña, Sevilla o remoto con viajes.
-            Puedo incorporarme ya.
-            Si lo de arriba te encaja, escríbeme.
-          </p>
-        </div>
-        <div class="botonera--cierre">
-          <a class="btn btn-solido" href="../cv-fernando-garcia-buzon.pdf" download>
-            Descargar CV (PDF) <span class="flecha" aria-hidden="true">↓</span>
-          </a>
-          <a class="btn btn-linea" href="mailto:fernandogbuzon@gmail.com?subject=Hola%20Fernando">Escribirme</a>
+  <main id="contenido" class="envoltura">
+    <div class="caso-hero">
+      <a class="volver" href="../index.html#proyectos">← Volver a proyectos</a>
+      <h1>Resultados de la federación, sin copiarlos a mano.</h1>
+      <div class="caso-hero__intro">
+        <p>La FAB publica partidos y clasificaciones en una web sin API. Construí un scraper para llevar esos datos a ADESA 80 y mantenerlos al día sin transcribirlos.</p>
+        <div class="caso-enlaces">
+          <a class="enlace-texto" href="https://github.com/Fernandogbuzon/fab-cadiz-scraper" target="_blank" rel="noopener">Ver código en GitHub ↗</a>
+          <span>Python · Playwright · PostgreSQL · GitHub Actions</span>
         </div>
       </div>
-</main>
-
-<footer class="pie">
-  <div class="env">
-    <div class="pie-fin">
-      <span>© <span id="anio">2026</span> Fernando García Buzón</span>
-      <span><a href="../index.html">Volver al inicio</a></span>
     </div>
-  </div>
-</footer>
 
-<script src="../js/lamina.js?v=1" defer></script>
+    <section class="texto-breve" aria-labelledby="funciona-titulo">
+      <h2 id="funciona-titulo">Dos ritmos para un mismo trabajo.</h2>
+      <p>Un proceso recorre las competiciones de noche. Otro consulta qué partidos deberían tener ya resultado y revisa solo esos grupos. Ambos corren en GitHub Actions y escriben en la base federativa que la plataforma lee por separado.</p>
+      <div class="flujo" aria-label="Proceso de actualización"><span>Web de la FAB</span><span>Extracción</span><span>Detección de cambios</span><span>Base federativa</span><span>ADESA 80</span></div>
+      <div class="decisiones">
+        <div class="decision"><h3>Menos trabajo repetido</h3><p>Comparo un hash de los partidos de cada grupo con el último guardado. Si no ha cambiado, no vuelvo a procesarlo.</p></div>
+        <div class="decision"><h3>Clasificaciones calculadas</h3><p>El barrido reconstruye la clasificación en Python, incluido el desempate particular, y descarta partidos de playoff que la federación deja publicados aunque no se juegan.</p></div>
+      </div>
+    </section>
+
+    <section class="texto-breve" aria-labelledby="fallo-titulo">
+      <h2 id="fallo-titulo">El fallo que me hizo cambiarlo.</h2>
+      <p>Una temporada, la federación cambió los identificadores de competición. El scraper dejó de encontrar partidos, pero la ejecución terminaba en verde. Corregí las URLs, el manejo del error y la salida del proceso: si falla la extracción, GitHub Actions debe mostrar un fallo. Desde entonces sé cuándo hay que intervenir.</p>
+    </section>
+
+    <div class="caso-otro"><p>Los datos llegan a la plataforma que desarrollé para el club.</p><a class="enlace-texto" href="adesa-digital.html">Ver ADESA 80 ↗</a></div>
+  </main>
+
+  <footer class="pie" id="contacto">
+    <div class="envoltura">
+      <div class="pie__principal"><div><h2>Hablemos.</h2><p>Abierto a incorporarme en modalidad presencial, híbrida o remota, con posibilidad de traslado.</p></div><div class="pie__enlaces"><a class="enlace-texto" href="mailto:fernandogbuzon@gmail.com?subject=Hola%20Fernando">Correo ↗</a><a class="enlace-texto" href="../cv-fernando-garcia-buzon.pdf" download>Descargar CV ↗</a></div></div>
+      <div class="pie__base"><span>© <span data-anio>2026</span> Fernando García Buzón</span><a href="../index.html">Volver al inicio ↑</a></div>
+    </div>
+  </footer>
 </body>
 </html>
