@@ -48,6 +48,7 @@ jobs:
                    casos/fab-cadiz-scraper.html css/portfolio.css \
                    js/portfolio.js media/adesa/inscripciones-demo.png \
                    media/adesa/pase-lista-demo.png \
+                   media/fernando-garcia-buzon.png \
                    cv-fernando-garcia-buzon.pdf; do
             [ -f "$f" ] || { echo "::error::falta $f"; exit 1; }
           done

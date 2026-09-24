@@ -4,7 +4,7 @@ Sitio estático en español. Muestra dos proyectos, el CV y las formas de contac
 
 ## Diseño y contenido
 
-La portada da prioridad al trabajo real: ADESA 80 y el scraper de resultados federativos. El caso de ADESA muestra capturas hechas en un entorno de prueba. Cada captura lleva un aviso visible de **datos ficticios y no reales**, también al abrirla completa.
+La portada presenta a Fernando junto al trabajo real: ADESA 80 y el scraper de resultados federativos. El caso de ADESA muestra capturas hechas en un entorno de prueba. Cada captura lleva un aviso visible de **datos ficticios y no reales**, también al abrirla completa.
 
 El caso organiza las 28 áreas de la plataforma en cuatro grupos desplegables. Cada área tiene una descripción breve. Así se puede recorrer el producto de un vistazo y consultar los detalles cuando hagan falta.
 
@@ -17,10 +17,11 @@ index.html                        portada
 casos/adesa-digital.html          caso de ADESA 80 y sus 28 áreas
 casos/fab-cadiz-scraper.html      caso del scraper
 cv.html                           fuente del CV para pantalla e impresión
-cv-fernando-garcia-buzon.pdf      CV publicado sin foto
+cv-fernando-garcia-buzon.pdf      CV publicado con foto
 css/portfolio.css                 estilos del portfolio
 js/portfolio.js                   tema y año del pie
 media/adesa/                      capturas del entorno de prueba
+media/fernando-garcia-buzon.png   retrato de Fernando
 marca/                            favicon y tarjeta para compartir
 herramientas/empaquetar.py        copia autocontenida para abrir sin red
 ```
