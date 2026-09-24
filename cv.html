@@ -108,17 +108,17 @@ h2{
 
 /* ---------- Stack ---------- */
 
-.stack{display:grid;gap:1.5mm}
-.nivel{display:grid;grid-template-columns:35mm 1fr;gap:3mm;align-items:baseline}
+.stack{display:grid;gap:1.2mm}
+.nivel{display:grid;grid-template-columns:42mm minmax(0,1fr);gap:4mm;align-items:baseline;break-inside:avoid}
 .nivel dt{
-  font-size:8.4pt;font-weight:700;color:var(--tinta);
-  letter-spacing:.05em;text-transform:uppercase;
+  font-size:9pt;font-weight:600;color:var(--acento);
 }
-.nivel dd{font-size:9.5pt;color:var(--tinta-suave)}
+.nivel dd{font-size:9.8pt;color:var(--tinta-suave)}
 .nivel .apunte{display:block;font-size:8pt;color:var(--tinta-tenue);font-weight:400;text-transform:none;letter-spacing:0;margin-top:.3mm}
 
 /* ---------- Experiencia adicional ---------- */
 .matiz{font-size:8.7pt;color:var(--tinta-tenue);margin-top:.4mm}
+.matiz a{color:var(--acento);text-decoration:none;border-bottom:.4pt solid var(--regla)}
 
 /* ---------- Barra de la web (no se imprime) ---------- */
 
@@ -146,8 +146,7 @@ h2{
   section{margin-bottom:1.8mm}
   .entrada{margin-bottom:1.5mm}
   .entrada li{margin-bottom:.5mm}
-  .stack{gap:.8mm}
-  .nivel{grid-template-columns:55mm 1fr}
+  .stack{gap:1mm}
   .barra{display:none}
   a{text-decoration:none}
 }
@@ -213,7 +212,7 @@ h2{
       <p class="matiz">Proyecto propio en producción desde agosto de 2026 · <a href="https://adesa80.com/">adesa80.com</a></p>
       <ul>
         <li>Desarrollé una plataforma web de gestión que reúne inscripciones, documentos, horarios, pagos y trabajo interno del club. Incluye web pública, área personal para familias y un panel con módulos según los permisos de cada usuario.</li>
-        <li>Hice configurables las cuotas, los contenidos y otros ajustes desde el panel para que el club los actualice sin cambiar código ni desplegar de nuevo.</li>
+        <li>Hice configurables cuotas y contenidos desde el panel, sin tocar código ni volver a desplegar.</li>
         <li>La construí con <b>Next.js, TypeScript y PostgreSQL</b>. Implementé autorización en el servidor y un flujo de integración continua con GitHub Actions que ejecuta lint, comprobación de tipos, pruebas y build en cada PR.</li>
       </ul>
     </div>
@@ -244,28 +243,6 @@ h2{
   </section>
 
   <section>
-    <h2>Otra experiencia laboral</h2>
-    <div class="entrada">
-      <div class="linea1">
-        <h3>Atención comercial y captación de viviendas · MH Inmobiliaria</h3>
-        <span class="cuando">2025 — actualidad</span>
-      </div>
-      <ul>
-        <li>Atiendo llamadas y consultas, enseño viviendas durante las visitas y capto inmuebles. Adapto mis explicaciones a lo que busca cada cliente.</li>
-      </ul>
-    </div>
-    <div class="entrada">
-      <div class="linea1">
-        <h3>Camarero · Taberna Cabildo</h3>
-        <span class="cuando">2023 — 2024</span>
-      </div>
-      <ul>
-        <li>Atendí mesas y peticiones de clientes, y me coordiné con mis compañeros para mantener el servicio fluido.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
     <h2>Competencias técnicas</h2>
     <dl class="stack">
       <div class="nivel">
@@ -285,10 +262,32 @@ h2{
         <dd>Zod · Vitest · Playwright</dd>
       </div>
       <div class="nivel">
-        <dt>Control de versiones y CI</dt>
+        <dt>Versionado y CI</dt>
         <dd>Git · GitHub Actions</dd>
       </div>
     </dl>
+  </section>
+
+  <section>
+    <h2>Otra experiencia laboral</h2>
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Atención comercial y captación de viviendas · MH Inmobiliaria</h3>
+        <span class="cuando">2025 — actualidad</span>
+      </div>
+      <ul>
+        <li>Atiendo llamadas, enseño viviendas y capto inmuebles; adapto mis explicaciones a cada cliente.</li>
+      </ul>
+    </div>
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Camarero · Taberna Cabildo</h3>
+        <span class="cuando">2023 — 2024</span>
+      </div>
+      <ul>
+        <li>Atendí mesas y peticiones de clientes, y me coordiné con mis compañeros para mantener el servicio fluido.</li>
+      </ul>
+    </div>
   </section>
 
   <section>
