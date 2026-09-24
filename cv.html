@@ -109,7 +109,7 @@ h2{
 /* ---------- Stack ---------- */
 
 .stack{display:grid;gap:1.5mm}
-.nivel{display:grid;grid-template-columns:30mm 1fr;gap:3mm;align-items:baseline}
+.nivel{display:grid;grid-template-columns:35mm 1fr;gap:3mm;align-items:baseline}
 .nivel dt{
   font-size:8.4pt;font-weight:700;color:var(--tinta);
   letter-spacing:.05em;text-transform:uppercase;
@@ -189,15 +189,15 @@ h2{
   <section>
     <h2>Perfil</h2>
     <p class="perfil">
-      Construí y mantengo ADESA 80, una plataforma que usa un club de baloncesto
-      para inscripciones, entrenamientos y gestión interna. Me gusta hablar con
-      quienes la usan y quitarles pasos manuales. Busco seguir haciendo ese
-      trabajo dentro de un equipo de desarrollo.
+      Soy técnico superior en Desarrollo de Aplicaciones Multiplataforma. Me gusta entender cómo trabaja quien va a usar
+      una aplicación y buscar una solución que le ahorre pasos. He sacado adelante
+      proyectos completos por mi cuenta; ahora quiero desarrollar software con
+      un equipo, aprender de otros y seguir ampliando mi experiencia.
     </p>
   </section>
 
   <section>
-    <h2>Experiencia y proyectos</h2>
+    <h2>Experiencia en desarrollo</h2>
 
     <div class="entrada">
       <div class="linea1">
@@ -207,9 +207,9 @@ h2{
       <p class="donde">ADESA 80 · Club de baloncesto · Sanlúcar de Barrameda</p>
       <p class="matiz">Proyecto propio en producción desde agosto de 2026 · <a href="https://adesa80.com/">adesa80.com</a></p>
       <ul>
-        <li>Construí con <b>Next.js, TypeScript y PostgreSQL</b> la web, el área personal y el panel de ADESA 80. Allí familias, entrenadores y directiva gestionan inscripciones, horarios, documentos y finanzas según sus permisos.</li>
-        <li>Pasé precios y textos a un panel editable para que el club pueda cambiarlos sin desplegar. También preparé altas con anexos y pagos por transferencia.</li>
-        <li>Separé los resultados federativos en otra base; las acciones verifican permisos en el servidor. El CI ejecuta pruebas, tipos y build en cada PR y al actualizar main.</li>
+        <li>El club resolvía muchas gestiones con hojas y mensajes. Reuní inscripciones, anexos, horarios y pagos en una plataforma con área personal y panel; familias y personal la usan según sus permisos.</li>
+        <li>Dejé cuotas y textos editables desde el panel para que el club pueda cambiarlos sin tocar código.</li>
+        <li>La desarrollé con <b>Next.js, TypeScript y PostgreSQL</b>. Los permisos se comprueban en el servidor y el CI ejecuta pruebas, tipos y build en cada PR.</li>
       </ul>
     </div>
 
@@ -221,8 +221,8 @@ h2{
       <p class="donde">FAB Cádiz Scraper</p>
       <p class="matiz">Proyecto propio y abierto · <a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper">GitHub</a></p>
       <ul>
-        <li>La federación publica los resultados en su web. Escribí un proceso con <b>Python y Playwright</b> que los normaliza y guarda en PostgreSQL desde GitHub Actions.</li>
-        <li>Revisa los partidos pendientes, evita reescribir grupos sin cambios y registra los errores. Los resultados llegan a la web del club sin copiarlos a mano.</li>
+        <li>La federación publica partidos y clasificaciones en su web. Automaticé con <b>Python y Playwright</b> su lectura y normalización para mostrarlos en ADESA 80 sin copiarlos a mano.</li>
+        <li>Cuando la federación cambió los identificadores de competición, el proceso dejó de encontrar partidos. Añadí búsqueda de las URL vigentes y detección de enlaces caducados; también evito reescribir grupos sin cambios.</li>
       </ul>
     </div>
 
@@ -239,7 +239,7 @@ h2{
   </section>
 
   <section>
-    <h2>Experiencia con clientes</h2>
+    <h2>Experiencia laboral</h2>
     <div class="entrada">
       <div class="linea1">
         <h3>Atención al cliente · MH Inmobiliaria</h3>
@@ -261,19 +261,19 @@ h2{
   </section>
 
   <section>
-    <h2>Tecnologías</h2>
+    <h2>Competencias técnicas</h2>
     <dl class="stack">
       <div class="nivel">
-        <dt>Trabajo habitual</dt>
-        <dd>TypeScript · React · Next.js · Node.js · PostgreSQL · Supabase · Python · Git</dd>
+        <dt>Desarrollo web</dt>
+        <dd>TypeScript · JavaScript · React · Next.js · Node.js · HTML · CSS</dd>
       </div>
       <div class="nivel">
-        <dt>Integración y calidad</dt>
-        <dd>API REST · GitHub Actions · Vitest · Playwright · Stripe · SQL</dd>
+        <dt>Datos y APIs</dt>
+        <dd>PostgreSQL · SQL · Supabase · Python · API REST</dd>
       </div>
       <div class="nivel">
-        <dt>Otras bases</dt>
-        <dd>Flutter · Dart · Java · HTML · CSS</dd>
+        <dt>Calidad y entrega</dt>
+        <dd>Git · GitHub Actions · Vitest · Playwright · Zod</dd>
       </div>
     </dl>
   </section>
@@ -286,6 +286,13 @@ h2{
         <span class="cuando">2023 — 2025</span>
       </div>
       <p class="donde">VictoriaFP · Sanlúcar de Barrameda</p>
+    </div>
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Bachillerato tecnológico</h3>
+        <span class="cuando">2021 — 2023</span>
+      </div>
+      <p class="donde">IES San Lucas · Sanlúcar de Barrameda</p>
     </div>
   </section>
 
