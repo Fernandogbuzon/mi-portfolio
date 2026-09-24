@@ -7,8 +7,8 @@ Sitio estático: HTML, CSS y JavaScript planos. Sin build, sin dependencias.
 
 Un portfolio de desarrollador es, además del contenido, una muestra de código.
 Un `create-next-app` con tres secciones no demuestra nada que no demuestre
-mejor un fichero de CSS que alguien pueda abrir y leer entero. Todo el sitio
-son dos hojas de estilo, un JavaScript de 220 líneas y cuatro HTML.
+mejor un fichero de CSS que alguien pueda abrir y leer entero. El sitio usa
+dos hojas de estilo, un JavaScript y cuatro HTML.
 
 ## El sistema visual: «la lámina»
 
@@ -88,9 +88,11 @@ navega en oscuro se comería un fogonazo blanco en cada carga.
 propio elemento: un `max-width:62ch` daba un ancho al titular de 45 px y otro
 al párrafo de 17 px, y la página perdía el eje derecho.
 
-**Cada cifra dice cómo se contó.** Un número sin método es un número inflado.
-`herramientas/contar.py` los recuenta desde los repositorios de verdad, y
-cuando no puede, escribe `disponible: false` en vez de inventarse uno.
+**Las cifras llevan contexto.** Las de la portada son una foto fechada, no
+un contador en vivo. Antes de actualizarlas hay que comprobar el código y la
+fuente de datos. `herramientas/contar.py` permite contar el propio sitio y el
+scraper cuando ambos repositorios están disponibles; no actualiza las cifras
+de ADESA ni se ejecuta automáticamente al publicar.
 
 **Sin cursor personalizado y sin fondo WebGL.** Los hubo. Se quitaron: son lo
 que antes hace leer la página como «portfolio de diseñador» en vez de como

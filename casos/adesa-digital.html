@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>ADESA Digital — Caso · Fernando García Buzón</title>
-<meta name="description" content="Cómo reconstruí la plataforma de un club de baloncesto: 27 módulos, RLS deny-by-default, pagos con Stripe y un marcador 3x3 que sobrevive a quedarse sin wifi.">
+<meta name="description" content="Cómo reconstruí la plataforma que usa un club de baloncesto: inscripciones, gestión diaria, datos de la federación y un marcador 3x3 que tolera los cortes de red.">
 
 <link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/casos/adesa-digital.html">
 <link rel="icon" href="../marca/favicon.svg" type="image/svg+xml">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="es_ES">
 <meta property="og:title" content="ADESA Digital — Caso">
-<meta property="og:description" content="27 módulos, 81 tablas, 2236 tests y cero políticas de escritura. La plataforma que gestiona un club de baloncesto entero.">
+<meta property="og:description" content="Una plataforma en producción para familias y directiva, con datos separados, permisos en servidor y automatización de resultados.">
 <meta property="og:image" content="https://fernandogbuzon.github.io/mi-portfolio/marca/og.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -21,8 +21,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../css/lamina.css?v=1">
-<link rel="stylesheet" href="../css/lamina-caso.css?v=1">
+<link rel="stylesheet" href="../css/lamina.css?v=2">
+<link rel="stylesheet" href="../css/lamina-caso.css?v=2">
 
 <script>
   try {
@@ -54,15 +54,15 @@
       <p class="entradilla">
         ADESA 80 llevaba sus inscripciones en hojas de cálculo, sus resultados
         a mano y sus precios dentro del código. Reconstruí la plataforma desde
-        cero: 27 módulos, pagos reales y una base de datos que dice que no por
-        defecto.
+        cero para que familias y directiva puedan resolver sus gestiones en un
+        mismo sitio. El club cobra hoy por transferencia.
       </p>
 
       <dl class="caso-ficha">
         <div><dt>Cliente</dt><dd>ADESA 80 · Sanlúcar de Barrameda</dd></div>
         <div><dt>Mi papel</dt><dd>Diseño, desarrollo y despliegue. Solo.</dd></div>
         <div><dt>Estado</dt><dd>En producción · <a href="https://adesa80.com" target="_blank" rel="noopener">adesa80.com</a></dd></div>
-        <div><dt>Stack</dt><dd>Next.js 16 · TypeScript · PostgreSQL · Stripe</dd></div>
+        <div><dt>Stack</dt><dd>Next.js 16 · TypeScript · PostgreSQL · Supabase</dd></div>
       </dl>
     </div>
   </div>
@@ -105,7 +105,7 @@
     <h3>1. La base de datos dice que no por defecto</h3>
 
     <p>
-      Las <strong>81 tablas tienen RLS activado</strong>. Existen 25 políticas y las
+      Las <strong>tablas del club tienen RLS activado</strong>. Existen 25 políticas y las
       25 son <code>SELECT</code> para contenido genuinamente público. No hay ni una sola
       política de <code>INSERT</code>, <code>UPDATE</code> o <code>DELETE</code> en todo el esquema.
     </p>
@@ -120,17 +120,17 @@
 <span class="k">await</span> requirePermiso(<span class="k">"horarios.gestionar"</span>);</code></pre>
 
     <p>
-      Hay <strong>76 puertas de este tipo</strong> repartidas por el código, apoyadas en 46
-      claves de permiso granulares y 7 plantillas de rol. Es más trabajo que
-      confiar en el cliente. También es la razón por la que el spam de noticias
-      no puede repetirse: no existe el camino.
+      Hay comprobaciones de permiso repartidas por las acciones del servidor.
+      Las claves distinguen ver de gestionar: una familia que puede leer una
+      noticia no puede publicarla. Así se cierra el camino que antes permitió
+      publicar spam con una cuenta cualquiera.
     </p>
 
     <h3>2. Nada del club vive en el código</h3>
 
     <p>
       Identidad, colores, precios, textos y credenciales viven en
-      <code>club_ajustes</code>, en <strong>17 áreas JSONB validadas con Zod</strong>. Cambiar una
+      <code>club_ajustes</code>, en áreas JSONB validadas con Zod. Cambiar una
       cuota es un formulario, no un despliegue. El efecto secundario es que el
       código no sabe de qué club es: la identidad entera vive en datos, no en
       constantes repartidas por las plantillas.
@@ -147,20 +147,23 @@
 
     <h2><span class="rotulo">Impacto</span><br>Qué cambió para el club</h2>
 
+    <p class="primera">
+      Las familias hacen el alta y entregan sus documentos desde la web. La
+      directiva cambia cuotas y textos desde su panel. Los resultados llegan
+      desde la federación sin que nadie tenga que copiarlos a mano.
+    </p>
+
     <ul class="metricas">
-      <li><span class="cifra" data-cifra="27">27</span><span class="que">Módulos de dominio</span></li>
-      <li><span class="cifra" data-cifra="115">115</span><span class="que">Migraciones SQL</span></li>
-      <li><span class="cifra" data-cifra="2236">2236</span><span class="que">Tests en verde</span></li>
-      <li><span class="cifra" data-cifra="97">97</span><span class="que">Páginas</span></li>
+      <li><span class="cifra" data-cifra="139">139</span><span class="que">Noticias antiguas conservadas</span></li>
+      <li><span class="cifra" data-cifra="167">167</span><span class="que">Imágenes migradas</span></li>
+      <li><span class="cifra" data-cifra="305">305</span><span class="que">Archivos de pruebas · sep 2026</span></li>
       <li><span class="cifra" data-cifra="0">0</span><span class="que">Políticas de escritura</span></li>
     </ul>
 
     <p>
-      Está <strong>en producción en adesa80.com desde agosto de 2026</strong>. Tres
-      generaciones de la web anterior seguían indexadas en Google: 130 reglas de
-      redirección llevan 111 de esas URLs a una página viva en un solo salto, y
-      se migraron 139 artículos con 167 imágenes del blog antiguo para que la
-      historia del club no se perdiera en la mudanza.
+      Está <strong>en producción en adesa80.com desde agosto de 2026</strong>. Las
+      direcciones antiguas tienen redirecciones y el contenido del blog se
+      conservó para que la historia del club no se perdiera en la mudanza.
     </p>
 
     <p>
@@ -196,19 +199,21 @@
       explícitamente que la foto que manda el cliente no se cree nunca.
     </p>
 
-    <h3>El webhook de Stripe, que es donde se paga el error</h3>
+    <h3>La opción de tarjeta, antes de encenderla</h3>
 
     <p>
-      Es la única parte del sistema que <strong>falla cerrada</strong>: sin
+      El club cobra hoy por transferencia. Dejé implementada la opción de
+      tarjeta con Stripe, apagada por configuración. El webhook
+      <strong>falla cerrado</strong>: sin
       <code>STRIPE_WEBHOOK_SECRET</code> devuelve 500 y no procesa nada, en lugar de
-      degradarse con elegancia como hace el resto. La firma se verifica contra
+      procesar un aviso sin verificar. La firma se comprueba contra
       el cuerpo en crudo capturado con <code>request.text()</code> <em>antes</em> de parsear,
       porque parsear primero invalida una firma que se calcula byte a byte.
     </p>
 
     <p>
-      Y la idempotencia va en tres capas, porque Stripe entrega duplicados de
-      verdad, a veces a la vez: la actualización del pago es un
+      La implementación contempla avisos duplicados y concurrentes: la
+      actualización del pago es un
       <em>compare-and-swap</em> sobre el estado, de modo que dos entregas
       simultáneas del mismo evento no pueden confirmar dos veces la misma
       inscripción.
@@ -234,9 +239,10 @@
       <div class="caso-contacto">
         <div>
           <span class="folio">¿Buscas a alguien?</span>
-          <h2>Esto lo escribí yo, y busco mi primer puesto</h2>
+          <h2>Quiero hacer este trabajo en un equipo</h2>
           <p>
-            Full-stack, en Sevilla o remoto, con incorporación inmediata.
+            Desarrollo full-stack, en A Coruña, Sevilla o remoto con viajes.
+            Puedo incorporarme ya.
             Si lo de arriba te encaja, escríbeme.
           </p>
         </div>

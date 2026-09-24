@@ -141,12 +141,12 @@ blockquote{
 /* ---------- 04 · Las cifras del caso ---------- */
 
 .metricas{
-  display:grid;grid-template-columns:repeat(5,1fr);
+  display:grid;grid-template-columns:repeat(4,1fr);
   gap:1px;background:var(--pauta);
   border:1px solid var(--pauta);
   margin-block:1.6rem 2rem;
 }
-@media (max-width:62rem){ .metricas{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:62rem){ .metricas{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:34rem){ .metricas{grid-template-columns:repeat(2,1fr)} }
 
 /* Cualificadas con .caso-cuerpo porque si no pierden por especificidad

@@ -323,8 +323,8 @@ main{counter-reset:lamina}
 /* ---------- 10 · La puerta ---------- */
 
 .puerta{
-  display:grid;grid-template-columns:repeat(9,1fr);
-  gap:3px;width:min(100%,25rem);margin-block:1.5rem;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:3px;width:min(100%,19rem);margin-block:1.5rem;
   background:var(--papel);
   box-shadow:0 0 0 .55rem var(--papel);
 }
@@ -344,7 +344,7 @@ main{counter-reset:lamina}
 /* ---------- 11 · El recuento ---------- */
 
 .recuento{
-  display:grid;grid-template-columns:repeat(3,1fr);
+  display:grid;grid-template-columns:repeat(2,1fr);
   gap:1px;background:var(--pauta);
   border:1px solid var(--pauta);margin-block:1.75rem;
 }

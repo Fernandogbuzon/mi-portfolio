@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>FAB Cádiz Scraper — Caso · Fernando García Buzón</title>
-<meta name="description" content="Cómo saco resultados de una federación sin API, sin servidor y casi sin escribir en la base de datos. Y el fallo silencioso que me enseñó a hacer ruido.">
+<meta name="description" content="Cómo integro resultados de una federación sin API, sin servidor y evitando reprocesar grupos sin cambios. Y el fallo silencioso que tuve que corregir.">
 
 <link rel="canonical" href="https://fernandogbuzon.github.io/mi-portfolio/casos/fab-cadiz-scraper.html">
 <link rel="icon" href="../marca/favicon.svg" type="image/svg+xml">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="es_ES">
 <meta property="og:title" content="FAB Cádiz Scraper — Caso">
-<meta property="og:description" content="Resultados de la federación en Postgres, sin servidor y sin escribir cuando no hace falta. Con el fallo silencioso incluido.">
+<meta property="og:description" content="Resultados de la federación en Postgres, sin servidor y con detección de cambios. Con el fallo silencioso incluido.">
 <meta property="og:image" content="https://fernandogbuzon.github.io/mi-portfolio/marca/og.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -21,8 +21,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../css/lamina.css?v=1">
-<link rel="stylesheet" href="../css/lamina-caso.css?v=1">
+<link rel="stylesheet" href="../css/lamina.css?v=2">
+<link rel="stylesheet" href="../css/lamina-caso.css?v=2">
 
 <script>
   try {
@@ -54,13 +54,13 @@
       <p class="entradilla">
         La federación andaluza no tiene API. Publica los resultados en una
         página de 2008 detrás de Cloudflare. Este scraper los saca, calcula las
-        clasificaciones y los deja en Postgres — y la mayoría de las veces
-        decide que no hace falta escribir nada.
+        clasificaciones y los deja en Postgres. Antes de procesar un grupo,
+        comprueba si sus partidos han cambiado.
       </p>
 
       <dl class="caso-ficha">
         <div><dt>Para</dt><dd>adesa80.com</dd></div>
-        <div><dt>Mi papel</dt><dd>Todo. Es mío de punta a punta.</dd></div>
+        <div><dt>Mi papel</dt><dd>Lo escribí y lo mantengo.</dd></div>
         <div><dt>Código</dt><dd><a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper" target="_blank" rel="noopener">Abierto en GitHub</a></dd></div>
         <div><dt>Stack</dt><dd>Python · Playwright · PostgreSQL · GitHub Actions</dd></div>
       </dl>
@@ -79,7 +79,7 @@
 
     <ul>
       <li>Es un <strong>ASP.NET WebForms</strong>: los datos solo salen disparando <code>__doPostBack</code> a través de tres desplegables encadenados —categoría, fase, grupo—, y todo eso detrás de Cloudflare.</li>
-      <li>Los resultados tienen que aparecer <strong>minutos después</strong> de acabar un partido un sábado por la tarde.</li>
+      <li>Los resultados deben llegar a la web sin depender de una transcripción manual.</li>
       <li>Sin servidor: corre con los minutos gratuitos de GitHub Actions.</li>
       <li>Escribe en un Postgres <strong>compartido</strong> con la web del club, cuyo contrato de lectura no se puede romper.</li>
     </ul>
@@ -98,7 +98,7 @@
 
     <h3>El barrido nocturno</h3>
     <p>
-      <code>scraper_competicion.py</code> (1.390 líneas) recorre una vez al día cada
+      <code>scraper_competicion.py</code> recorre una vez al día cada
       competición, categoría, fase y grupo. Calcula las clasificaciones en
       Python —con desempate particular incluido— y borra los <em>partidos
       fantasma</em> de playoff que la federación deja publicados y nunca se
@@ -107,19 +107,19 @@
 
     <h3>El sondeo quirúrgico</h3>
     <p>
-      <code>scraper_resultados.py</code> (1.153 líneas) no recorre nada. Le pregunta a
+      <code>scraper_resultados.py</code> no recorre todo. Le pregunta a
       Postgres <strong>qué partidos deberían haber terminado ya y no tienen
       resultado</strong>, los agrupa, y vuelve a mirar solo esos grupos. Los sábados
       por la tarde son unos pocos; el resto de la semana, ninguno.
     </p>
 
-    <h3>Y sobre todo: no escribir</h3>
+    <h3>Y sobre todo: no repetir trabajo</h3>
 
     <p>
       De cada grupo se calcula un <strong>SHA-256 del listado de partidos
       canonicalizado</strong> y se compara con el hash guardado, a través de una
-      función atómica en Postgres. Si coincide, la ejecución termina sin tocar
-      una fila.
+      función atómica en Postgres. Si coincide, se omite el procesamiento de ese
+      grupo.
     </p>
 
 <pre><code><span class="c"># La mayoría de las ejecuciones acaban aquí.</span>
@@ -129,25 +129,23 @@
 
     <p>
       Encima va un <em>pre-check</em> sin <code>checkout</code> que mira si hoy hay partidos
-      antes de arrancar el trabajo entero. Los días sin baloncesto no cuestan
-      casi nada: <strong>alrededor de un 80&nbsp;% menos de coste de CI</strong>.
+      antes de arrancar el trabajo entero. En los días sin baloncesto evita
+      ejecutar el scraper completo.
     </p>
 
     <h2><span class="rotulo">Impacto</span><br>Nadie transcribe nada</h2>
 
     <ul class="metricas">
-      <li><span class="cifra" data-cifra="25" data-sufijo=" min">25 min</span><span class="que">Del pitido a la web</span></li>
-      <li><span class="cifra" data-cifra="3003">3003</span><span class="que">Líneas de Python</span></li>
-      <li><span class="cifra" data-cifra="80" data-sufijo=" %">80 %</span><span class="que">Menos coste de CI</span></li>
+      <li><span class="cifra" data-cifra="0">0</span><span class="que">Resultados copiados a mano</span></li>
+      <li><span class="cifra" data-cifra="2">2</span><span class="que">Trabajos con distinto ritmo</span></li>
+      <li><span class="cifra">SHA-256</span><span class="que">Evita reprocesar grupos sin cambios</span></li>
       <li><span class="cifra" data-cifra="0">0</span><span class="que">Servidores</span></li>
     </ul>
 
     <p>
-      Además del scraper salieron 6 migraciones SQL y una pasada de seguridad
-      que dejó los avisos de Supabase <strong>de 13 hallazgos a 1</strong>, y se movió la
-      búsqueda de escudos —que estaba a fuego en el cliente de la web— a la
-      base de datos: <strong>202 de 255</strong> nombres distintos de equipo resuelven
-      escudo automáticamente.
+      También moví la búsqueda de escudos, que estaba escrita a mano en el
+      cliente, a la base de datos. Los nombres de equipo se normalizan para
+      encontrar su escudo sin mantener una lista paralela en la web.
     </p>
 
     <h2><span class="rotulo">Proceso</span><br>El fallo del que más he aprendido</h2>
@@ -202,9 +200,10 @@
       <div class="caso-contacto">
         <div>
           <span class="folio">¿Buscas a alguien?</span>
-          <h2>Esto lo escribí yo, y busco mi primer puesto</h2>
+          <h2>Quiero hacer este trabajo en un equipo</h2>
           <p>
-            Full-stack, en Sevilla o remoto, con incorporación inmediata.
+            Desarrollo full-stack, en A Coruña, Sevilla o remoto con viajes.
+            Puedo incorporarme ya.
             Si lo de arriba te encaja, escríbeme.
           </p>
         </div>
