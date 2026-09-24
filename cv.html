@@ -18,14 +18,13 @@
    nada de iconos que sustituyan palabras.
    ============================================================ */
 
-/* La misma tinta que el sitio, con fuentes estándar para que el texto
-   siga siendo legible al imprimirlo y al extraerlo de un PDF. */
+/* Paleta del portfolio y fuentes estándar para imprimir y extraer el texto. */
 :root{
   --tinta:#0D1114;
   --tinta-suave:#2A333A;
   --tinta-tenue:#57616C;
-  --regla:#C3CBD3;
-  --azul:#17399B;
+  --regla:#C8D5CC;
+  --acento:#285D43;
   --papel:#FFFFFF;
   --texto:Arial,'Helvetica Neue',sans-serif;
   --dato:Consolas,'Courier New',monospace;
@@ -58,12 +57,13 @@ body{
   font-size:20pt;font-weight:700;color:var(--tinta);
   letter-spacing:-.025em;line-height:1.05;margin-bottom:1mm;
 }
-.rol{font-size:10.8pt;font-weight:600;color:var(--azul);margin-bottom:2mm}
+.rol{font-size:10.8pt;font-weight:600;color:var(--acento);margin-bottom:2mm}
 
 .contacto{
-  display:flex;flex-wrap:wrap;gap:1mm 4mm;
+  display:grid;gap:1mm;
   font-size:9.2pt;color:var(--tinta-suave);
 }
+.contacto__grupo{display:flex;flex-wrap:wrap;gap:1mm 4mm}
 .contacto span{white-space:nowrap}
 .contacto a{color:var(--tinta-suave);text-decoration:none;border-bottom:.4pt solid var(--regla)}
 .contacto b{color:var(--tinta);font-weight:600}
@@ -96,13 +96,13 @@ h2{
   font-size:7.8pt;color:var(--tinta-tenue);white-space:nowrap;
   font-variant-numeric:tabular-nums;
 }
-.donde{font-size:9.2pt;color:var(--azul);font-weight:600;margin-bottom:1mm}
+.donde{font-size:9.2pt;color:var(--acento);font-weight:600;margin-bottom:1mm}
 .entrada p{font-size:9.4pt;color:var(--tinta-suave)}
 .entrada ul{list-style:none;margin-top:1mm}
 .entrada li{font-size:9.5pt;padding-left:3.5mm;position:relative;margin-bottom:.8mm}
 .entrada li::before{
   content:"";position:absolute;left:0;top:1.75mm;
-  width:1.6mm;height:.5pt;background:var(--azul);
+  width:1.6mm;height:.5pt;background:var(--acento);
 }
 .entrada li b{color:var(--tinta);font-weight:600}
 
@@ -120,15 +120,6 @@ h2{
 /* ---------- Experiencia adicional ---------- */
 .matiz{font-size:8.7pt;color:var(--tinta-tenue);margin-top:.4mm}
 
-/* ---------- Pie ---------- */
-
-.pie{
-  margin-top:3.4mm;padding-top:2mm;border-top:.6pt solid var(--regla);
-  font-size:8.5pt;color:var(--tinta-tenue);
-  display:flex;justify-content:space-between;gap:4mm;flex-wrap:wrap;
-}
-.pie a{color:var(--tinta-tenue)}
-
 /* ---------- Barra de la web (no se imprime) ---------- */
 
 .barra{
@@ -137,10 +128,10 @@ h2{
   font-size:.85rem;
 }
 .barra a{
-  color:var(--azul);font-weight:600;text-decoration:none;
+  color:var(--acento);font-weight:600;text-decoration:none;
   border-bottom:1px solid transparent;
 }
-.barra a:hover{border-color:var(--azul)}
+.barra a:hover{border-color:var(--acento)}
 
 /* ---------- Impresión ---------- */
 
@@ -174,26 +165,34 @@ h2{
 <div class="hoja">
 
   <header class="cab">
-    <h1>Fernando García Buzón</h1>
-    <p class="rol">Desarrollador full stack · aplicaciones de negocio y datos</p>
-    <div class="contacto">
-      <span><b>Correo:</b> <a href="mailto:fernandogbuzon@gmail.com">fernandogbuzon@gmail.com</a></span>
-      <span><b>Teléfono:</b> +34 674 036 944</span>
-      <span><b>Ubicación:</b> Sanlúcar de Barrameda (Cádiz)</span>
-      <span><b>Incorporación:</b> presencial, híbrida o remota; posibilidad de traslado</span>
-      <span><a href="https://github.com/Fernandogbuzon">github.com/Fernandogbuzon</a></span>
-      <span><a href="https://fernandogbuzon.github.io/mi-portfolio/">Portfolio y casos</a></span>
-      <span><a href="https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/">LinkedIn</a></span>
+    <div class="cab__datos">
+      <h1>Fernando García Buzón</h1>
+      <p class="rol">Desarrollador full stack</p>
+      <div class="contacto">
+        <div class="contacto__grupo">
+          <span><b>Correo:</b> <a href="mailto:fernandogbuzon@gmail.com">fernandogbuzon@gmail.com</a></span>
+          <span><b>Teléfono:</b> +34 674 036 944</span>
+          <span><b>Ubicación:</b> Sanlúcar de Barrameda (Cádiz)</span>
+        </div>
+        <div class="contacto__grupo">
+          <span><b>Disponibilidad:</b> presencial, híbrida o remota; posibilidad de traslado</span>
+        </div>
+        <div class="contacto__grupo">
+          <span><a href="https://github.com/Fernandogbuzon">github.com/Fernandogbuzon</a></span>
+          <span><a href="https://fernandogbuzon.github.io/mi-portfolio/">Portfolio y casos</a></span>
+          <span><a href="https://www.linkedin.com/in/fernando-garc%C3%ADa-buz%C3%B3n-02939328b/">LinkedIn</a></span>
+        </div>
+      </div>
     </div>
   </header>
 
   <section>
     <h2>Perfil</h2>
     <p class="perfil">
-      Soy técnico superior en DAM. Hice y mantengo una plataforma que un club
-      de baloncesto usa para gestionar inscripciones, horarios y resultados.
-      Me gusta entender primero el trabajo de quien la va a usar y quitarle
-      pasos manuales. Ahora busco hacerlo dentro de un equipo de desarrollo.
+      Construí y mantengo ADESA 80, una plataforma que usa un club de baloncesto
+      para inscripciones, entrenamientos y gestión interna. Me gusta hablar con
+      quienes la usan y quitarles pasos manuales. Busco seguir haciendo ese
+      trabajo dentro de un equipo de desarrollo.
     </p>
   </section>
 
@@ -208,9 +207,9 @@ h2{
       <p class="donde">ADESA 80 · Club de baloncesto · Sanlúcar de Barrameda</p>
       <p class="matiz">Proyecto propio en producción desde agosto de 2026 · <a href="https://adesa80.com/">adesa80.com</a></p>
       <ul>
-        <li>Construí la web pública, el área de usuarios y el panel de gestión con <b>Next.js, TypeScript y PostgreSQL</b>. Sigo manteniéndolos para el club.</li>
-        <li>Trabajé en inscripciones, pagos por transferencia, horarios y datos federativos. Los precios y textos se editan desde el panel sin cambiar código.</li>
-        <li>Los permisos se comprueban en el servidor y el CI ejecuta pruebas, tipos y build en cada PR y al actualizar main. Preparé también el flujo de <b>Stripe</b> para cuando el club active la tarjeta.</li>
+        <li>Construí con <b>Next.js, TypeScript y PostgreSQL</b> la web, el área personal y el panel de ADESA 80. Allí familias, entrenadores y directiva gestionan inscripciones, horarios, documentos y finanzas según sus permisos.</li>
+        <li>Pasé precios y textos a un panel editable para que el club pueda cambiarlos sin desplegar. También preparé altas con anexos y pagos por transferencia.</li>
+        <li>Separé los resultados federativos en otra base; las acciones verifican permisos en el servidor. El CI ejecuta pruebas, tipos y build en cada PR y al actualizar main.</li>
       </ul>
     </div>
 
@@ -222,8 +221,8 @@ h2{
       <p class="donde">FAB Cádiz Scraper</p>
       <p class="matiz">Proyecto propio y abierto · <a href="https://github.com/Fernandogbuzon/fab-cadiz-scraper">GitHub</a></p>
       <ul>
-        <li>La federación publica resultados en una web sin API. Escribí un proceso con <b>Python y Playwright</b> que los lee, normaliza y actualiza en PostgreSQL desde GitHub Actions.</li>
-        <li>Evita reprocesar grupos sin cambios. Los resultados llegan automáticamente a la web del club; antes había que copiarlos a mano.</li>
+        <li>La federación publica los resultados en su web. Escribí un proceso con <b>Python y Playwright</b> que los normaliza y guarda en PostgreSQL desde GitHub Actions.</li>
+        <li>Revisa los partidos pendientes, evita reescribir grupos sin cambios y registra los errores. Los resultados llegan a la web del club sin copiarlos a mano.</li>
       </ul>
     </div>
 
@@ -235,6 +234,28 @@ h2{
       <p class="donde">Grupo Solutia · Cádiz</p>
       <ul>
         <li>Trabajé en <b>WeSpaces</b>, una app de reservas y salas conectada a una API REST. Tuve que entender código que ya existía antes de modificarlo y trabajar con Git y sprints.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Experiencia con clientes</h2>
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Atención al cliente · MH Inmobiliaria</h3>
+        <span class="cuando">2025 — actualidad</span>
+      </div>
+      <ul>
+        <li>Atiendo consultas y adapto mis explicaciones a las dudas de cada persona.</li>
+      </ul>
+    </div>
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Camarero · Taberna Cabildo</h3>
+        <span class="cuando">2023 — 2024</span>
+      </div>
+      <ul>
+        <li>Atendía mesas y me coordinaba con mis compañeros para sacar el servicio.</li>
       </ul>
     </div>
   </section>
@@ -257,30 +278,21 @@ h2{
     </dl>
   </section>
 
-    <section>
-      <h2>Formación</h2>
-      <div class="entrada">
-        <div class="linea1">
-          <h3>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma</h3>
-          <span class="cuando">2023 — 2025</span>
-        </div>
-        <p class="donde">VictoriaFP · Sanlúcar de Barrameda</p>
+  <section>
+    <h2>Formación</h2>
+    <div class="entrada">
+      <div class="linea1">
+        <h3>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma</h3>
+        <span class="cuando">2023 — 2025</span>
       </div>
-    </section>
+      <p class="donde">VictoriaFP · Sanlúcar de Barrameda</p>
+    </div>
+  </section>
 
-    <section>
-      <h2>Otros datos</h2>
-      <div class="entrada">
-        <ul>
-          <li><b>Idiomas:</b> español nativo; inglés técnico para documentación y código.</li>
-          <li><b>Experiencia adicional:</b> atención al cliente en MH Inmobiliaria (2025 — actualidad) y camarero en Taberna Cabildo (2023 — 2024).</li>
-        </ul>
-      </div>
-    </section>
-
-  <div class="pie">
-    <span>Casos completos: <a href="https://fernandogbuzon.github.io/mi-portfolio/">fernandogbuzon.github.io/mi-portfolio</a></span>
-  </div>
+  <section>
+    <h2>Idiomas</h2>
+    <p>Español nativo · Inglés técnico para documentación y código</p>
+  </section>
 
 </div>
 
